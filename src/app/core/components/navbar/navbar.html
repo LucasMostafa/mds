@@ -9,7 +9,7 @@
     <ul class="nav-links">
       <li><a (click)="scrollTo('servicios')" style="cursor: pointer;">Servicios</a></li>
       <li><a (click)="scrollTo('proyectos')" style="cursor: pointer;">Proyectos</a></li>
-      <li><a style="cursor: pointer; opacity: 0.5;">Estudio</a></li>
+      <li><a (click)="scrollTo('estudio')" style="cursor: pointer;">Estudio</a></li>
     </ul>
 
     <button class="btn-contact desktop-only" (click)="scrollTo('contacto')">
@@ -24,8 +24,10 @@
   </div>
 
   <div class="mobile-menu" [class.open]="isMenuOpen">
-    <a (click)="scrollTo('hero')">Inicio</a>
+    <a (click)="scrollTo('servicios')">Servicios</a>
     <a (click)="scrollTo('proyectos')">Proyectos</a>
+    <a (click)="scrollTo('estudio')">Estudio</a>
+    
     <button class="mobile-btn" (click)="scrollTo('contacto')">
       Contactanos
     </button>

@@ -1,0 +1,170 @@
+.studio-container {
+  // 1. SOLUCIÓN AL DESFASAJE (Corte a la derecha)
+  box-sizing: border-box; 
+  width: 100%;
+  padding: 120px 20px;
+  
+  // Fondo "Gris Azulado Profundo"
+  background-color: #111827; 
+  color: white;
+  overflow: hidden;
+
+  .content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    
+    // Usamos GRID para poder reordenar todo fácilmente
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 80px;
+    align-items: center;
+    box-sizing: border-box; // Seguridad extra
+
+    // --- COLUMNA TEXTO ---
+    .text-column {
+      .badge {
+        color: #818cf8; 
+        font-size: 0.85rem;
+        letter-spacing: 3px;
+        font-weight: 700;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 25px;
+      }
+
+      h2 {
+        font-size: clamp(2.5rem, 4vw, 3.5rem);
+        line-height: 1.1;
+        font-weight: 800;
+        margin-bottom: 15px;
+        margin-top: 15px;       
+        color: white;
+      }
+
+      .story {
+        p {
+          font-size: 1.1rem;
+          line-height: 1.8;
+          color: #cbd5e1;
+          margin-bottom: 25px;
+
+          strong {
+            color: white;
+            font-weight: 600;
+          }
+        }
+      }
+
+      .founders {
+        display: flex;
+        gap: 50px;
+        margin-top: 40px;
+        padding-top: 30px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+        .founder {
+          display: flex;
+          flex-direction: column;
+          
+          .name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: white;
+          }
+          .role {
+            font-size: 0.9rem;
+            color: #60a5fa; 
+            margin-top: 5px;
+            font-weight: 500;
+          }
+        }
+      }
+    }
+
+    // --- COLUMNA IMAGEN ---
+    .image-column {
+      position: relative;
+      padding: 10px;
+
+      .image-frame {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        
+        transform: rotate(3deg) scale(1);
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.5s ease;
+        
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); 
+        border: 1px solid rgba(255,255,255,0.05);
+        cursor: pointer;
+
+        img {
+          width: 100%;
+          height: auto;
+          display: block;
+        }
+
+        .glow-effect {
+          position: absolute;
+          bottom: -20%;
+          right: -20%;
+          width: 60%;
+          height: 60%;
+          background: radial-gradient(circle, rgba(59, 130, 246, 0.3), transparent 70%);
+          filter: blur(60px);
+          pointer-events: none;
+        }
+
+        &:hover {
+          transform: rotate(0deg) scale(1.02);
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
+          border-color: rgba(255, 255, 255, 0.3);
+        }
+      }
+    }
+  }
+}
+
+// --- MOBILE (EL FIX IMPORTANTE) ---
+@media (max-width: 900px) {
+  .studio-container {
+    padding: 100px 20px 50px; // Menos padding vertical
+    
+
+    .content-wrapper {
+      // Pasamos a 1 sola columna
+      grid-template-columns: 1fr;
+      gap: 5px; // Menos espacio entre elementos
+
+      // TRUCO DE MAGIA: "display: contents"
+      // Esto hace que la .text-column desaparezca visualmente y sus hijos 
+      // (Badge, H2, Story) sean tratados como hijos directos del grid principal.
+      // Así podemos poner la imagen ENTRE el título y el texto.
+      .text-column {
+        display: contents;
+
+        // 1. Título arriba
+        .badge { order: 1; }
+        h2 { 
+          order: 2;
+          margin-top: 2px; 
+          font-size: 2.2rem; // Letra un poco más chica para que no corte
+        }
+        
+        // 3. Historia abajo
+        .story { order: 4; }
+        .founders { order: 5; }
+      }
+
+      .image-column {
+        // 2. Imagen al medio (debajo del título)
+        order: 3;
+        margin: 10px 0 20px 0; // Un poco de aire para separarla
+        
+        .image-frame {
+           transform: rotate(0deg); // Derecha en mobile
+        }
+      }
+    }
+  }
+}
