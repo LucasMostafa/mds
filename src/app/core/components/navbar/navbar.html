@@ -1,0 +1,33 @@
+<nav class="navbar-glass">
+  <div class="nav-container">
+    
+    <div class="logo" (click)="scrollTo('hero')" style="cursor: pointer;">
+      <span class="mds-text">MD</span>
+      <span class="studio-text">STUDIO</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a (click)="scrollTo('servicios')" style="cursor: pointer;">Servicios</a></li>
+      <li><a (click)="scrollTo('proyectos')" style="cursor: pointer;">Proyectos</a></li>
+      <li><a style="cursor: pointer; opacity: 0.5;">Estudio</a></li>
+    </ul>
+
+    <button class="btn-contact desktop-only" (click)="scrollTo('contacto')">
+      Contactanos
+    </button>
+
+    <button class="hamburger-btn" (click)="toggleMenu()" [class.active]="isMenuOpen">
+      <span class="bar top"></span>
+      <span class="bar mid"></span>
+      <span class="bar bot"></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" [class.open]="isMenuOpen">
+    <a (click)="scrollTo('hero')">Inicio</a>
+    <a (click)="scrollTo('proyectos')">Proyectos</a>
+    <button class="mobile-btn" (click)="scrollTo('contacto')">
+      Contactanos
+    </button>
+  </div>
+</nav>

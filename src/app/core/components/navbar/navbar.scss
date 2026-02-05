@@ -1,0 +1,189 @@
+// src/app/core/components/navbar/navbar.scss
+
+.navbar-glass {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 20px; 
+  margin-top: 50px; 
+  margin-bottom: 20px;
+  
+  // Centrado y límites
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  width: 90%;
+  max-width: 1200px;
+  height: 70px;
+  
+  // Estética de Vidrio
+  background: rgba(255, 255, 255, 0.03); 
+  backdrop-filter: blur(15px); 
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  z-index: 1000; 
+  
+  // IMPORTANTE: No usar overflow:hidden para que el menú pueda salir
+  
+  .nav-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    position: relative;
+    z-index: 1002; 
+
+    .logo {
+      font-weight: 800;
+      letter-spacing: 1px;
+      flex-shrink: 0;
+      .mds-text { color: #fff; }
+      .studio-text { color: #3b82f6; margin-left: 4px; }
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+      margin: 0;
+      a {
+        text-decoration: none;
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+        &:hover { color: #fff; }
+      }
+    }
+
+    // Botón Desktop (Blanco simple)
+    .btn-contact {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      white-space: nowrap;
+      margin-right: 50px;
+      
+      &.desktop-only { display: block; }
+      &:hover { transform: scale(1.05); }
+    }
+
+    // Hamburguesa
+    .hamburger-btn {
+      display: none; 
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 30px;
+      height: 20px;
+      position: relative;
+      z-index: 1003; // Siempre encima de todo
+      margin-right: 50px;
+
+      .bar {
+        display: block;
+        width: 100%;
+        height: 2px;
+        background-color: #fff;
+        position: absolute;
+        transition: all 0.3s ease-in-out;
+        border-radius: 2px;
+        
+        &.top { top: 0; }
+        &.mid { top: 50%; transform: translateY(-50%); }
+        &.bot { bottom: 0; }
+      }
+
+      &.active {
+        .bar.top { top: 50%; transform: rotate(45deg); }
+        .bar.mid { opacity: 0; }
+        .bar.bot { bottom: 50%; transform: rotate(-45deg) translateY(50%); }
+      }
+    }
+  }
+
+  // --- MENÚ MOBILE CORREGIDO ---
+  .mobile-menu {
+    // Posición: Flotando EXTERNO abajo de la barra
+    position: absolute;
+    top: calc(100% + 10px); // 10px de separación
+    left: 0;
+    width: 100%; // Mismo ancho que la barra padre
+    
+    // Estética propia (Igual a la barra)
+    background: rgba(15, 15, 15, 0.95); // Un poco más oscuro para leer mejor
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px 0px;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    
+    // Animación
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    
+    &.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    a {
+      text-decoration: none;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    // --- NUEVO ESTILO BOTÓN MOBILE ---
+    .mobile-btn {
+      width: 30%;
+      padding: 14px;
+      border-radius: 15px;
+      border: none;
+      color: white;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: -10px;
+      
+      // Degradado MDS (Azul a Violeta)
+      background: linear-gradient(90deg, #3b82f6 0%, #7c3aed 100%);
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); // Glow sutil azul
+      
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+  }
+}
+
+// --- MEDIA QUERIES ---
+@media (max-width: 768px) {
+  .navbar-glass {
+    top: 20px;
+    margin-top: 50px;
+    width: 95%; // Un poco más ancho en celular
+
+    .nav-container {
+      padding: 0 20px;
+      .nav-links { display: none; }
+      .btn-contact.desktop-only { display: none; }
+      .hamburger-btn { display: block; }
+    }
+  }
+}

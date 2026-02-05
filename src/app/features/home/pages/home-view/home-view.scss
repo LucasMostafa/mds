@@ -1,0 +1,175 @@
+// src/app/features/home/pages/home-view/home-view.scss
+
+// 1. DEFINICIÓN DE LA ANIMACIÓN (IMPORTANTE: Esto va al principio o al final, FUERA de las llaves)
+@keyframes floatOrbs {
+  0% {
+    transform: translate(0, 0);
+  }
+  33% {
+    transform: translate(100px, -50px); // Se mueve 100px a la derecha
+  }
+  66% {
+    transform: translate(-50px, 150px); // Se mueve abajo y a la izquierda
+  }
+  100% {
+    transform: translate(20px, -20px); // Vuelve cerca del inicio
+  }
+}
+
+// 2. LA ESTRUCTURA PRINCIPAL
+.hero-fullscreen {
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  
+  // CAMBIO 1: Negro Profundo Absoluto
+  background-color: #000000; 
+
+  // --- CAPA DE EFECTOS ---
+  .hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px); // Un poco más de blur para que se funda bien con el negro
+      opacity: 0.6; 
+      
+      // CAMBIO 2: Llamada a la animación corregida
+      // 'forwards' asegura que no se resetee de golpe
+      animation: floatOrbs 12s infinite ease-in-out alternate;
+      
+      // Optimizacion para que el navegador sepa que esto se va a mover (mejora rendimiento)
+      will-change: transform; 
+    }
+
+    // ORBE 1 (Azul)
+    .orb-1 {
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+      top: 10%;       
+      left: 15%;      
+      animation-delay: 0s;
+    }
+
+    // ORBE 2 (Violeta)
+    .orb-2 {
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, #7c3aed 0%, transparent 70%);
+      bottom: 15%;    
+      right: 15%;     
+      animation-delay: -6s; // Desfase para que no se muevan igual
+    }
+
+    // Textura de Ruido (Esencial para que el negro no se vea plano)
+    .noise-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.04; // Apenas visible
+      pointer-events: none;
+    }
+  }
+
+  // --- CONTENIDO DEL TEXTO ---
+  .hero-content {
+    text-align: center;
+    z-index: 2;
+    padding: 0 20px;
+    
+    h1 {
+      font-size: clamp(3rem, 9vw, 7rem); 
+      font-weight: 900;
+      margin: 0;
+      line-height: 0.9;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: -2px;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.8); // Sombra más fuerte
+    }
+    
+    p {
+      color: #dbeafe;
+      font-family: 'monospace';
+      font-size: 1.2rem;
+      margin-top: 1.5rem;
+      letter-spacing: 1px;
+      background: rgba(255, 255, 255, 0.03); // Fondo casi invisible
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 8px 16px;
+      border-radius: 50px;
+      backdrop-filter: blur(5px);
+      display: inline-block;
+    }
+  }
+
+  // --- MOUSE INDICADOR ---
+  .scroll-hint {
+    position: absolute;
+    bottom: 120px; 
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    z-index: 2;
+
+    &:hover { opacity: 1; }
+
+    span {
+      color: #fff;
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 300;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .mouse {
+      width: 26px;
+      height: 42px;
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      position: relative;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+
+      .wheel {
+        width: 4px;
+        height: 6px;
+        background: #fff;
+        border-radius: 2px;
+        position: absolute;
+        top: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        animation: scroll-wheel 2s infinite;
+      }
+    }
+  }
+}
+
+// Animación del mouse (Simple y efectiva)
+@keyframes scroll-wheel {
+  0% { opacity: 1; top: 8px; }
+  50% { opacity: 1; }
+  100% { opacity: 0; top: 25px; }
+}

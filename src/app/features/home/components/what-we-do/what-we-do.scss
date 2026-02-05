@@ -1,0 +1,141 @@
+.what-we-do-container {
+  // 1. SOLUCIÓN AL DESFASAJE: Esto evita que el padding se sume al ancho total
+  box-sizing: border-box;
+  
+  position: relative;
+  width: 100%;
+  padding: 100px 20px;
+  overflow: hidden; // Corta cualquier elemento decorativo que se salga
+  
+  // El fondo oscuro base
+  background-color: #000;
+  color: white;
+
+  .gradient-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    // El gradiente violeta/azul de la marca
+    background: radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, rgba(59, 130, 246, 0.1) 50%, rgba(0,0,0,0) 70%);
+    filter: blur(80px);
+    z-index: 1;
+    pointer-events: none; // Importante para poder clickear encima
+  }
+
+  .content {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    
+    // Aseguramos que el contenido hijo tampoco se pase del ancho
+    width: 100%;
+    box-sizing: border-box;
+
+    .header {
+      text-align: center;
+      
+      .badge {
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        color: #3b82f6; // Azul
+        font-weight: 600;
+        text-transform: uppercase;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+        padding: 5px 15px;
+        border-radius: 20px;
+        display: inline-block; // Para que el borde abrace el texto correctamente
+      }
+
+      h2 {
+        // Ajusté el mínimo del clamp a 2rem para que entre mejor en celulares
+        font-size: clamp(2rem, 5vw, 4rem);
+        font-weight: 800;
+        margin: 20px 0;
+        line-height: 1.1;
+        background: linear-gradient(to right, #fff, #a5b4fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      p {
+        font-size: 1.2rem;
+        color: #94a3b8;
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+    }
+
+    .pillars {
+      display: grid;
+      // Ajustado: Si hay espacio pone columnas, si no, usa todo el ancho (1fr)
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 20px;
+
+      .pillar {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 30px;
+        border-radius: 20px;
+        transition: transform 0.3s ease;
+        box-sizing: border-box; // Seguridad extra
+
+        &:hover {
+          transform: translateY(-5px);
+          background: rgba(255, 255, 255, 0.05);
+          border-color: rgba(124, 58, 237, 0.5); // Borde violeta al hover
+        }
+
+        h3 {
+          font-size: 1.5rem;
+          margin-bottom: 10px;
+          color: white;
+        }
+
+        p {
+          color: #94a3b8;
+          font-size: 0.95rem;
+          line-height: 1.5;
+        }
+      }
+    }
+  }
+}
+
+// 2. AJUSTES ESPECÍFICOS PARA MOBILE
+@media (max-width: 768px) {
+  .what-we-do-container {
+    padding: 60px 20px; // Reducimos el aire vertical
+
+    .content {
+      gap: 40px;
+
+      .header {
+        h2 {
+          font-size: 2.2rem; // Tamaño seguro para celular
+        }
+        p {
+          font-size: 1rem; // Texto un poco más chico para lectura cómoda
+        }
+      }
+
+      .pillars {
+        // En celular, forzamos 1 sola columna para que no se aprieten
+        grid-template-columns: 1fr;
+        
+        .pillar {
+          padding: 25px;
+        }
+      }
+    }
+  }
+}

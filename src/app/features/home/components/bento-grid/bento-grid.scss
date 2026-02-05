@@ -1,0 +1,62 @@
+.bento-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 20px;
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 110px; 
+  padding-bottom: 40px;
+  // Un poco de aire arriba para cuando el Navbar se pega
+  padding-top: 40px;
+
+  .bento-item {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    padding: 24px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+
+    &:hover {
+      border-color: #3b82f6;
+      transform: translateY(-5px);
+    }
+
+    @media (max-width: 768px) {
+    padding-top: 100px; // Un poco menos en mobile
+    }
+  }
+
+  // Ajustes de tamaño para las cajas
+  .hero-card {
+    grid-column: span 3;
+    grid-row: span 2;
+    background: linear-gradient(135deg, #1e3a8a 0%, #581c87 100%);
+    display: flex;
+    align-items: flex-end;
+    
+    h1 { font-size: 3rem; margin: 0; }
+  }
+
+  .team-card {
+    grid-column: span 1;
+    grid-row: span 2;
+  }
+
+  .ampas { grid-column: span 2; }
+  .gnc { grid-column: span 2; }
+
+  // Responsive para el celular que tanto nos importa
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-auto-rows: auto;
+    padding: 20px;
+
+    .hero-card, .team-card, .ampas, .gnc {
+      grid-column: span 1;
+      grid-row: span 1;
+    }
+  }
+}
