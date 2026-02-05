@@ -1,13 +1,10 @@
 .what-we-do-container {
-  // 1. SOLUCIÓN AL DESFASAJE: Esto evita que el padding se sume al ancho total
   box-sizing: border-box;
-  
   position: relative;
   width: 100%;
   padding: 100px 20px;
-  overflow: hidden; // Corta cualquier elemento decorativo que se salga
+  overflow: hidden;
   
-  // El fondo oscuro base
   background-color: #000;
   color: white;
 
@@ -18,11 +15,10 @@
     transform: translate(-50%, -50%);
     width: 80%;
     height: 80%;
-    // El gradiente violeta/azul de la marca
     background: radial-gradient(circle, rgba(124, 58, 237, 0.3) 0%, rgba(59, 130, 246, 0.1) 50%, rgba(0,0,0,0) 70%);
     filter: blur(80px);
     z-index: 1;
-    pointer-events: none; // Importante para poder clickear encima
+    pointer-events: none;
   }
 
   .content {
@@ -33,28 +29,23 @@
     display: flex;
     flex-direction: column;
     gap: 60px;
-    
-    // Aseguramos que el contenido hijo tampoco se pase del ancho
     width: 100%;
     box-sizing: border-box;
 
     .header {
       text-align: center;
-      
       .badge {
         font-size: 0.8rem;
         letter-spacing: 2px;
-        color: #3b82f6; // Azul
+        color: #3b82f6; 
         font-weight: 600;
         text-transform: uppercase;
         border: 1px solid rgba(59, 130, 246, 0.3);
         padding: 5px 15px;
         border-radius: 20px;
-        display: inline-block; // Para que el borde abrace el texto correctamente
+        display: inline-block;
       }
-
       h2 {
-        // Ajusté el mínimo del clamp a 2rem para que entre mejor en celulares
         font-size: clamp(2rem, 5vw, 4rem);
         font-weight: 800;
         margin: 20px 0;
@@ -64,7 +55,6 @@
         -webkit-text-fill-color: transparent;
         background-clip: text;
       }
-
       p {
         font-size: 1.2rem;
         color: #94a3b8;
@@ -76,64 +66,99 @@
 
     .pillars {
       display: grid;
-      // Ajustado: Si hay espacio pone columnas, si no, usa todo el ancho (1fr)
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 30px;
       margin-top: 20px;
 
       .pillar {
+        position: relative;
         background: rgba(255, 255, 255, 0.03);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 30px;
         border-radius: 20px;
-        transition: transform 0.3s ease;
-        box-sizing: border-box; // Seguridad extra
+        transition: transform 0.3s ease, border-color 0.3s ease;
+        box-sizing: border-box;
+        overflow: hidden; 
+        min-height: 350px;
 
+        // --- EL VIDEO/IMAGEN DE FONDO ---
+        .video-container {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          z-index: 0; 
+          
+          // VISIBILIDAD: Tiene que estar en 1 para ver el poster
+          opacity: 1; 
+          
+          // Un poco oscuro para que se lea el texto encima
+          filter: brightness(0.6) grayscale(20%); 
+          transition: filter 0.5s ease, transform 0.5s ease;
+          
+          video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+
+        // --- EL TEXTO ---
+        .pillar-content {
+          position: relative;
+          z-index: 10;
+          padding: 30px; 
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          // Degradado de seguridad para lectura
+          background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 60%);
+          box-sizing: border-box;
+        }
+
+        // --- HOVER ---
         &:hover {
           transform: translateY(-5px);
-          background: rgba(255, 255, 255, 0.05);
-          border-color: rgba(124, 58, 237, 0.5); // Borde violeta al hover
+          border-color: rgba(124, 58, 237, 0.8); 
+
+          // Al pasar el mouse, devolvemos el color y brillo
+          .video-container {
+             filter: brightness(1) grayscale(0%);
+             transform: scale(1.05);
+          }
         }
 
         h3 {
           font-size: 1.5rem;
           margin-bottom: 10px;
           color: white;
+          text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
 
         p {
-          color: #94a3b8;
+          color: #e2e8f0;
           font-size: 0.95rem;
           line-height: 1.5;
+          text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
       }
     }
   }
 }
 
-// 2. AJUSTES ESPECÍFICOS PARA MOBILE
+// MOBILE
 @media (max-width: 768px) {
   .what-we-do-container {
-    padding: 60px 20px; // Reducimos el aire vertical
-
+    padding: 60px 20px;
     .content {
       gap: 40px;
-
-      .header {
-        h2 {
-          font-size: 2.2rem; // Tamaño seguro para celular
-        }
-        p {
-          font-size: 1rem; // Texto un poco más chico para lectura cómoda
-        }
-      }
-
+      .header h2 { font-size: 2.2rem; }
       .pillars {
-        // En celular, forzamos 1 sola columna para que no se aprieten
         grid-template-columns: 1fr;
-        
         .pillar {
-          padding: 25px;
+          min-height: 300px;
+          .pillar-content { padding: 25px; }
         }
       }
     }
