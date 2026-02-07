@@ -1,0 +1,242 @@
+.contact-container {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 120px 20px;
+  
+  // --- NUEVO FONDO CLARO ---
+  // Base gris muy clara, casi blanca
+  background-color: #f8fafc; 
+  
+  // Patrón de cuadrícula (Grid) sutil para dar textura técnica
+  background-image: 
+    linear-gradient(#e2e8f0 1px, transparent 1px),
+    linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
+  background-size: 40px 40px; // Tamaño de los cuadraditos
+  
+  // Un degradado radial blanco encima para que el grid se desvanezca en el centro
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%);
+    z-index: 0;
+  }
+
+  // Color de texto base ahora es oscuro
+  color: #0f172a; 
+  overflow: hidden;
+
+  // Eliminamos el .background-glow oscuro anterior porque no pega con el fondo claro
+  .background-glow { display: none; }
+
+  .content-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: 80px;
+    align-items: center;
+
+    // --- COLUMNA IZQUIERDA ---
+    .text-column {
+      .badge {
+        color: #3b82f6; // Azul vibrante
+        font-size: 0.85rem;
+        letter-spacing: 3px;
+        font-weight: 700;
+        text-transform: uppercase;
+        display: block;
+        margin-bottom: 25px;
+      }
+
+      h2 {
+        font-size: clamp(3rem, 5vw, 4.5rem); 
+        line-height: 1.1;
+        font-weight: 800;
+        margin-bottom: 30px;
+        // Color oscuro sólido para máxima legibilidad
+        color: #0f172a; 
+        // Sin sombra de texto, limpieza total
+        text-shadow: none; 
+      }
+
+      p {
+        font-size: 1.2rem;
+        // Gris medio oscuro para lectura cómoda
+        color: #475569; 
+        line-height: 1.7;
+        max-width: 500px;
+        margin-bottom: 40px;
+        
+        strong {
+          color: #0f172a; // Negro azulado para resaltar
+          font-weight: 600;
+        }
+      }
+
+      .status-indicator {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        // Fondo blanco puro con sombra suave
+        background: #ffffff; 
+        padding: 10px 20px;
+        border-radius: 30px;
+        border: 1px solid #e2e8f0;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+
+        .dot {
+          width: 8px;
+          height: 8px;
+          background-color: #22c55e;
+          border-radius: 50%;
+          box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2); // Anillo verde suave
+          animation: pulse 2s infinite;
+        }
+
+        .text {
+          color: #166534; // Verde oscuro para texto
+          font-size: 0.9rem;
+          font-weight: 600;
+          letter-spacing: 0.5px;
+        }
+      }
+    }
+
+    // --- COLUMNA DERECHA (BOTONES) ---
+    .actions-column {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .contact-card {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        padding: 25px;
+        border-radius: 20px;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        
+        // ESTILO TARJETA CLARA
+        background: #ffffff;
+        border: 1px solid #e2e8f0; // Borde gris muy suave
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); // Sombra sutil
+
+        .icon-wrapper {
+          width: 50px;
+          height: 50px;
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          // Fondo gris muy claro para el ícono
+          background: #f1f5f9; 
+          color: #0f172a;
+          transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+          flex-shrink: 0;
+        }
+
+        .card-text {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          
+          .label {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0f172a; // Título oscuro
+            margin-bottom: 4px;
+          }
+          .value {
+            font-size: 0.9rem;
+            color: #64748b; // Subtítulo gris medio
+          }
+        }
+
+        .arrow {
+          font-size: 1.5rem;
+          color: #94a3b8;
+          transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        // HOVER GENERAL
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); // Sombra más grande al levantar
+          border-color: #cbd5e1;
+          
+          .arrow {
+            color: #3b82f6; // Flecha azul al hover
+            transform: translateX(5px);
+          }
+        }
+
+        // HOVER WHATSAPP
+        &.whatsapp:hover {
+          .icon-wrapper { background: #dcfce7; color: #166534; } // Fondo verde muy claro
+        }
+
+        // HOVER EMAIL
+        &.email:hover {
+          .icon-wrapper { background: #dbeafe; color: #1e40af; } // Fondo azul muy claro
+        }
+      }
+
+      .social-footer {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        color: #64748b;
+        font-size: 0.9rem;
+        
+        .links {
+          display: flex;
+          gap: 10px;
+          
+          a {
+            color: #475569;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            &:hover { color: #0f172a; } // Negro al hover
+          }
+          .separator { color: #cbd5e1; }
+        }
+      }
+    }
+  }
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(34, 197, 94, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+}
+
+// --- MOBILE ---
+@media (max-width: 900px) {
+  .contact-container {
+    padding: 60px 20px;
+
+    .content-wrapper {
+      grid-template-columns: 1fr;
+      gap: 50px;
+
+      .text-column {
+        h2 { font-size: 2.5rem; }
+      }
+      
+      .actions-column {
+        .contact-card {
+           padding: 20px;
+           .label { font-size: 1rem; }
+        }
+      }
+    }
+  }
+}
