@@ -1,51 +1,123 @@
-<section class="what-we-do-container">
+<section class="what-we-do-container" id="servicios">
   <div class="gradient-bg"></div>
 
   <div class="content">
     <div class="header">
       <span class="badge">NUESTROS SERVICIOS</span>
-      <h2>Diseño y desarrollo con<br>ADN marplatense.</h2>
+      <h2>Diseño y desarrollo<br>a medida.</h2>
       <p>En Mostafa Dev Studio fusionamos código limpio con diseño estratégico.</p>
     </div>
 
     <div class="pillars">
       
-      <div class="pillar" (mouseenter)="playVideo(video1)" (mouseleave)="stopVideo(video1)">
-        <div class="video-container">
-          <video #video1 muted loop playsinline preload="metadata" 
-                 poster="/assets/images/cuca.jpg">
-             <source src="/assets/videos/thecreator.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="pillar-content">
-          <h3>01. Desarrollo Web</h3>
-          <p>Sitios rápidos, responsivos y escalables con Angular.</p>
+      <div class="pillar-scene">
+        <div class="pillar-inner" [class.flipped]="isFlipped1">
+          
+          <div class="pillar-face pillar-front">
+            <div class="bg-image" style="background-image: url('/assets/images/code.jpg');"></div>
+            <div class="overlay"></div>
+            <div class="content-wrap">
+              <h3>01. Desarrollo Web & Apps</h3>
+              <p class="subtitle">Sitios institucionales y PWAs.</p>
+              <button class="btn-flip" (click)="flipCard(1)">
+                Ver más <span class="arrow">→</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="pillar-face pillar-back">
+            <div class="content-wrap">
+              <h3>Detalles Técnicos</h3>
+              <p class="description">
+                Desarrollamos código limpio, escalable y optimizado para que tu sitio cargue rápido y se posicione mejor en Google (SEO).
+              </p>
+              
+              <div class="tech-stack">
+                <span class="tech-badge">Angular</span>
+                <span class="tech-badge">TypeScript</span>
+                <span class="tech-badge">SASS</span>
+              </div>
+
+              <button class="btn-back" (click)="flipCard(1)">
+                ← Volver
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div class="pillar" (mouseenter)="playVideo(video2)" (mouseleave)="stopVideo(video2)">
-        <div class="video-container">
-           <video #video2 muted loop playsinline preload="metadata" 
-                  poster="https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000&auto=format&fit=crop">
-            <source src="https://videos.pexels.com/video-files/3129671/3129671-sd_640_360_25fps.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="pillar-content">
-          <h3>02. E-Commerce</h3>
-          <p>Tiendas que venden, integradas con pasarelas de pago.</p>
+      <div class="pillar-scene">
+        <div class="pillar-inner" [class.flipped]="isFlipped2">
+          
+          <div class="pillar-face pillar-front">
+            <div class="bg-image" style="background-image: url('/assets/images/conexion.jpg');"></div>
+            <div class="overlay"></div>
+            <div class="content-wrap">
+              <h3>02. E-Commerce</h3>
+              <p class="subtitle">Tiendas online que venden.</p>
+              <button class="btn-flip" (click)="flipCard(2)">
+                Ver más <span class="arrow">→</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="pillar-face pillar-back">
+            <div class="content-wrap">
+              <h3>Ventas 24/7</h3>
+              <p class="description">
+                Tiendas seguras, integradas con MercadoPago y sistemas de envío.
+              </p>
+              
+              <div class="tech-stack">
+                <span class="tech-badge">WooCommerce</span>
+                <span class="tech-badge">MercadoPago</span>
+                <span class="tech-badge">Analytics</span>
+              </div>
+
+              <button class="btn-back" (click)="flipCard(2)">
+                ← Volver
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
 
-      <div class="pillar" (mouseenter)="playVideo(video3)" (mouseleave)="stopVideo(video3)">
-        <div class="video-container">
-           <video #video3 muted loop playsinline preload="metadata" 
-                  poster="https://images.unsplash.com/photo-1600508774634-4e11d34730e2?q=80&w=1000&auto=format&fit=crop">
-            <source src="https://videos.pexels.com/video-files/3129671/3129671-sd_640_360_25fps.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="pillar-content">
-          <h3>03. Branding</h3>
-          <p>Identidad visual fuerte para destacar en el mercado.</p>
+      <div class="pillar-scene">
+        <div class="pillar-inner" [class.flipped]="isFlipped3">
+          
+          <div class="pillar-face pillar-front">
+            <div class="bg-image" style="background-image: url('/assets/images/branding.jpg');"></div>
+            <div class="overlay"></div>
+            <div class="content-wrap">
+              <h3>03. Branding & UI/UX</h3>
+              <p class="subtitle">Identidad visual estratégica.</p>
+              <button class="btn-flip" (click)="flipCard(3)">
+                Ver más <span class="arrow">→</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="pillar-face pillar-back">
+            <div class="content-wrap">
+              <h3>Diseño con Propósito</h3>
+              <p class="description">
+                Diseñamos identidades visuales modernas y experiencias de usuario (UX) intuitivas que transmiten profesionalismo.
+              </p>
+              
+              <div class="tech-stack">
+                <span class="tech-badge">Figma</span>
+                <span class="tech-badge">Illustrator</span>
+                <span class="tech-badge">Photoshop</span>
+              </div>
+
+              <button class="btn-back" (click)="flipCard(3)">
+                ← Volver
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
 
