@@ -1,62 +1,266 @@
-.bento-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 200px;
-  gap: 20px;
-  padding: 40px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding-top: 110px; 
-  padding-bottom: 40px;
-  // Un poco de aire arriba para cuando el Navbar se pega
-  padding-top: 40px;
+.projects-section {
+  position: relative;
+  padding: 120px 20px;
+  color: white;
+  overflow: hidden;
 
-  .bento-item {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 30px;
-    padding: 24px;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+  // --- 1. FONDO PARALLAX ---
+  background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop');
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 
-    &:hover {
-      border-color: #3b82f6;
-      transform: translateY(-5px);
-    }
-
-    @media (max-width: 768px) {
-    padding-top: 100px; // Un poco menos en mobile
-    }
-  }
-
-  // Ajustes de tamaño para las cajas
-  .hero-card {
-    grid-column: span 3;
-    grid-row: span 2;
-    background: linear-gradient(135deg, #1e3a8a 0%, #581c87 100%);
-    display: flex;
-    align-items: flex-end;
+  // --- 2. EL VELO OSCURO ---
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
     
-    h1 { font-size: 3rem; margin: 0; }
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 1) 0%,      
+      rgba(0, 0, 0, 0.85) 15%,  
+      rgba(0, 0, 0, 0.85) 85%,  
+      rgba(0, 0, 0, 1) 100%     
+    );
+    
+    z-index: 0; 
   }
 
-  .team-card {
-    grid-column: span 1;
-    grid-row: span 2;
+  // --- HEADER ---
+  .section-header {
+    position: relative;
+    z-index: 1; 
+    max-width: 1200px;
+    margin: 0 auto 60px auto;
+    
+    .badge {
+      color: #3b82f6; 
+      font-size: 0.85rem;
+      letter-spacing: 3px;
+      font-weight: 700;
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 15px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.5); 
+    }
+
+    h2 {
+      font-size: clamp(2.5rem, 4vw, 3.5rem);
+      line-height: 1.1;
+      font-weight: 800;
+      margin-bottom: 15px;
+      color: white;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.8);
+    }
+
+    p {
+      font-size: 1.1rem;
+      color: #cbd5e1; 
+      max-width: 600px;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+    }
   }
 
-  .ampas { grid-column: span 2; }
-  .gnc { grid-column: span 2; }
+  // --- BENTO GRID ---
+  .bento-container {
+    position: relative;
+    z-index: 1; 
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 240px; 
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
 
-  // Responsive para el celular que tanto nos importa
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
-    grid-auto-rows: auto;
-    padding: 20px;
+    // ESTILO COMÚN
+    .bento-item {
+      // --- RESETEO DE ENLACES ---
+      text-decoration: none; 
+      color: white; 
+      display: block; 
+      // --------------------------
 
-    .hero-card, .team-card, .ampas, .gnc {
+      background: rgba(15, 23, 42, 0.6); 
+      backdrop-filter: blur(20px); 
+      -webkit-backdrop-filter: blur(20px);
+      
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 30px;
+      overflow: hidden; 
+      position: relative;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); 
+
+      // --- EFECTO HOVER (LUZ NEÓN) ---
+      &:hover {
+        transform: translateY(-5px);
+        background: rgba(15, 23, 42, 0.9); // Más oscuro al hover
+        
+        // Borde Brillante
+        border-color: rgba(59, 130, 246, 0.8);
+        
+        // Sombra de Luz Neón
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.3); 
+      }
+    }
+
+    // HERO CARD
+    .hero-card {
+      grid-column: span 3; 
+      grid-row: span 2;    
+      background: linear-gradient(135deg, rgba(30, 27, 75, 0.9) 0%, rgba(49, 46, 129, 0.9) 100%);
+      padding: 40px;
+      display: flex;
+      align-items: flex-end;
+
+      .content {
+        h1 { 
+          font-size: clamp(2rem, 4vw, 3.5rem); 
+          margin: 0 0 10px 0; 
+          line-height: 1;
+        }
+        p { 
+          color: #a5b4fc; 
+          font-size: 1.2rem; 
+        }
+        .decorative-line {
+          width: 60px;
+          height: 4px;
+          background: #3b82f6;
+          margin-top: 20px;
+          border-radius: 2px;
+        }
+      }
+    }
+
+    // TEAM CARD
+    .team-card {
       grid-column: span 1;
-      grid-row: span 1;
+      grid-row: span 2;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.03);
+
+      h3 { font-size: 1.5rem; margin-bottom: 10px; color: #fff; }
+      p { color: #94a3b8; line-height: 1.5; }
+    }
+
+    // --- PROYECTOS (VIDEOS + IMAGEN TAPA) ---
+    .project-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end; 
+      padding: 25px;
+      cursor: pointer;
+      background: #0f172a; // Fondo negro de seguridad
+
+      // Contenedor Multimedia
+      .media-container {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: 0;
+        
+        // 1. VIDEO (FONDO - Z-INDEX 1)
+        video {
+          position: absolute;
+          top: 0; left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+          z-index: 1; 
+        }
+        
+        // 2. IMAGEN DE TAPA (ARRIBA - Z-INDEX 10)
+        .cover-image {
+          position: absolute;
+          top: 0; left: 0; width: 100%; height: 100%;
+          background-size: cover;
+          background-position: center;
+          background-color: #000; // Seguridad por si falla la imagen
+          
+          z-index: 10; // Mucho más alto que el video
+          
+          opacity: 1; // Visible por defecto
+          transition: opacity 0.4s ease-in-out;
+        }
+
+        // 3. OVERLAY (SOMBRA - Z-INDEX 20)
+        .overlay {
+          position: absolute;
+          top: 0; left: 0; width: 100%; height: 100%;
+          background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+          z-index: 20; 
+          pointer-events: none;
+        }
+      }
+
+      // 4. INFO (TEXTO - Z-INDEX 30)
+      .info {
+        position: relative;
+        z-index: 30;
+        
+        .tag {
+          font-size: 0.7rem;
+          background: #3b82f6;
+          color: white;
+          padding: 4px 10px;
+          border-radius: 12px;
+          font-weight: 600;
+          display: inline-block;
+          margin-bottom: 10px;
+        }
+        h4 {
+          font-size: 1.3rem;
+          margin: 0 0 5px 0;
+          font-weight: 700;
+          text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+        p {
+          font-size: 0.9rem;
+          color: #e2e8f0;
+          margin: 0;
+          text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+      }
+
+      // --- HOVER ---
+      &:hover {
+        .media-container video {
+          transform: scale(1.05); 
+        }
+        
+        // Al pasar el mouse, ocultamos la imagen
+        .media-container .cover-image {
+          opacity: 0;
+        }
+      }
+    }
+
+    .ampas  { grid-column: span 2; }
+    .gnc    { grid-column: span 1; }
+    .kdonna { grid-column: span 1; }
+
+    // --- MOBILE ---
+    @media (max-width: 900px) {
+      grid-template-columns: 1fr; 
+      grid-auto-rows: 250px;
+      padding: 0;
+
+      .hero-card, .team-card, .ampas, .gnc, .kdonna {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+      
+      .hero-card {
+        padding: 30px;
+        h1 { font-size: 2.5rem; }
+      }
     }
   }
 }

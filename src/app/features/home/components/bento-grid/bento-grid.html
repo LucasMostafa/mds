@@ -1,71 +1,91 @@
-<div class="bento-container">
-  <div class="bento-item hero-card">
-    <div class="content">
-      <h1>Mostafa Devs Studio</h1>
-      <p>Diseño y desarrollo de software a medida.</p>
+<section class="projects-section" id="proyectos">
+  
+  <div class="section-header">
+    <span class="badge">PROYECTOS</span>
+    <h2>Nuestros trabajos<br>recientes.</h2>
+    <p>Soluciones digitales que marcan la diferencia.</p>
+  </div>
+
+  <div class="bento-container">
+    
+    <div class="bento-item hero-card">
+      <div class="content">
+        <h1>Mostafa Devs<br>Studio</h1>
+        <p>Diseño y desarrollo de software a medida.</p>
+        <div class="decorative-line"></div>
+      </div>
     </div>
-  </div>
 
-  <div class="bento-item team-card">
-    <h3>MDS Team</h3>
-    <p>Programadores socios. Soluciones corporativas y creativas.</p>
-  </div>
+    <div class="bento-item team-card">
+      <div class="content">
+        <h3>MDS Team</h3>
+        <p>Programadores socios. Soluciones corporativas y creativas.</p>
+      </div>
+    </div>
 
-  <div class="bento-item project-card ampas">
-    <span class="tag">Proyecto Destacado</span>
-    <h4>AMPAS MDP</h4>
-  </div>
-
-  <div class="bento-item project-card gnc">
-    <h4>GNC Constitución</h4>
-  </div>
-
-  <div class="bento-item project-card gnc">
-    <h4>Kdonna</h4>
-  </div>
-</div>
-
-<!--
-<div class="pillars">
+    <a href="https://www.ampasmdp.com.ar/" target="_blank" rel="noopener noreferrer"
+       class="bento-item project-card ampas" 
+       (mouseenter)="playVideo(vidAmpas)" 
+       (mouseleave)="stopVideo(vidAmpas)">
       
-      <div class="pillar" (mouseenter)="playVideo(video1)" (mouseleave)="stopVideo(video1)">
-        <div class="video-container">
-          <video #video1 muted loop playsinline preload="metadata" 
-                 poster="/assets/images/cuca.jpg">
-             <source src="/assets/videos/thecreator.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="pillar-content">
-          <h3>01. Desarrollo Web & Apps</h3>
-          <p>Sitios institucionales, Landing Pages y Aplicaciones Web progresivas (PWA).</p>
-        </div>
+      <div class="media-container">
+        <video #vidAmpas muted loop playsinline preload="metadata">
+           <source src="/assets/videos/ampasvideo.mp4" type="video/mp4">
+        </video>
+        
+        <div class="cover-image" style="background-image: url('/assets/images/ampasimg.jpg');"></div>
+        
+        <div class="overlay"></div>
       </div>
 
-      <div class="pillar" (mouseenter)="playVideo(video2)" (mouseleave)="stopVideo(video2)">
-        <div class="video-container">
-           <video #video2 muted loop playsinline preload="metadata" 
-                  poster="https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1000&auto=format&fit=crop">
-            <source src="https://videos.pexels.com/video-files/3129671/3129671-sd_640_360_25fps.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="pillar-content">
-          <h3>02. E-Commerce</h3>
-          <p>Tiendas que venden, integradas con pasarelas de pago.</p>
-        </div>
+      <div class="info">
+        <span class="tag">Proyecto Destacado</span>
+        <h4>AMPAS MDP</h4>
+        <p>Plataforma de gestión.</p>
+      </div>
+    </a>
+
+    <a href="https://gncconstitucion.ar/home" target="_blank" rel="noopener noreferrer"
+       class="bento-item project-card gnc"
+       (mouseenter)="playVideo(vidGnc)" 
+       (mouseleave)="stopVideo(vidGnc)">
+      
+      <div class="media-container">
+        <video #vidGnc muted loop playsinline preload="metadata">
+           <source src="/assets/videos/gncconstitucionvideo.mp4" type="video/mp4">
+        </video>
+        
+        <div class="cover-image" style="background-image: url('/assets/images/gncconstitucionimg.jpg');"></div>
+        
+        <div class="overlay"></div>
       </div>
 
-      <div class="pillar" (mouseenter)="playVideo(video3)" (mouseleave)="stopVideo(video3)">
-        <div class="video-container">
-           <video #video3 muted loop playsinline preload="metadata" 
-                  poster="https://images.unsplash.com/photo-1600508774634-4e11d34730e2?q=80&w=1000&auto=format&fit=crop">
-            <source src="https://videos.pexels.com/video-files/3129671/3129671-sd_640_360_25fps.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="pillar-content">
-          <h3>03. Branding</h3>
-          <p>Identidad visual fuerte para destacar en el mercado.</p>
-        </div>
+      <div class="info">
+        <h4>GNC Constitución</h4>
+        <p>Landing Page Corporativa.</p>
+      </div>
+    </a>
+
+    <a href="#" target="_blank" rel="noopener noreferrer"
+       class="bento-item project-card kdonna"
+       (mouseenter)="playVideo(vidKdonna)" 
+       (mouseleave)="stopVideo(vidKdonna)">
+      
+      <div class="media-container">
+        <video #vidKdonna muted loop playsinline preload="metadata">
+           <source src="/assets/videos/branding.mp4" type="video/mp4">
+        </video>
+        
+        <div class="cover-image" style="background-image: url('/assets/images/kdonna-poster.jpg');"></div>
+        
+        <div class="overlay"></div>
       </div>
 
-    </div>
--->
+      <div class="info">
+        <h4>Kdonna</h4>
+        <p>E-Commerce de Moda.</p>
+      </div>
+    </a>
+
+  </div>
+</section>

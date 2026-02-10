@@ -1,27 +1,34 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-bento-grid',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './bento-grid.html',
   styleUrl: './bento-grid.scss',
 })
 export class BentoGrid {
 
-  /*
   // Función para reproducir el video al entrar
   playVideo(videoElement: HTMLVideoElement) {
+    // IMPORTANTE: Reseteamos a 0 para asegurar que arranque
     videoElement.currentTime = 0;
-    // Forzar el mute ayuda a que el navegador permita el autoplay
     videoElement.muted = true; 
     
-    videoElement.play().catch(error => {
-      console.log('Video play prevented (normal si no hubo interacción previa):', error);
-    });
+    const playPromise = videoElement.play();
+    
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        console.log('Interrupted play:', error);
+      });
+    }
   }
 
   // Función para detener el video al salir
   stopVideo(videoElement: HTMLVideoElement) {
-    videoElement.pause();*/
-
+    videoElement.pause();
+    // Reseteamos al principio para que cuando vuelva la imagen, el video esté listo
+    videoElement.currentTime = 0; 
+  }
 }

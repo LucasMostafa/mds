@@ -1,10 +1,7 @@
 .studio-container {
-  // 1. SOLUCIÓN AL DESFASAJE (Corte a la derecha)
   box-sizing: border-box; 
   width: 100%;
   padding: 120px 20px;
-  
-  // Fondo "Gris Azulado Profundo"
   background-color: #111827; 
   color: white;
   overflow: hidden;
@@ -12,13 +9,11 @@
   .content-wrapper {
     max-width: 1200px;
     margin: 0 auto;
-    
-    // Usamos GRID para poder reordenar todo fácilmente
     display: grid;
     grid-template-columns: 1fr 1fr; 
     gap: 80px;
     align-items: center;
-    box-sizing: border-box; // Seguridad extra
+    box-sizing: border-box; 
 
     // --- COLUMNA TEXTO ---
     .text-column {
@@ -47,11 +42,7 @@
           line-height: 1.8;
           color: #cbd5e1;
           margin-bottom: 25px;
-
-          strong {
-            color: white;
-            font-weight: 600;
-          }
+          strong { color: white; font-weight: 600; }
         }
       }
 
@@ -65,26 +56,30 @@
         .founder {
           display: flex;
           flex-direction: column;
-          
-          .name {
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: white;
-          }
-          .role {
-            font-size: 0.9rem;
-            color: #60a5fa; 
-            margin-top: 5px;
-            font-weight: 500;
-          }
+          .name { font-weight: 700; font-size: 1.1rem; color: white; }
+          .role { font-size: 0.9rem; color: #60a5fa; margin-top: 5px; font-weight: 500; }
         }
       }
     }
 
-    // --- COLUMNA IMAGEN ---
+    // --- COLUMNA IMAGEN (ANIMACIÓN CORREGIDA) ---
     .image-column {
       position: relative;
       padding: 10px;
+      
+      // 1. ESTADO INICIAL
+      opacity: 0;
+      // Usamos 200px. Es suficiente para que se vea "fuera" pero el navegador la detecte.
+      transform: translateX(300px); 
+      
+      // Aumentamos el tiempo a 1.5s para que el viaje parezca más largo y suave
+      transition: opacity 1.5s ease-out, transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+      
+      // 2. ESTADO VISIBLE
+      &.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
 
       .image-frame {
         position: relative;
@@ -125,44 +120,40 @@
   }
 }
 
-// --- MOBILE (EL FIX IMPORTANTE) ---
+// --- MOBILE ---
 @media (max-width: 900px) {
   .studio-container {
-    padding: 100px 20px 50px; // Menos padding vertical
-    
+    padding: 100px 20px 50px; 
 
     .content-wrapper {
-      // Pasamos a 1 sola columna
       grid-template-columns: 1fr;
-      gap: 5px; // Menos espacio entre elementos
+      gap: 5px; 
 
-      // TRUCO DE MAGIA: "display: contents"
-      // Esto hace que la .text-column desaparezca visualmente y sus hijos 
-      // (Badge, H2, Story) sean tratados como hijos directos del grid principal.
-      // Así podemos poner la imagen ENTRE el título y el texto.
       .text-column {
         display: contents;
-
-        // 1. Título arriba
         .badge { order: 1; }
         h2 { 
           order: 2;
           margin-top: 2px; 
-          font-size: 2.2rem; // Letra un poco más chica para que no corte
+          font-size: 2.2rem; 
         }
-        
-        // 3. Historia abajo
         .story { order: 4; }
         .founders { order: 5; }
       }
 
       .image-column {
-        // 2. Imagen al medio (debajo del título)
         order: 3;
-        margin: 10px 0 20px 0; // Un poco de aire para separarla
+        margin: 10px 0 20px 0; 
         
+        // En mobile 80px es suficiente para que entre desde el borde
+        transform: translateX(80px);
+        
+        &.visible {
+          transform: translateX(0);
+        }
+
         .image-frame {
-           transform: rotate(0deg); // Derecha en mobile
+           transform: rotate(0deg); 
         }
       }
     }
