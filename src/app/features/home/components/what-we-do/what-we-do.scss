@@ -71,21 +71,21 @@
         width: 100%;
         cursor: pointer;
         position: relative;
-        
         will-change: transform; 
         transition: transform 0.3s ease; 
 
-        // ESTADO "ENCENDIDO" (AL PASAR EL MOUSE)
-        &:hover {
-          transform: translateY(-5px); 
-          
-          .pillar-face {
-            border-color: rgba(59, 130, 246, 0.8); // Borde Azul Brillante
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.3); // Glow Neón
+        // ESTADO "ENCENDIDO" (SOLO EN PC)
+        @media (hover: hover) {
+          &:hover {
+            transform: translateY(-5px); 
+            
+            .pillar-face {
+              border-color: rgba(59, 130, 246, 0.8); 
+              box-shadow: 0 0 30px rgba(59, 130, 246, 0.3); 
+            }
           }
         }
 
-        // El objeto que gira
         .pillar-inner {
           position: relative;
           width: 100%;
@@ -102,56 +102,47 @@
           }
         }
 
-        // ============================================================
-        // ESTADO "APAGADO" (POR DEFECTO)
-        // ============================================================
+        // --- CARA BASE ---
         .pillar-face {
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          
-          // --- FIX ANTI-LINEA BLANCA ---
-          // Truco viejo pero efectivo para suavizar bordes en 3D
-          outline: 1px solid transparent;
-          // Fuerza extra a la GPU
-          transform: perspective(1000px) translateZ(0);
-          // ---------------------------
-
+          top: 0; left: 0; width: 100%; height: 100%;
           -webkit-backface-visibility: hidden; 
           backface-visibility: hidden;
+          
+          // Fix anti-línea blanca
+          outline: 1px solid transparent;
+          transform: perspective(1000px) translateZ(0);
 
           border-radius: 20px;
-          
-          // Borde gris suave y casi transparente (APAGADO)
           border: 1px solid rgba(255, 255, 255, 0.08); 
-          
-          // Sombra transparente (SIN GLOW)
           box-shadow: 0 0 0 transparent;
 
           overflow: hidden;
           display: flex;
           flex-direction: column;
-          
-          // Transiciones suaves
           transition: border-color 0.3s ease, box-shadow 0.3s ease; 
         }
 
-        // --- CARA FRONTAL ---
+        // --- CARA FRONTAL (CON VIDEO) ---
         .pillar-front {
           background-color: #111;
           justify-content: flex-end; 
           z-index: 2; 
           
-          .bg-image {
+          // Contenedor del video
+          .video-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background-size: cover;
-            background-position: center;
-            transition: transform 0.5s ease;
-            will-change: transform;
             z-index: 0;
+            overflow: hidden;
+
+            video {
+              width: 100%;
+              height: 100%;
+              object-fit: cover; // Para que llene todo el espacio sin deformarse
+              transition: transform 0.5s ease; // Zoom suave
+              will-change: transform;
+            }
           }
           
           .overlay {
@@ -194,17 +185,22 @@
               transition: all 0.3s;
               pointer-events: auto; 
               
-              &:hover {
-                background: white;
-                color: black;
-                .arrow { margin-left: 5px; }
+              @media (hover: hover) {
+                &:hover {
+                  background: white;
+                  color: black;
+                  .arrow { margin-left: 5px; }
+                }
               }
               .arrow { transition: margin 0.3s; }
             }
           }
 
-          &:hover .bg-image {
-            transform: scale(1.05);
+          // Zoom al video en PC
+          @media (hover: hover) {
+            &:hover .video-container video {
+              transform: scale(1.05);
+            }
           }
         }
 
@@ -213,7 +209,6 @@
           background: #0f172a; 
           background: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
           transform: rotateY(180deg) translateZ(0);
-          
           justify-content: center; 
           align-items: center;
           padding: 30px;
@@ -223,7 +218,6 @@
 
           .content-wrap {
             width: 100%;
-            
             h3 {
               color: #60a5fa; 
               margin-bottom: 15px;
@@ -236,14 +230,12 @@
               color: #e2e8f0;
               margin-bottom: 25px;
             }
-
             .tech-stack {
               display: flex;
               justify-content: center;
               gap: 8px;
               flex-wrap: wrap;
               margin-bottom: 30px;
-
               .tech-badge {
                 font-size: 0.75rem;
                 background: rgba(255,255,255,0.05);
@@ -253,7 +245,6 @@
                 color: #cbd5e1;
               }
             }
-
             .btn-back {
               background: transparent;
               border: none;
@@ -271,11 +262,10 @@
   }
 }
 
-// Ajustes Mobile
+// Mobile
 @media (max-width: 768px) {
   .what-we-do-container {
     padding: 60px 20px;
-    
     .content .pillars .pillar-scene {
       height: 380px; 
     }

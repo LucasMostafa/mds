@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './what-we-do.scss'
 })
 export class WhatWeDo {
-  // Variables para controlar el estado de cada carta
+  // Estado de las cartas
   isFlipped1 = false;
   isFlipped2 = false;
   isFlipped3 = false;
@@ -20,20 +20,28 @@ export class WhatWeDo {
     if (cardNumber === 3) this.isFlipped3 = !this.isFlipped3;
   }
 
-  // Función para reproducir el video al entrar
-  /*playVideo(videoElement: HTMLVideoElement) {
-    videoElement.currentTime = 0;
-    // Forzar el mute ayuda a que el navegador permita el autoplay
-    videoElement.muted = true; 
+  // --- REPRODUCIR VIDEO (Hover) ---
+  playVideo(videoElement: HTMLVideoElement) {
+    // Si la tarjeta está girada, no reproducimos
+    // (Opcional: podés sacar este if si querés que suene igual)
     
-    videoElement.play().catch(error => {
-      console.log('Video play prevented (normal si no hubo interacción previa):', error);
-    });
+    videoElement.currentTime = 0; // Reinicia el video
+    videoElement.muted = true;    // Asegura mute para autoplay
+    
+    const playPromise = videoElement.play();
+    
+    if (playPromise !== undefined) {
+      playPromise.catch(error => {
+        // Autoplay bloqueado o interrupción rápida (normal en browsers)
+        console.log('Video play prevented:', error);
+      });
+    }
   }
 
-  // Función para detener el video al salir
+  // --- PAUSAR VIDEO (Leave) ---
   stopVideo(videoElement: HTMLVideoElement) {
     videoElement.pause();
-  }*/
+    // Opcional: Volver a 0 para que la próxima vez arranque de inicio
+    // videoElement.currentTime = 0; 
+  }
 }
-

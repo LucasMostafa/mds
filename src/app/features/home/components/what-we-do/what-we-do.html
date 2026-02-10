@@ -10,12 +10,17 @@
 
     <div class="pillars">
       
-      <div class="pillar-scene">
+      <div class="pillar-scene" (mouseenter)="playVideo(vid1)" (mouseleave)="stopVideo(vid1)">
         <div class="pillar-inner" [class.flipped]="isFlipped1">
           
           <div class="pillar-face pillar-front">
-            <div class="bg-image" style="background-image: url('/assets/images/code.jpg');"></div>
+            <div class="video-container">
+              <video #vid1 muted loop playsinline preload="metadata" 
+                     poster="/assets/images/code1.jpg"> <source src="/assets/videos/coding.mp4" type="video/mp4"> </video>
+            </div>
+            
             <div class="overlay"></div>
+            
             <div class="content-wrap">
               <h3>01. Desarrollo Web & Apps</h3>
               <p class="subtitle">Sitios institucionales y PWAs.</p>
@@ -31,13 +36,11 @@
               <p class="description">
                 Desarrollamos código limpio, escalable y optimizado para que tu sitio cargue rápido y se posicione mejor en Google (SEO).
               </p>
-              
               <div class="tech-stack">
                 <span class="tech-badge">Angular</span>
                 <span class="tech-badge">TypeScript</span>
                 <span class="tech-badge">SASS</span>
               </div>
-
               <button class="btn-back" (click)="flipCard(1)">
                 ← Volver
               </button>
@@ -47,12 +50,19 @@
         </div>
       </div>
 
-      <div class="pillar-scene">
+      <div class="pillar-scene" (mouseenter)="playVideo(vid2)" (mouseleave)="stopVideo(vid2)">
         <div class="pillar-inner" [class.flipped]="isFlipped2">
           
           <div class="pillar-face pillar-front">
-            <div class="bg-image" style="background-image: url('/assets/images/conexion.jpg');"></div>
+            <div class="video-container">
+              <video #vid2 muted loop playsinline preload="metadata" 
+                     poster="/assets/images/conexion.jpg">
+                 <source src="/assets/videos/conexionvideo.mp4" type="video/mp4">
+              </video>
+            </div>
+            
             <div class="overlay"></div>
+            
             <div class="content-wrap">
               <h3>02. E-Commerce</h3>
               <p class="subtitle">Tiendas online que venden.</p>
@@ -68,13 +78,11 @@
               <p class="description">
                 Tiendas seguras, integradas con MercadoPago y sistemas de envío.
               </p>
-              
               <div class="tech-stack">
                 <span class="tech-badge">WooCommerce</span>
                 <span class="tech-badge">MercadoPago</span>
                 <span class="tech-badge">Analytics</span>
               </div>
-
               <button class="btn-back" (click)="flipCard(2)">
                 ← Volver
               </button>
@@ -84,12 +92,19 @@
         </div>
       </div>
 
-      <div class="pillar-scene">
+      <div class="pillar-scene" (mouseenter)="playVideo(vid3)" (mouseleave)="stopVideo(vid3)">
         <div class="pillar-inner" [class.flipped]="isFlipped3">
           
           <div class="pillar-face pillar-front">
-            <div class="bg-image" style="background-image: url('/assets/images/branding.jpg');"></div>
+            <div class="video-container">
+              <video #vid3 muted loop playsinline preload="metadata" 
+                     poster="/assets/images/branding.jpg">
+                 <source src="/assets/videos/brandingvideo1.mp4" type="video/mp4">
+              </video>
+            </div>
+            
             <div class="overlay"></div>
+            
             <div class="content-wrap">
               <h3>03. Branding & UI/UX</h3>
               <p class="subtitle">Identidad visual estratégica.</p>
@@ -103,15 +118,13 @@
             <div class="content-wrap">
               <h3>Diseño con Propósito</h3>
               <p class="description">
-                Diseñamos identidades visuales modernas y experiencias de usuario (UX) intuitivas que transmiten profesionalismo.
+                Diseñamos identidades visuales modernas y experiencias de usuario (UX) intuitivas.
               </p>
-              
               <div class="tech-stack">
                 <span class="tech-badge">Figma</span>
                 <span class="tech-badge">Illustrator</span>
                 <span class="tech-badge">Photoshop</span>
               </div>
-
               <button class="btn-back" (click)="flipCard(3)">
                 ← Volver
               </button>
