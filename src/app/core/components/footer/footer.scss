@@ -3,28 +3,36 @@
   color: #fff;
   position: relative;
   width: 100%;
-  padding-top: 0; 
+  padding-top: 20px; // Un poco de aire arriba
   overflow: hidden;
 
-  // --- LÍNEA SUPERIOR DE NEÓN ---
+  // --- LÍNEA DE NEÓN (Violeta -> Azul) ---
   .footer-gradient-line {
-    width: 100%;
-    height: 1px;
-    background: linear-gradient(90deg, 
-      rgba(0,0,0,0) 0%, 
-      #3b82f6 30%, 
-      #7c3aed 70%, 
-      rgba(0,0,0,0) 100%
+    width: 90%;           // No ocupa todo el ancho para que se noten las puntas
+    max-width: 1200px;    // Tope máximo
+    height: 3px;          // Grosor
+    margin: 0 auto 40px;  // Centrado horizontal y margen abajo
+    border-radius: 100%;  // Puntas redondeadas
+
+    // EL DEGRADADO: Transparente en los extremos
+    background: linear-gradient(
+      90deg, 
+      rgba(0,0,0,0) 0%,       // Punta izquierda invisible
+      #7c3aed 20%,            // Violeta
+      #3b82f6 80%,            // Azul
+      rgba(0,0,0,0) 100%      // Punta derecha invisible
     );
-    opacity: 0.5;
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); 
+
+    // Glow suave
+    box-shadow: 0 0 15px 1px rgba(124, 58, 237, 0.4);
+    opacity: 1;
   }
 
-  // --- CONTENIDO PRINCIPAL ---
+  // --- CONTENIDO ---
   .footer-content {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 80px 20px 60px;
+    padding: 0 20px 60px;
     display: grid;
     grid-template-columns: 2fr 1fr 1fr; 
     gap: 60px;
@@ -35,7 +43,7 @@
         font-size: 2rem;
         font-weight: 800;
         margin-bottom: 20px;
-        margin-top: 0px;
+        margin-top: 0;
         letter-spacing: -1px;
         span { color: #3b82f6; } 
       }
@@ -86,7 +94,6 @@
             font-size: 1rem;
             transition: all 0.3s ease;
             position: relative;
-            cursor: pointer; // IMPORTANTE: Para asegurar la manito
 
             &:hover {
               color: #3b82f6; 
@@ -128,12 +135,6 @@
           }
         }
       }
-
-      .legal-text {
-        font-size: 0.8rem;
-        color: #475569;
-        line-height: 1.5;
-      }
     }
   }
 
@@ -156,7 +157,7 @@
       grid-template-columns: 1fr; 
       gap: 40px;
       text-align: center;
-      padding: 60px 20px;
+      padding: 40px 20px;
 
       .footer-brand {
         .tagline { margin: 0 auto 20px auto; }
