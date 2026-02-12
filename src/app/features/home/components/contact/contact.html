@@ -32,16 +32,47 @@
         <div class="arrow">→</div>
       </a>
 
-      <a #animateCard href="mailto:mostafadevsstudio@gmail.com" class="contact-card email">
-        <div class="icon-wrapper">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+      <div #animateCard class="email-interactive-card" [class.is-open]="isEmailFormOpen">
+
+        <div class="card-front" (click)="openEmailForm()">
+          <div class="icon-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div class="card-text">
+            <span class="label">Envianos un Email</span>
+            <span class="value">mostafadevsstudio@gmail.com</span>
+          </div>
+          <div class="arrow">→</div>
         </div>
-        <div class="card-text">
-          <span class="label">Envianos un Email</span>
-          <span class="value">mostafadevsstudio@gmail.com</span>
+
+        <div class="card-back">
+          
+          <div class="form-header" (click)="closeEmailForm()">
+            <h3>Escribinos</h3>
+            <button type="button" class="close-btn">✕</button>
+          </div>
+
+          <form (ngSubmit)="sendEmail($event)">
+            <div class="form-group">
+              <label>Identificación</label>
+              <input type="text" placeholder="Tu nombre o Empresa" required>
+            </div>
+            <div class="form-group">
+              <label>Tu Email</label>
+              <input type="email" placeholder="ejemplo@correo.com" required>
+            </div>
+            <div class="form-group">
+              <label>Mensaje</label>
+              <textarea rows="3" placeholder="Contanos tu idea..." required></textarea>
+            </div>
+            <button type="submit" class="submit-btn">
+              Enviar Mensaje
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" x2="11" y1="2" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </form>
         </div>
-        <div class="arrow">→</div>
-      </a>
+
+      </div>
 
       <div #animateCard class="social-footer">
         <p>Seguinos en</p>

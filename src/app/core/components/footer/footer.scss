@@ -6,7 +6,7 @@
   padding-top: 20px; 
   overflow: hidden;
 
-  // --- LÍNEA DE NEÓN ---
+  // --- LÍNEA DE NEÓN (Violeta -> Azul) ---
   .footer-gradient-line {
     width: 90%;           
     max-width: 1200px;    
@@ -26,16 +26,16 @@
     opacity: 1;
   }
 
-  // --- CONTENIDO ---
+  // --- CONTENIDO PRINCIPAL ---
   .footer-content {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px 60px;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr; 
+    grid-template-columns: 2fr 1fr 1fr; // La columna de marca es más ancha
     gap: 60px;
 
-    // COLUMNA 1: BRAND
+    // 1. SECCIÓN DE MARCA
     .footer-brand {
       .logo {
         font-size: 2rem;
@@ -67,7 +67,7 @@
       }
     }
 
-    // COLUMNA 2: NAV
+    // 2. SECCIÓN DE NAVEGACIÓN
     .footer-nav {
       h3 {
         font-size: 0.9rem;
@@ -93,13 +93,12 @@
             transition: all 0.3s ease;
             position: relative;
             
-            // --- CRÍTICO ---
-            // Como quitamos el href, esto devuelve la manito al mouse
+            // IMPORTANTE: Manito de click para enlaces sin href
             cursor: pointer; 
             user-select: none;
 
             &:hover {
-              color: #3b82f6; 
+              color: #7c3aed; // Azul al hover
               padding-left: 5px; 
             }
           }
@@ -107,7 +106,7 @@
       }
     }
 
-    // COLUMNA 3: SOCIAL
+    // 3. SECCIÓN SOCIAL (Con Iconos SVG)
     .footer-social {
       h3 {
         font-size: 0.9rem;
@@ -126,22 +125,43 @@
 
         .social-btn {
           text-decoration: none;
-          color: #fff;
+          color: #fff; // Color base blanco
           font-size: 0.95rem;
-          transition: color 0.3s;
+          transition: all 0.3s ease;
           
+          // Flex para alinear Icono + Texto
+          display: flex;
+          align-items: center;
+          gap: 10px; 
+
+          // Estilo de los iconos SVG
+          svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor; // Hereda el color del texto
+            transition: transform 0.3s ease;
+          }
+          
+          // Efecto Hover
           &:hover {
-            color: #7c3aed; 
+            color: #3b82f6; // Todo se vuelve violeta (texto e icono)
+            
+            // Subrayado sutil
             text-decoration: underline;
             text-decoration-thickness: 1px;
             text-underline-offset: 4px;
+
+            // El icono crece un poquito
+            svg {
+              transform: scale(1.1);
+            }
           }
         }
       }
     }
   }
 
-  // --- BARRA INFERIOR ---
+  // --- BARRA INFERIOR (Copyright) ---
   .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding: 20px 0;
@@ -154,10 +174,10 @@
     }
   }
 
-  // --- MOBILE ---
+  // --- RESPONSIVE (Móvil) ---
   @media (max-width: 768px) {
     .footer-content {
-      grid-template-columns: 1fr; 
+      grid-template-columns: 1fr; // Una sola columna
       gap: 40px;
       text-align: center;
       padding: 40px 20px;
@@ -167,8 +187,13 @@
         .logo { justify-content: center; }
       }
 
+      // En móvil centramos los botones sociales también
+      .footer-social .social-links {
+        align-items: center; 
+      }
+
       .footer-nav ul li a:hover {
-        padding-left: 0; 
+        padding-left: 0; // Quitamos el desplazamiento en móvil
         color: #3b82f6;
       }
     }

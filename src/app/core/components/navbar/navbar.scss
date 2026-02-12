@@ -14,7 +14,7 @@
   max-width: 1200px;
   height: 70px;
   
-  // Estética de Vidrio (Default: Para fondo oscuro)
+  // Estética del Navbar (Barra superior)
   background: rgba(255, 255, 255, 0.03); 
   backdrop-filter: blur(15px); 
   -webkit-backdrop-filter: blur(15px);
@@ -40,7 +40,7 @@
       flex-shrink: 0;
       cursor: pointer;
       .mds-text { color: #fff; transition: color 0.3s ease; }
-      .studio-text { color: #3b82f6; margin-left: 4px; }
+      .studio-text { color: #3b82f6; margin-left: 0px; }
     }
 
     .nav-links {
@@ -57,7 +57,6 @@
       }
     }
 
-    // Botón Desktop
     .btn-contact {
       background: #fff;
       color: #000;
@@ -74,7 +73,6 @@
       &:hover { transform: scale(1.05); }
     }
 
-    // --- HAMBURGUESA MEJORADA ---
     .hamburger-btn {
       display: none; 
       background: none;
@@ -94,62 +92,65 @@
         transition: all 0.3s ease-in-out;
         border-radius: 2px;
         
-        // Estado Normal
         &.top { top: 0; }
         &.mid { top: 50%; transform: translateY(-50%); opacity: 1; }
         &.bot { bottom: 0; }
       }
 
-      // Estado Activo (CRUZ SIMÉTRICA)
       &.active {
-        .bar {
-          // Ancho controlado de la cruz
-          width: 24px; 
-          // Centrado horizontal
-          left: 50%; 
-          margin-left: -12px; 
-        }
-
-        .bar.top { 
-          top: 50%; 
-          transform: translateY(-50%) rotate(45deg); 
-        }
-        
-        .bar.mid { 
-          opacity: 0; 
-        }
-        
-        .bar.bot { 
-          // Usamos top 50% para que parta del mismo centro que la otra línea
-          top: 50%; 
-          bottom: auto; 
-          transform: translateY(-50%) rotate(-45deg); 
-        }
+        .bar { width: 24px; left: 50%; margin-left: -12px; }
+        .bar.top { top: 50%; transform: translateY(-50%) rotate(45deg); }
+        .bar.mid { opacity: 0; }
+        .bar.bot { top: 50%; bottom: auto; transform: translateY(-50%) rotate(-45deg); }
       }
     }
   }
 
-  // --- MENÚ MOBILE ---
+  // --- MENÚ MOBILE (SOLUCIÓN PSEUDO-ELEMENTO) ---
   .mobile-menu {
     position: absolute;
     top: calc(100% + 10px); 
     left: 0;
     width: 100%; 
-    background: rgba(15, 15, 15, 0.95); 
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    
+    // 1. Quitamos el fondo y filtro directo del contenedor
+    background: transparent !important; 
     border-radius: 20px;
-    padding: 30px 0px;
+    z-index: 9999;
+    
+    // Importante para contener el vidrio
+    overflow: hidden; 
     
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 25px;
-    
+    padding: 30px 0;
+
     opacity: 0;
     visibility: hidden;
     transform: translateY(-10px);
     transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    
+    // --- 2. LA CAPA DE VIDRIO (::before) ---
+    // Esto crea una capa separada solo para el efecto, forzando el blur.
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0; // Ocupa todo el espacio
+      z-index: -1; // Se pone DETRÁS del texto
+      
+      // Color Oscuro Transparente (Ajustado)
+      background: rgba(10, 15, 30, 0.55); 
+      
+      // Filtros aplicados a esta capa aislada
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      
+      // Borde y Sombra
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
     
     &.open {
       opacity: 1;
@@ -164,6 +165,11 @@
       font-weight: 500;
       letter-spacing: 0.5px;
       cursor: pointer;
+      position: relative; // Para estar sobre el vidrio
+      z-index: 2;
+      transition: color 0.3s;
+      
+      &:hover { color: #3b82f6; }
     }
 
     .mobile-btn {
@@ -176,6 +182,8 @@
       font-size: 1rem;
       cursor: pointer;
       margin-top: 10px;
+      position: relative; // Para estar sobre el vidrio
+      z-index: 2;
       background: linear-gradient(90deg, #3b82f6 0%, #7c3aed 100%);
       box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); 
       
@@ -185,7 +193,7 @@
 
   // --- MODO OSCURO (Navbar) ---
   &.nav-dark {
-    background: rgba(255, 255, 255, 0.7); 
+    background: rgba(255, 255, 255, 0.8); 
     border-color: rgba(0, 0, 0, 0.05);
 
     .nav-container {
@@ -221,11 +229,10 @@
       .nav-links { display: none; }
       .btn-contact.desktop-only { display: none; }
       
-      // ALINEACIÓN DERECHA DEL HAMBURGUER
       .hamburger-btn { 
         display: block; 
-        margin-left: auto; // Empuja a la derecha
-        margin-right: 50px;   // Sin margen derecho
+        margin-left: auto; 
+        margin-right: 50px;   
       }
     }
   }
