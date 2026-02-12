@@ -3,27 +3,25 @@
   color: #fff;
   position: relative;
   width: 100%;
-  padding-top: 20px; // Un poco de aire arriba
+  padding-top: 20px; 
   overflow: hidden;
 
-  // --- LÍNEA DE NEÓN (Violeta -> Azul) ---
+  // --- LÍNEA DE NEÓN ---
   .footer-gradient-line {
-    width: 90%;           // No ocupa todo el ancho para que se noten las puntas
-    max-width: 1200px;    // Tope máximo
-    height: 3px;          // Grosor
-    margin: 0 auto 40px;  // Centrado horizontal y margen abajo
-    border-radius: 100%;  // Puntas redondeadas
+    width: 90%;           
+    max-width: 1200px;    
+    height: 3px;          
+    margin: 0 auto 40px;  
+    border-radius: 100%;  
 
-    // EL DEGRADADO: Transparente en los extremos
     background: linear-gradient(
       90deg, 
-      rgba(0,0,0,0) 0%,       // Punta izquierda invisible
-      #7c3aed 20%,            // Violeta
-      #3b82f6 80%,            // Azul
-      rgba(0,0,0,0) 100%      // Punta derecha invisible
+      rgba(0,0,0,0) 0%,       
+      #7c3aed 20%,            
+      #3b82f6 80%,            
+      rgba(0,0,0,0) 100%      
     );
 
-    // Glow suave
     box-shadow: 0 0 15px 1px rgba(124, 58, 237, 0.4);
     opacity: 1;
   }
@@ -94,6 +92,11 @@
             font-size: 1rem;
             transition: all 0.3s ease;
             position: relative;
+            
+            // --- CRÍTICO ---
+            // Como quitamos el href, esto devuelve la manito al mouse
+            cursor: pointer; 
+            user-select: none;
 
             &:hover {
               color: #3b82f6; 
