@@ -26,6 +26,7 @@
   justify-content: center;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
   
   // CAMBIO 1: Negro Profundo Absoluto
   background-color: #000000; 

@@ -17,8 +17,8 @@
     background: linear-gradient(
       90deg, 
       rgba(0,0,0,0) 0%,       
-      #7c3aed 20%,            
-      #3b82f6 80%,            
+      #3b82f6 20%,            
+      #7c3aed  80%,            
       rgba(0,0,0,0) 100%      
     );
 
@@ -98,7 +98,7 @@
             user-select: none;
 
             &:hover {
-              color: #7c3aed; // Azul al hover
+              color: #3b82f6; // Azul al hover
               padding-left: 5px; 
             }
           }
@@ -144,7 +144,7 @@
           
           // Efecto Hover
           &:hover {
-            color: #3b82f6; // Todo se vuelve violeta (texto e icono)
+            color: #7c3aed; // Todo se vuelve violeta (texto e icono)
             
             // Subrayado sutil
             text-decoration: underline;

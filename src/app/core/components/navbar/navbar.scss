@@ -1,11 +1,10 @@
 .navbar-glass {
   position: sticky;
   position: -webkit-sticky;
-  top: 20px; 
-  margin-top: 50px; 
+  top: 20px;
+  margin-top: 50px;
   margin-bottom: 20px;
-  
-  // Centrado y límites
+
   margin-left: auto;
   margin-right: auto;
   left: 0;
@@ -13,17 +12,17 @@
   width: 90%;
   max-width: 1200px;
   height: 70px;
-  
-  // Estética del Navbar (Barra superior)
-  background: rgba(255, 255, 255, 0.03); 
-  backdrop-filter: blur(15px); 
+
+  // 🔥 VIDRIO REAL
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 20px;
-  z-index: 1000; 
-  
-  transition: background 0.3s ease, border-color 0.3s ease; 
-  
+  z-index: 1000;
+
+  transition: background 0.3s ease, border-color 0.3s ease;
+
   .nav-container {
     width: 100%;
     height: 100%;
@@ -32,15 +31,23 @@
     align-items: center;
     padding: 0 30px;
     position: relative;
-    z-index: 1002; 
+    z-index: 1002;
 
     .logo {
       font-weight: 800;
       letter-spacing: 1px;
       flex-shrink: 0;
       cursor: pointer;
-      .mds-text { color: #fff; transition: color 0.3s ease; }
-      .studio-text { color: #3b82f6; margin-left: 0px; }
+
+      .mds-text {
+        color: #fff;
+        transition: color 0.3s ease;
+      }
+
+      .studio-text {
+        color: #3b82f6;
+        margin-left: 0px;
+      }
     }
 
     .nav-links {
@@ -48,12 +55,16 @@
       list-style: none;
       gap: 30px;
       margin: 0;
+
       a {
         text-decoration: none;
         color: rgba(255, 255, 255, 0.7);
         font-size: 0.9rem;
         transition: color 0.3s ease;
-        &:hover { color: #fff; }
+
+        &:hover {
+          color: #fff;
+        }
       }
     }
 
@@ -65,97 +76,102 @@
       border-radius: 12px;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease; 
+      transition: all 0.3s ease;
       white-space: nowrap;
-      margin-right: 50px; 
-      
-      &.desktop-only { display: block; }
-      &:hover { transform: scale(1.05); }
+      margin-right: 50px;
+
+      &.desktop-only {
+        display: block;
+      }
+
+      &:hover {
+        transform: scale(1.05);
+      }
     }
 
     .hamburger-btn {
-      display: none; 
+      display: none;
       background: none;
       border: none;
       cursor: pointer;
       width: 30px;
       height: 20px;
       position: relative;
-      z-index: 1003; 
+      z-index: 1003;
 
       .bar {
         display: block;
         width: 100%;
         height: 2px;
-        background-color: #fff; 
+        background-color: #fff;
         position: absolute;
         transition: all 0.3s ease-in-out;
         border-radius: 2px;
-        
+
         &.top { top: 0; }
-        &.mid { top: 50%; transform: translateY(-50%); opacity: 1; }
+        &.mid { top: 50%; transform: translateY(-50%); }
         &.bot { bottom: 0; }
       }
 
       &.active {
-        .bar { width: 24px; left: 50%; margin-left: -12px; }
-        .bar.top { top: 50%; transform: translateY(-50%) rotate(45deg); }
-        .bar.mid { opacity: 0; }
-        .bar.bot { top: 50%; bottom: auto; transform: translateY(-50%) rotate(-45deg); }
+        .bar {
+          width: 24px;
+          left: 50%;
+          margin-left: -12px;
+        }
+
+        .bar.top {
+          top: 50%;
+          transform: translateY(-50%) rotate(45deg);
+        }
+
+        .bar.mid {
+          opacity: 0;
+        }
+
+        .bar.bot {
+          top: 50%;
+          bottom: auto;
+          transform: translateY(-50%) rotate(-45deg);
+        }
       }
     }
   }
 
-  // --- MENÚ MOBILE (SOLUCIÓN PSEUDO-ELEMENTO) ---
+  // 🔥 MOBILE MENU CORREGIDO PROFESIONAL
   .mobile-menu {
-    position: absolute;
-    top: calc(100% + 10px); 
-    left: 0;
-    width: 100%; 
-    
-    // 1. Quitamos el fondo y filtro directo del contenedor
-    background: transparent !important; 
+    position: fixed; // 🔥 CLAVE
+    top: 110px; // Ajustable según separación del navbar
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1200px;
+
     border-radius: 20px;
+    overflow: hidden;
     z-index: 9999;
-    
-    // Importante para contener el vidrio
-    overflow: hidden; 
-    
+
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 25px;
     padding: 30px 0;
 
+    // 🔥 MISMO VIDRIO EXACTO
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-10px);
     transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    
-    // --- 2. LA CAPA DE VIDRIO (::before) ---
-    // Esto crea una capa separada solo para el efecto, forzando el blur.
-    &::before {
-      content: '';
-      position: absolute;
-      inset: 0; // Ocupa todo el espacio
-      z-index: -1; // Se pone DETRÁS del texto
-      
-      // Color Oscuro Transparente (Ajustado)
-      background: rgba(10, 15, 30, 0.55); 
-      
-      // Filtros aplicados a esta capa aislada
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      
-      // Borde y Sombra
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-    }
-    
+
     &.open {
       opacity: 1;
       visibility: visible;
-      transform: translateY(0);
     }
 
     a {
@@ -165,15 +181,15 @@
       font-weight: 500;
       letter-spacing: 0.5px;
       cursor: pointer;
-      position: relative; // Para estar sobre el vidrio
-      z-index: 2;
       transition: color 0.3s;
-      
-      &:hover { color: #3b82f6; }
+
+      &:hover {
+        color: #3b82f6;
+      }
     }
 
     .mobile-btn {
-      width: 40%; 
+      width: 40%;
       padding: 14px;
       border-radius: 15px;
       border: none;
@@ -182,57 +198,67 @@
       font-size: 1rem;
       cursor: pointer;
       margin-top: 10px;
-      position: relative; // Para estar sobre el vidrio
-      z-index: 2;
+
       background: linear-gradient(90deg, #3b82f6 0%, #7c3aed 100%);
-      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3); 
-      
-      &:active { transform: scale(0.98); }
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+
+      &:active {
+        transform: scale(0.98);
+      }
     }
   }
 
-  // --- MODO OSCURO (Navbar) ---
+  // 🔥 NAV DARK
   &.nav-dark {
-    background: rgba(255, 255, 255, 0.8); 
+    background: rgba(255, 255, 255, 0.85);
     border-color: rgba(0, 0, 0, 0.05);
 
     .nav-container {
       .logo .mds-text { color: #0f172a; }
+
       .nav-links a {
-        color: #64748b; 
+        color: #64748b;
         &:hover { color: #000; }
       }
+
       .btn-contact {
         background: #0f172a;
         color: #fff;
+
         &:hover {
-          background: #3b82f6; 
+          background: #3b82f6;
           transform: scale(1.05);
         }
       }
+
       .hamburger-btn .bar {
         background-color: #0f172a;
       }
     }
+
+    .mobile-menu {
+      border-color: rgba(0, 0, 0, 0.1);
+    }
   }
 }
 
-// --- MEDIA QUERIES ---
+// MEDIA
 @media (max-width: 768px) {
   .navbar-glass {
     top: 20px;
-    margin-top: 20px; 
-    width: 95%; 
+    margin-top: 20px;
+    width: 95%;
 
     .nav-container {
       padding: 0 20px;
+
       .nav-links { display: none; }
       .btn-contact.desktop-only { display: none; }
-      
-      .hamburger-btn { 
-        display: block; 
-        margin-left: auto; 
-        margin-right: 50px;   
+
+      .hamburger-btn {
+        display: block;
+        margin-left: auto;
+        margin-right: 50px;
       }
     }
   }
