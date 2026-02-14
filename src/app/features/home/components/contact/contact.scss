@@ -32,15 +32,10 @@
     grid-template-columns: 1fr 1fr; 
     gap: 80px;
     
-    // --- CLAVE PARA QUE NO SE MUEVA ---
-    // Alineamos todo al inicio superior.
     align-items: start; 
 
     // --- COLUMNA IZQUIERDA ---
     .text-column {
-      // Ya no necesitamos sticky aquí si usamos align-items: start
-      // Se quedará fija arriba naturalmente.
-
       .badge {
         color: #3b82f6; 
         font-size: 0.85rem;
@@ -174,7 +169,7 @@
         min-height: 100px; 
         cursor: pointer;
 
-        // FRENTE (Mismo estilo que WhatsApp)
+        // FRENTE
         .card-front {
           display: flex;
           align-items: center;
@@ -205,16 +200,15 @@
         .card-back {
           position: absolute;
           top: 0; left: 0; width: 90%; 
-          padding: 25px;
+          padding: 30px 25px; // 🔥 Más padding arriba/abajo para darle aire
           opacity: 0;
           visibility: hidden;
           transform: translateY(20px);
           transition: all 0.4s ease 0.1s;
           display: flex; flex-direction: column;
 
-          // Header Clickable para cerrar
           .form-header {
-            display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 25px;
             cursor: pointer; user-select: none; transition: opacity 0.2s;
             &:hover { opacity: 0.7; }
 
@@ -226,9 +220,11 @@
           }
 
           form {
-            display: flex; flex-direction: column; gap: 15px;
+            display: flex; flex-direction: column; 
+            gap: 20px; // 🔥 Más espacio entre inputs
+
             .form-group {
-              display: flex; flex-direction: column; gap: 6px;
+              display: flex; flex-direction: column; gap: 8px;
               label { font-size: 0.8rem; font-weight: 600; color: #475569; text-transform: uppercase; }
               input, textarea {
                 width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0;
@@ -236,7 +232,13 @@
                 box-sizing: border-box;
                 &:focus { outline: none; border-color: #3b82f6; background: #fff; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
               }
-              textarea { resize: vertical; min-height: 80px; }
+              
+              // --- CONFIGURACIÓN TEXTAREA ACTUALIZADA ---
+              textarea { 
+                resize: none; // 🔥 Bloqueado: El usuario NO puede cambiar el tamaño
+                height: 150px; // 🔥 Altura fija y grande por defecto
+                overflow-y: auto; // Scroll si el texto es muy largo
+              }
             }
 
             .submit-btn {
@@ -253,7 +255,7 @@
         // ESTADO ABIERTO
         &.is-open {
           cursor: default;
-          min-height: 425px; // Altura expandida
+          min-height: 540px; // 🔥 Recuadro mucho más alto para contener todo cómodo
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
           border-color: #cbd5e1;
 
@@ -288,8 +290,8 @@
       .text-column h2 { font-size: 2.5rem; }
       .actions-column { .contact-card, .email-interactive-card .card-front { padding: 20px; .label { font-size: 1rem; } } }
       .social-footer {
-          justify-content: center; // Centra el contenido (texto + links)
-          width: 100%; // Asegura que tome el ancho para poder centrar
+          justify-content: center;
+          width: 100%;
         }
     }
   }
