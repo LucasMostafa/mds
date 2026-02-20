@@ -1,6 +1,6 @@
-import { Component, ElementRef, AfterViewInit, ViewChildren, QueryList } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // NECESARIO para el formulario
+import { Component, ElementRef, AfterViewInit, ViewChildren, QueryList, Inject, PLATFORM_ID } from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
@@ -13,6 +13,8 @@ export class Contact implements AfterViewInit {
 
   // --- LÓGICA TARJETA EMAIL ---
   isEmailFormOpen = false;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   openEmailForm() {
     this.isEmailFormOpen = true;
@@ -29,23 +31,28 @@ export class Contact implements AfterViewInit {
     this.closeEmailForm();
   }
 
-  // --- ANIMACIÓN DE ENTRADA (Tu código original) ---
-  @ViewChildren('animateCard') cards!: QueryList<ElementRef>;
+  // --- ANIMACIÓN DE ENTRADA AL SCROLLEAR ---
+  // Capturamos todos los elementos con #revealEl (tanto los de la izquierda como los de la derecha)
+  @ViewChildren('revealEl') revealElements!: QueryList<ElementRef>;
 
   ngAfterViewInit() {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
+    if (isPlatformBrowser(this.platformId)) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Dispara el CSS asignándole la clase visible
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px 25px 0px' // 🔥 Dispara la animación antes
       });
-    }, {
-      threshold: 0.1
-    });
 
-    this.cards.forEach(card => {
-      observer.observe(card.nativeElement);
-    });
+      this.revealElements.forEach(el => {
+        observer.observe(el.nativeElement);
+      });
+    }
   }
 }

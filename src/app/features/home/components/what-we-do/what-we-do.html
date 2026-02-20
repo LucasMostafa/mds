@@ -3,14 +3,14 @@
 
   <div class="content">
     <div class="header">
-      <span class="badge">NUESTROS SERVICIOS</span>
-      <h2>Diseño y desarrollo<br>a medida.</h2>
-      <p>En Mostafa Dev Studio fusionamos código limpio con diseño estratégico.</p>
+      <span #revealEl class="badge animate-up">NUESTROS SERVICIOS</span>
+      <h2 #revealEl class="animate-up delay-1">Diseño y desarrollo<br>a medida.</h2>
+      <p #revealEl class="animate-up delay-2">En Mostafa Dev Studio fusionamos código limpio con diseño estratégico.</p>
     </div>
 
     <div class="pillars">
       
-      <div class="pillar-scene" (mouseenter)="playVideo(vid1)" (mouseleave)="stopVideo(vid1)">
+      <div #revealEl class="pillar-scene animate-up delay-1" (mouseenter)="playVideo(vid1)" (mouseleave)="stopVideo(vid1)">
         <div class="pillar-inner" [class.flipped]="isFlipped1">
           
           <div class="pillar-face pillar-front">
@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <div class="pillar-scene" (mouseenter)="playVideo(vid2)" (mouseleave)="stopVideo(vid2)">
+      <div #revealEl class="pillar-scene animate-up delay-2" (mouseenter)="playVideo(vid2)" (mouseleave)="stopVideo(vid2)">
         <div class="pillar-inner" [class.flipped]="isFlipped2">
           
           <div class="pillar-face pillar-front">
@@ -92,7 +92,7 @@
         </div>
       </div>
 
-      <div class="pillar-scene" (mouseenter)="playVideo(vid3)" (mouseleave)="stopVideo(vid3)">
+      <div #revealEl class="pillar-scene animate-up delay-3" (mouseenter)="playVideo(vid3)" (mouseleave)="stopVideo(vid3)">
         <div class="pillar-inner" [class.flipped]="isFlipped3">
           
           <div class="pillar-face pillar-front">

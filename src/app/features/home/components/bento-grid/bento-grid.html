@@ -1,14 +1,14 @@
 <section class="projects-section" id="proyectos">
   
   <div class="section-header">
-    <span class="badge">PROYECTOS</span>
-    <h2>Nuestros trabajos<br>recientes.</h2>
-    <p>Soluciones digitales que marcan la diferencia.</p>
+    <span #revealEl class="badge animate-up">PROYECTOS</span>
+    <h2 #revealEl class="animate-up delay-1">Nuestros trabajos<br>recientes.</h2>
+    <p #revealEl class="animate-up delay-2">Soluciones digitales que marcan la diferencia.</p>
   </div>
 
   <div class="bento-container">
     
-    <div class="bento-item hero-card">
+    <div #revealEl class="bento-item hero-card animate-up delay-1">
       <div class="card-bg" style="background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop');"></div>
       
       <div class="content">
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <div class="bento-item team-card">
+    <div #revealEl class="bento-item team-card animate-up delay-2">
       <div class="card-bg" style="background-image: url('/assets/images/programador.jpg');"></div>
 
       <div class="content">
@@ -27,8 +27,8 @@
       </div>
     </div>
 
-    <a href="https://www.ampasmdp.com.ar/" target="_blank" rel="noopener noreferrer"
-       class="bento-item project-card ampas" 
+    <a #revealEl href="https://www.ampasmdp.com.ar/" target="_blank" rel="noopener noreferrer"
+       class="bento-item project-card ampas animate-up delay-3" 
        (mouseenter)="playVideo(vidAmpas)" 
        (mouseleave)="stopVideo(vidAmpas)">
       
@@ -47,8 +47,8 @@
       </div>
     </a>
 
-    <a href="https://gncconstitucion.ar/home" target="_blank" rel="noopener noreferrer"
-       class="bento-item project-card gnc"
+    <a #revealEl href="https://gncconstitucion.ar/home" target="_blank" rel="noopener noreferrer"
+       class="bento-item project-card gnc animate-up delay-4"
        (mouseenter)="playVideo(vidGnc)" 
        (mouseleave)="stopVideo(vidGnc)">
       
@@ -66,8 +66,8 @@
       </div>
     </a>
 
-    <a href="#" target="_blank" rel="noopener noreferrer"
-       class="bento-item project-card kdonna"
+    <a #revealEl href="#" target="_blank" rel="noopener noreferrer"
+       class="bento-item project-card kdonna animate-up delay-5"
        (mouseenter)="playVideo(vidKdonna)" 
        (mouseleave)="stopVideo(vidKdonna)">
       

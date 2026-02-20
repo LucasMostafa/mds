@@ -1,3 +1,33 @@
+// 🔥 DE ABAJO HACIA ARRIBA (Izquierda)
+.animate-up {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// 🔥 DE DERECHA A IZQUIERDA (Derecha) - Velocidad más lenta
+.animate-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  &.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Delays para el efecto cascada
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.3s; }
+.delay-3 { transition-delay: 0.5s; }
+
+// --- RESTO DEL COMPONENTE ---
 .contact-container {
   box-sizing: border-box;
   width: 100%;
@@ -95,21 +125,8 @@
       display: flex;
       flex-direction: column;
       gap: 20px;
-      
-      .contact-card, .email-interactive-card, .social-footer {
-        opacity: 0; 
-        transform: translateX(50px);
-        transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        
-        &.visible {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-      .contact-card { transition-delay: 0.1s; } 
-      .email-interactive-card { transition-delay: 0.3s; } 
-      .social-footer { transition-delay: 0.5s; } 
 
+      // Las tarjetas ahora solo se preocupan por su estilo base y su hover rápido
       .contact-card, .email-interactive-card {
         background: #ffffff;
         border: 1px solid #e2e8f0; 
@@ -200,7 +217,7 @@
         .card-back {
           position: absolute;
           top: 0; left: 0; width: 90%; 
-          padding: 30px 25px; // 🔥 Más padding arriba/abajo para darle aire
+          padding: 30px 25px; 
           opacity: 0;
           visibility: hidden;
           transform: translateY(20px);
@@ -221,7 +238,7 @@
 
           form {
             display: flex; flex-direction: column; 
-            gap: 20px; // 🔥 Más espacio entre inputs
+            gap: 20px; 
 
             .form-group {
               display: flex; flex-direction: column; gap: 8px;
@@ -233,11 +250,10 @@
                 &:focus { outline: none; border-color: #3b82f6; background: #fff; box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); }
               }
               
-              // --- CONFIGURACIÓN TEXTAREA ACTUALIZADA ---
               textarea { 
-                resize: none; // 🔥 Bloqueado: El usuario NO puede cambiar el tamaño
-                height: 150px; // 🔥 Altura fija y grande por defecto
-                overflow-y: auto; // Scroll si el texto es muy largo
+                resize: none; 
+                height: 150px; 
+                overflow-y: auto; 
               }
             }
 
@@ -255,7 +271,7 @@
         // ESTADO ABIERTO
         &.is-open {
           cursor: default;
-          min-height: 540px; // 🔥 Recuadro mucho más alto para contener todo cómodo
+          min-height: 540px; 
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
           border-color: #cbd5e1;
 

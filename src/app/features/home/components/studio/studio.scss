@@ -1,3 +1,20 @@
+// 🔥 CLASES DE ANIMACIÓN (De abajo hacia arriba)
+.animate-up {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.3s; }
+.delay-3 { transition-delay: 0.5s; }
+
+// --- CONTENEDOR PRINCIPAL ---
 .studio-container {
   box-sizing: border-box; 
   width: 100%;
@@ -62,17 +79,14 @@
       }
     }
 
-    // --- COLUMNA IMAGEN (ANIMACIÓN CORREGIDA) ---
+    // --- COLUMNA IMAGEN (Se mantiene su entrada desde la derecha) ---
     .image-column {
       position: relative;
       padding: 10px;
       
-      // 1. ESTADO INICIAL
+      // 1. ESTADO INICIAL (Desde la derecha)
       opacity: 0;
-      // Usamos 200px. Es suficiente para que se vea "fuera" pero el navegador la detecte.
       transform: translateX(300px); 
-      
-      // Aumentamos el tiempo a 1.5s para que el viaje parezca más largo y suave
       transition: opacity 1.5s ease-out, transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
       
       // 2. ESTADO VISIBLE
@@ -145,7 +159,7 @@
         order: 3;
         margin: 10px 0 20px 0; 
         
-        // En mobile 80px es suficiente para que entre desde el borde
+        // En mobile entra desde más cerca
         transform: translateX(80px);
         
         &.visible {
