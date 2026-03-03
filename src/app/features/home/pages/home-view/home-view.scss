@@ -165,7 +165,62 @@
 
 @media (max-width: 900px) {
   .hero-fullscreen {
-    .floating-tag { display: none; }
+    // 🔥 CAMBIO APLICADO: Habilitamos las etiquetas en mobile y las adaptamos
+    .floating-tag { 
+      font-size: 0.7rem; // Un poco más chicas para que no saturen
+      padding: 6px 14px;
+      
+      // Reacomodamos posiciones para que rodeen el texto central
+      &.tag-1 { top: 12%; left: 5%; }
+      &.tag-2 { top: 18%; right: 5%; left: auto; }
+      &.tag-3 { bottom: 25%; left: 5%; }
+      &.tag-4 { bottom: 20%; right: 5%; left: auto; }
+    }
+    
     .hero-content .typewriter-container { font-size: 1rem; min-width: 280px; padding: 10px 15px; }
+  }
+}
+
+// ========================================================
+// 🔥 PANEL DE CONTROL DE FRENO DE SCROLL POR COMPONENTE 🔥
+// ========================================================
+
+// 1. SERVICIOS
+app-what-we-do {
+  display: block; 
+  scroll-margin-top: 0px; // <-- Modificá esto para PC
+  
+  @media (max-width: 768px) {
+    scroll-margin-top: 0px; // <-- Modificá esto para Celular
+  }
+}
+
+// 2. ESTUDIO
+app-studio {
+  display: block; 
+  scroll-margin-top: -130px; // <-- Modificá esto para PC
+  
+  @media (max-width: 768px) {
+    scroll-margin-top: -100px; // <-- Modificá esto para Celular
+  }
+}
+
+// 3. PROYECTOS
+app-bento-grid {
+  display: block; 
+  scroll-margin-top: -130px; // <-- Modificá esto para PC
+  
+  @media (max-width: 768px) {
+    scroll-margin-top: -100px; // <-- Modificá esto para Celular
+  }
+}
+
+// 4. CONTACTO
+app-contact {
+  display: block; 
+  scroll-margin-top: -130px; // <-- Modificá esto para PC
+  
+  @media (max-width: 768px) {
+    scroll-margin-top: -100px; // <-- Modificá esto para Celular
   }
 }

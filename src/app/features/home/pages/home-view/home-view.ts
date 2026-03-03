@@ -59,6 +59,9 @@ export class HomeView implements OnInit, AfterViewInit {
       
       // 1. PARA COMPUTADORA (Rueda del Mouse)
       window.addEventListener('wheel', (e: WheelEvent) => {
+        // 🔥 Desactivamos el salto automático en pantallas chicas
+        if (window.innerWidth <= 900) return;
+
         // Si estamos en los primeros 50px (arriba de todo), scrolleando hacia abajo, y no está ya saltando
         if (window.scrollY <= 50 && e.deltaY > 0 && !this.isAutoScrolling) {
           e.preventDefault(); // CLAVE: Frenamos el scroll normal de la compu
@@ -68,10 +71,16 @@ export class HomeView implements OnInit, AfterViewInit {
 
       // 2. PARA CELULARES (Touch)
       window.addEventListener('touchstart', (e: TouchEvent) => {
+        // 🔥 Desactivamos la detección táctil para el salto automático en celulares
+        if (window.innerWidth <= 900) return;
+
         this.touchStartY = e.touches[0].clientY;
       }, { passive: true });
 
       window.addEventListener('touchmove', (e: TouchEvent) => {
+        // 🔥 Dejamos el touch libre para arrastrar las etiquetas sin que la página salte
+        if (window.innerWidth <= 900) return;
+
         if (window.scrollY <= 50 && !this.isAutoScrolling) {
           const touchEndY = e.touches[0].clientY;
           // Si desliza el dedo hacia arriba (moviendo la pantalla abajo) más de 30px
