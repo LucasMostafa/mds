@@ -1,28 +1,31 @@
-<section id="hero" class="hero-fullscreen" 
-         [style.--x.px]="mouseX" 
-         [style.--y.px]="mouseY">
-
-  <div class="spotlight-overlay" *ngIf="isSpotlightActive"></div>
-
-  <button class="light-switch" (click)="toggleSpotlight()" 
-          [class.active]="!isSpotlightActive"
-          title="Encender/Apagar Luces">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-1 1.5-2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
-      <path d="M9 18h6"/>
-      <path d="M10 22h4"/>
-    </svg>
-  </button>
-
+<section id="hero" class="hero-fullscreen">
+  
   <div class="hero-bg">
     <div class="orb orb-1"></div> 
     <div class="orb orb-2"></div> 
     <div class="noise-overlay"></div> 
   </div>
 
+  <div #draggableTag class="floating-tag tag-1">
+    <span>/> Angular & TS</span>
+  </div>
+  <div #draggableTag class="floating-tag tag-2">
+    <span>✨ UI/UX Design</span>
+  </div>
+  <div #draggableTag class="floating-tag tag-3">
+    <span>🛒 E-Commerce</span>
+  </div>
+  <div #draggableTag class="floating-tag tag-4">
+    <span>🚀 Escalabilidad</span>
+  </div>
+
   <div class="hero-content">
-    <h1>MOSTAFA DEVS STUDIO</h1>
-    <p>Code & Design from Mar del Plata</p>
+    <h1>MD<span class="text-studio">STUDIO</span></h1>
+    
+    <p class="typewriter-container">
+      <span class="text">{{ currentText }}</span>
+      <span class="cursor">|</span>
+    </p>
   </div>
 
   <div class="scroll-hint">

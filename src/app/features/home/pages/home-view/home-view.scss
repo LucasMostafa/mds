@@ -1,9 +1,19 @@
-// Animación flotante (Igual que antes)
 @keyframes floatOrbs {
   0% { transform: translate(0, 0); }
   33% { transform: translate(100px, -50px); }
   66% { transform: translate(-50px, 150px); }
   100% { transform: translate(20px, -20px); }
+}
+
+@keyframes floatTags {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(1deg); } 
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+@keyframes blinkCursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
 .hero-fullscreen {
@@ -14,78 +24,10 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden; // Esto asegura que nada salga del Hero
+  overflow: hidden; 
   isolation: isolate;
   background-color: #000000; 
-  
-  // Cursor personalizado en modo foco (opcional)
-  cursor: default;
 
-  // --- EFECTO FOCO (LA MAGIA) ---
-  .spotlight-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 10; // Por encima de todo el contenido del hero
-    pointer-events: none; // Permite hacer click a través de la oscuridad (importante para el botón)
-    
-    // El gradiente es transparente en el centro (mouse) y negro en el resto
-    // var(--x) y var(--y) vienen del HTML/TS
-    background: radial-gradient(
-      circle 250px at var(--x) var(--y), 
-      transparent 0%, 
-      rgba(0, 0, 0, 0.95) 40%, 
-      #000000 100%
-    );
-    
-    // Transición suave al entrar/salir si usas *ngIf o opacidad
-    transition: opacity 0.5s ease;
-  }
-
-  // --- BOTÓN INTERRUPTOR ---
-  .light-switch {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    z-index: 20; // Por encima de la oscuridad
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    
-    // Efecto Glow
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-
-    &:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: scale(1.1);
-    }
-
-    // Estado "Encendido" (Cuando la luz está prendida/normal)
-    &.active {
-      background: #fbbf24; // Color ámbar/luz
-      color: #000;
-      box-shadow: 0 0 30px #fbbf24;
-      border-color: #fbbf24;
-    }
-    
-    svg {
-      width: 24px;
-      height: 24px;
-    }
-  }
-
-  // --- HERO BG (Igual que antes) ---
   .hero-bg {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -100,33 +42,75 @@
       will-change: transform; 
     }
 
-    .orb-1 {
-      width: 250px; height: 250px;
-      background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
-      top: 10%; left: 15%;
-    }
-
-    .orb-2 {
-      width: 250px; height: 250px;
-      background: radial-gradient(circle, #7c3aed 0%, transparent 70%);
-      bottom: 15%; right: 15%; 
-      animation-delay: -6s; 
-    }
+    .orb-1 { width: 250px; height: 250px; background: radial-gradient(circle, #3b82f6 0%, transparent 70%); top: 10%; left: 15%; }
+    .orb-2 { width: 250px; height: 250px; background: radial-gradient(circle, #7c3aed 0%, transparent 70%); bottom: 15%; right: 15%; animation-delay: -6s; }
 
     .noise-overlay {
-      position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.04; 
-      pointer-events: none;
+      opacity: 0.04; pointer-events: none;
     }
   }
 
-  // --- CONTENIDO ---
+  // --- TAGS FLOTANTES INTERACTIVOS ---
+  .floating-tag {
+    position: absolute;
+    padding: 8px 18px; 
+    background: rgba(255, 255, 255, 0.01); 
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 30px;
+    color: #64748b; 
+    font-size: 0.85rem; 
+    font-weight: 400; 
+    letter-spacing: 0.5px;
+    
+    z-index: 1; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    pointer-events: auto; 
+    cursor: grab; 
+    user-select: none; 
+    touch-action: none; 
+
+    // Animaciones iniciales (Se apagan cuando interactuás)
+    // 🔥 USAMOS max() PARA QUE NUNCA QUEDEN A MENOS DE 40PX DEL BORDE
+    &.tag-1 { 
+      top: 18%; left: max(40px, 12vw); 
+      animation: floatTags 10s ease-in-out infinite; 
+    }
+    &.tag-2 { 
+      top: 22%; right: max(40px, 10vw); 
+      animation: floatTags 12s ease-in-out infinite alternate-reverse; 
+    }
+    &.tag-3 { 
+      bottom: 28%; left: max(40px, 15vw); 
+      animation: floatTags 11s ease-in-out infinite 1s; 
+    }
+    &.tag-4 { 
+      bottom: 22%; right: max(40px, 15vw); 
+      animation: floatTags 13s ease-in-out infinite alternate; 
+    }
+
+    &.is-dragging {
+      cursor: grabbing !important; 
+      animation: none !important; 
+      z-index: 3; 
+      box-shadow: 0 15px 30px rgba(59, 130, 246, 0.2); 
+      border-color: rgba(59, 130, 246, 0.3);
+    }
+    
+    &[style*="transform"] {
+      animation: none !important; 
+    }
+  }
+
+  // --- CONTENIDO PRINCIPAL ---
   .hero-content {
     text-align: center;
-    z-index: 2; // Debajo de la capa oscura (overlay es z-10)
+    z-index: 2; 
     padding: 0 20px;
+    pointer-events: none; 
     
     h1 {
       font-size: clamp(3rem, 9vw, 7rem); 
@@ -137,62 +121,38 @@
       text-transform: uppercase;
       letter-spacing: -2px;
       text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+
+      // 🔥 ESTILO PARA EL TEXTO AZUL
+      .text-studio {
+        color: #3b82f6; 
+      }
     }
     
-    p {
-      color: #dbeafe;
-      font-family: 'monospace';
-      font-size: 1.2rem;
-      margin-top: 1.5rem;
-      letter-spacing: 1px;
-      background: rgba(255, 255, 255, 0.03); 
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 8px 16px;
-      border-radius: 50px;
-      backdrop-filter: blur(5px);
-      display: inline-block;
+    .typewriter-container {
+      font-family: 'monospace'; font-size: 1.2rem; color: #dbeafe;
+      margin-top: 1.5rem; background: rgba(255, 255, 255, 0.03); 
+      border: 1px solid rgba(255, 255, 255, 0.1); padding: 10px 25px;
+      border-radius: 50px; backdrop-filter: blur(5px);
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 320px; min-height: 48px; box-sizing: border-box;
+      pointer-events: auto; 
+
+      .text { letter-spacing: 1px; }
+      .cursor { color: #3b82f6; font-weight: 800; font-size: 1.3rem; margin-left: 2px; animation: blinkCursor 1s step-end infinite; }
     }
   }
 
   // --- SCROLL HINT ---
   .scroll-hint {
-    position: absolute;
-    bottom: 120px; 
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    opacity: 0.7;
-    z-index: 2;
+    position: absolute; bottom: 120px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    opacity: 0.7; z-index: 2;
 
     &:hover { opacity: 1; }
-
-    span {
-      color: #fff;
-      font-size: 0.75rem;
-      letter-spacing: 3px;
-      text-transform: uppercase;
-      font-weight: 300;
-    }
-
+    span { color: #fff; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 300; }
     .mouse {
-      width: 26px;
-      height: 42px;
-      border: 2px solid rgba(255, 255, 255, 0.6);
-      border-radius: 20px;
-      position: relative;
-      
-      .wheel {
-        width: 4px;
-        height: 6px;
-        background: #fff;
-        border-radius: 2px;
-        position: absolute;
-        top: 8px; left: 50%; transform: translateX(-50%);
-        animation: scroll-wheel 2s infinite;
-      }
+      width: 26px; height: 42px; border: 2px solid rgba(255, 255, 255, 0.6); border-radius: 20px; position: relative;
+      .wheel { width: 4px; height: 6px; background: #fff; border-radius: 2px; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); animation: scroll-wheel 2s infinite; }
     }
   }
 }
@@ -203,15 +163,9 @@
   100% { opacity: 0; top: 25px; }
 }
 
-// --- AJUSTE MOBILE (Desactivar foco) ---
 @media (max-width: 900px) {
-  // Ocultamos la capa negra para que se vea el diseño normal
-  .spotlight-overlay {
-    display: none !important;
-  }
-
-  // Ocultamos el botón del interruptor (no hace falta)
-  .light-switch {
-    display: none !important;
+  .hero-fullscreen {
+    .floating-tag { display: none; }
+    .hero-content .typewriter-container { font-size: 1rem; min-width: 280px; padding: 10px 15px; }
   }
 }
