@@ -1,0 +1,155 @@
+.integrations-container {
+  padding: 20px 0px 20px 0px;
+  
+  // 🔥 DEGRADADO: Arranca en negro puro para unirse a Servicios, y baja a un azul muy oscuro
+  background: linear-gradient(to bottom, #000000 0%, #0f172a 100%);
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .header-titles {
+    text-align: center;
+    margin-bottom: 10px;
+    z-index: 2;
+
+    .badge {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      color: #a1aaff;
+      font-weight: 600;
+      text-transform: uppercase;
+      border: 1px solid #98a2fa;
+      padding: 5px 15px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+
+    h3 {
+      color: #fff;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      font-weight: 700;
+      margin-top: 15px;
+    }
+  }
+
+  .slider-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    // --- 🔥 EL NUEVO DIFUMINADO SUTIL PERFECTO (mask-image) ---
+    // Valores ajustados para un difuminado rápido solo en los bordes.
+    // La tarjeta es 100% visible desde el 5% hasta el 95% del ancho del contenedor.
+    -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 92%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 92%, rgba(0,0,0,0) 100%);
+
+    .slide-track {
+      display: flex;
+      
+      // LA CORRECCIÓN CLAVE: Esto permite que el TypeScript pueda hacer "scrollLeft"
+      width: 100%; 
+      overflow-x: hidden; 
+      
+      touch-action: pan-y; 
+      cursor: grab;
+      
+      padding: 40px 0; // Fix para que el resplandor del hover no se corte
+      box-sizing: border-box;
+
+      // Cuando el usuario hace click y arrastra
+      &.dragging {
+        cursor: grabbing;
+        
+        .glass-card {
+          pointer-events: none; // Fundamental para que el drag no se trabe en una imagen
+          transform: scale(0.98); 
+        }
+      }
+
+      .slide {
+        // LA OTRA CORRECCIÓN CLAVE: Le decimos a las tarjetas que NO se achiquen jamás y tengan 240px fijos
+        flex: 0 0 240px; 
+        padding: 0 15px; 
+        overflow: visible;
+        box-sizing: border-box;
+
+        .glass-card {
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.05);
+          border-radius: 24px;
+          padding: 30px 15px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 20px;
+          transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
+          &:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.15);
+          }
+
+          .img-circle {
+            // LOGOS MUCHO MÁS GRANDES E IMPONENTES
+            width: 100px; 
+            height: 100px;
+            background: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+
+            img {
+              // IMAGEN OCUPA CASI TODO EL CÍRCULO
+              width: 90%; 
+              height: 90%;
+              object-fit: contain; 
+              user-select: none; 
+              -webkit-user-drag: none;
+            }
+          }
+
+          .name {
+            color: #e2e8f0;
+            font-size: 1.05rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .integrations-container {
+    padding: 50px 0;
+    
+    .slider-wrapper {
+      // Difuminado aún más corto y sutil en mobile para aprovechar el espacio reducido
+      -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 5%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%);
+      mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 5%, rgba(0,0,0,1) 95%, rgba(0,0,0,0) 100%);
+
+      .slide-track {
+        padding: 30px 0;
+
+        .slide {
+          flex: 0 0 200px; // En celu un poquito más chicas, pero igual grandes
+          
+          .glass-card {
+            padding: 25px 10px;
+            .img-circle { width: 85px; height: 85px; }
+            .name { font-size: 0.95rem; }
+          }
+        }
+      }
+    }
+  }
+}

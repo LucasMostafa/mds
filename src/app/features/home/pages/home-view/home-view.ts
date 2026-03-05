@@ -5,11 +5,12 @@ import { Navbar } from '../../../../core/components/navbar/navbar';
 import { WhatWeDo } from '../../components/what-we-do/what-we-do';
 import { Studio } from '../../components/studio/studio';
 import { Contact } from '../../components/contact/contact';
+import { Integrations } from '../../components/integrations/integrations';
 
 @Component({
   selector: 'app-home-view',
   standalone: true,
-  imports: [CommonModule, BentoGrid, Navbar, WhatWeDo, Studio, Contact],
+  imports: [CommonModule, BentoGrid, Navbar, WhatWeDo, Studio, Contact, Integrations],
   templateUrl: './home-view.html',
   styleUrl: './home-view.scss',
 })
