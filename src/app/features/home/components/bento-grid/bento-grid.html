@@ -18,8 +18,17 @@
       </div>
     </div>
 
-    <div #revealEl class="bento-item team-card animate-up delay-2">
-      <div class="card-bg" style="background-image: url('/assets/images/programador.jpg');"></div>
+    <div #revealEl class="bento-item team-card animate-up delay-2"
+         (mouseenter)="playVideo(vidTeam)" 
+         (mouseleave)="stopVideo(vidTeam)">
+      
+      <div class="media-container">
+        <video #vidTeam muted loop playsinline preload="metadata">
+           <source src="/assets/videos/programadorcodeando.mp4" type="video/mp4">
+        </video>
+        <div class="cover-image" style="background-image: url('/assets/images/programador.jpg');"></div>
+        <div class="overlay"></div>
+      </div>
 
       <div class="content">
         <h3>MDS Team</h3>
@@ -66,16 +75,16 @@
       </div>
     </a>
 
-    <a #revealEl href="#" target="_blank" rel="noopener noreferrer"
+    <a #revealEl href="https://kdonna.pages.dev/" target="_blank" rel="noopener noreferrer"
        class="bento-item project-card kdonna animate-up delay-5"
        (mouseenter)="playVideo(vidKdonna)" 
        (mouseleave)="stopVideo(vidKdonna)">
       
       <div class="media-container">
         <video #vidKdonna muted loop playsinline preload="metadata">
-           <source src="/assets/videos/branding.mp4" type="video/mp4">
+           <source src="/assets/videos/kdonnavideo.mp4" type="video/mp4">
         </video>
-        <div class="cover-image" style="background-image: url('/assets/images/kdonna-poster.jpg');"></div>
+        <div class="cover-image" style="background-image: url('/assets/images/kdonna.png');"></div>
         <div class="overlay"></div>
       </div>
 

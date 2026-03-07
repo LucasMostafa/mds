@@ -178,19 +178,44 @@
       justify-content: flex-end;
       background: #0f172a;
       
-      .card-bg {
+      // 🔥 REEMPLAZAMOS LA IMAGEN FIJA POR EL CONTENEDOR DE MEDIA 🔥
+      .media-container {
         position: absolute;
         top: 0; left: 0; width: 100%; height: 100%;
-        background-size: cover;
-        background-position: center;
-        opacity: 0.5; 
         z-index: 0;
-        transition: transform 0.5s ease;
+        
+        video {
+          position: absolute;
+          top: 0; left: 0; width: 100%; height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+          z-index: 1; 
+        }
+        
+        .cover-image {
+          position: absolute;
+          top: 0; left: 0; width: 100%; height: 100%;
+          background-size: cover;
+          background-position: center;
+          background-color: #000;
+          z-index: 10;
+          opacity: 1;
+          transition: opacity 0.4s ease-in-out;
+        }
+
+        .overlay {
+          position: absolute;
+          top: 0; left: 0; width: 100%; height: 100%;
+          // Mismo velo degradado que las cards de proyectos
+          background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+          z-index: 20; 
+          pointer-events: none;
+        }
       }
 
       .content {
         position: relative;
-        z-index: 2;
+        z-index: 30; // Aseguramos que quede arriba del velo
         
         h3 { 
           font-size: 1.5rem; 
@@ -205,15 +230,24 @@
           text-shadow: 0 2px 5px rgba(0,0,0,0.8);
         }
       }
+
+      // 🔥 ANIMACIÓN HOVER PARA QUE SALGA EL VIDEO 🔥
+      &:hover {
+        .media-container video { transform: scale(1.05); }
+        .media-container .cover-image { opacity: 0; }
+      }
     }
 
-    // --- PROYECTOS ---
+    // --- PROYECTOS (Banners Anchos) ---
     .project-card {
+      // 🔥 ACÁ ESTÁ EL CAMBIO CLAVE: Ocupan las 4 columnas 🔥
+      grid-column: span 4;
+      
       position: relative;
       display: flex;
       flex-direction: column;
       justify-content: flex-end; 
-      padding: 25px;
+      padding: 35px; // Le subí un poquito el padding para que respire mejor como banner horizontal
       cursor: pointer;
       background: #0f172a; 
 
@@ -244,7 +278,8 @@
         .overlay {
           position: absolute;
           top: 0; left: 0; width: 100%; height: 100%;
-          background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+          // Degradado ajustado para banner panorámico
+          background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
           z-index: 20; 
           pointer-events: none;
         }
@@ -255,23 +290,23 @@
         z-index: 30;
         
         .tag {
-          font-size: 0.7rem;
+          font-size: 0.75rem;
           background: #3b82f6;
           color: white;
-          padding: 4px 10px;
+          padding: 6px 12px;
           border-radius: 12px;
           font-weight: 600;
           display: inline-block;
-          margin-bottom: 10px;
+          margin-bottom: 12px;
         }
         h4 {
-          font-size: 1.3rem;
+          font-size: 1.8rem; // Título un poco más grande
           margin: 0 0 5px 0;
           font-weight: 700;
           text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
         p {
-          font-size: 0.9rem;
+          font-size: 1.05rem; // Texto un poco más grande
           color: #e2e8f0;
           margin: 0;
           text-shadow: 0 2px 4px rgba(0,0,0,0.8);
@@ -284,17 +319,14 @@
       }
     }
 
-    .ampas  { grid-column: span 2; }
-    .gnc    { grid-column: span 1; }
-    .kdonna { grid-column: span 1; }
-
     // --- MOBILE ---
     @media (max-width: 900px) {
       grid-template-columns: 1fr; 
       grid-auto-rows: 250px;
       padding: 0;
 
-      .hero-card, .team-card, .ampas, .gnc, .kdonna {
+      // 🔥 Todas las tarjetas ahora son de 1 columna en móvil 🔥
+      .hero-card, .team-card, .project-card {
         grid-column: span 1;
         grid-row: span 1;
       }
@@ -302,6 +334,14 @@
       .hero-card {
         padding: 30px;
         h1 { font-size: 2.5rem; }
+      }
+      
+      .project-card {
+        padding: 25px; // Volvemos al padding normal en celular
+        .info {
+          h4 { font-size: 1.5rem; }
+          p { font-size: 0.95rem; }
+        }
       }
     }
   }
