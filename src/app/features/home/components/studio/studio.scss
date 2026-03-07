@@ -22,8 +22,35 @@
   background-color: #111827; 
   color: white;
   overflow: hidden;
+  position: relative; // 🔥 CLAVE: Para que el video absolute se quede adentro
+
+  // ==========================================
+  // 🔥 MAGIA DEL VIDEO DE FONDO 🔥
+  // ==========================================
+  .video-background {
+    position: absolute;
+    top: 0;
+    right: 0; // Lo pegamos a la derecha detrás de la imagen
+    width: 65%; // Cubre la mitad derecha y un poco más hacia el centro
+    height: 100%;
+    z-index: 0; // Lo mandamos al fondo
+    pointer-events: none; // Evita que interfiera con los clicks
+    
+    // El truco del fundido: Visible a la derecha, transparente a la izquierda
+    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+    mask-image: linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
+
+    video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; 
+      opacity: 0.25; // 🔥 Opacidad sutil para que no pelee con tu foto principal
+    }
+  }
 
   .content-wrapper {
+    position: relative; // 🔥 CLAVE
+    z-index: 2;         // 🔥 CLAVE: Mantiene el contenido por encima del video
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
@@ -79,7 +106,7 @@
       }
     }
 
-    // --- COLUMNA IMAGEN (Se mantiene su entrada desde la derecha) ---
+    // --- COLUMNA IMAGEN ---
     .image-column {
       position: relative;
       padding: 10px;
@@ -138,6 +165,18 @@
 @media (max-width: 900px) {
   .studio-container {
     padding: 100px 20px 50px; 
+
+    // 🔥 AJUSTE DEL VIDEO EN MOBILE
+    .video-background {
+      width: 100%; // En celular que ocupe todo el ancho
+      // Cambiamos el degradado para que se funda hacia arriba (el video queda abajo)
+      -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%);
+      mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%);
+      
+      video {
+        opacity: 0.15; // Un poco más transparente en móvil
+      }
+    }
 
     .content-wrapper {
       grid-template-columns: 1fr;
