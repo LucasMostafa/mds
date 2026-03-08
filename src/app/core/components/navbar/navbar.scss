@@ -1,7 +1,10 @@
 .navbar-glass {
   position: sticky;
   position: -webkit-sticky;
-  top: 20px;
+  
+  // 🔥 FIX iOS 1: Protege el Navbar del Notch o la Isla Dinámica de iPhone
+  top: calc(env(safe-area-inset-top, 0px) + 20px);
+  
   margin-top: 50px;
   margin-bottom: 20px;
 
@@ -13,7 +16,12 @@
   max-width: 1200px;
   height: 70px;
 
-  // 🔥 VIDRIO AHUMADO REAL (Más oscuro para igualar al menú)
+  // 🔥 FIX iOS 2: Obliga a Safari a no cortar el efecto de vidrio al hacer scroll
+  will-change: transform;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+
+  // VIDRIO AHUMADO REAL
   background: rgba(10, 10, 10, 0.6);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -138,7 +146,7 @@
     }
   }
 
-  // 🔥 MOBILE MENU CORREGIDO
+  // MOBILE MENU CORREGIDO
   .mobile-menu {
     position: fixed; 
     top: 110px; 
@@ -157,9 +165,6 @@
     gap: 25px;
     padding: 30px 0;
 
-    // 🔥 VIDRIO OSCURO PREMIUM 🔥
-    // Usamos un fondo mucho más oscuro para tapar las imágenes brillantes de atrás
-    // y mantener la misma elegancia que el navbar.
     background: rgba(10, 10, 10, 0.85); 
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -214,7 +219,7 @@
     }
   }
 
-  // 🔥 NAV DARK
+  // NAV DARK
   &.nav-dark {
     background: rgba(255, 255, 255, 0.85);
     border-color: rgba(0, 0, 0, 0.05);
@@ -257,8 +262,9 @@
 // MEDIA
 @media (max-width: 768px) {
   .navbar-glass {
-    top: 20px;
-    margin-top: 20px;
+    // 🔥 FIX iOS 3: Mantenemos el safe-area para celulares
+    top: calc(env(safe-area-inset-top, 0px) + 15px);
+    margin-top: 15px;
     width: 95%;
 
     .nav-container {
