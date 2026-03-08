@@ -5,7 +5,7 @@
     <div class="header">
       <span #revealEl class="badge animate-up">NUESTROS SERVICIOS</span>
       <h2 #revealEl class="animate-up delay-1">Diseño y desarrollo<br>a medida.</h2>
-      <p #revealEl class="animate-up delay-2">En MDStudio fusionamos código limpio con diseño estratégico.</p>
+      <p #revealEl class="animate-up delay-2">En MDStudio construimos ecosistemas digitales únicos, escalables y 100% autogestionables que se adaptan al ritmo de tu crecimiento..</p>
     </div>
 
     <div class="pillars">
@@ -15,9 +15,9 @@
            (mouseleave)="stopVideoDesktop(vid1)">
         <div class="pillar-inner" [class.flipped]="isFlipped1">
           
-          <div class="pillar-face pillar-front" (click)="toggleVideoMobile(vid1)">
+          <div class="pillar-face pillar-front">
             <div class="video-container">
-              <video #vid1 muted loop playsinline preload="auto" 
+              <video #vid1 #videoEl muted loop playsinline preload="auto" 
                      poster="/assets/images/code1.jpg"> 
                      <source src="/assets/videos/codevideo.mp4" type="video/mp4"> 
               </video>
@@ -27,7 +27,7 @@
             
             <div class="content-wrap">
               <h3>01. Desarrollo Web & Apps</h3>
-              <p class="subtitle">Sitios institucionales y PWAs.</p>
+              <p class="subtitle">Sitios institucionales de alto rendimiento y PWAs.</p>
               <button class="btn-flip" (click)="flipCard(1, $event)">
                 Ver más <span class="arrow">→</span>
               </button>
@@ -36,14 +36,15 @@
 
           <div class="pillar-face pillar-back">
             <div class="content-wrap">
-              <h3>Detalles Técnicos</h3>
+              <h3>Arquitectura de Alto Impacto</h3>
               <p class="description">
-                Desarrollamos código limpio, escalable y optimizado para que tu sitio cargue rápido y se posicione mejor en Google (SEO).
+                Diseñamos estructuras robustas, escalables y optimizadas para que la velocidad de carga sea tu mayor ventaja competitiva y se posicione mejor en Google (SEO).
               </p>
               <div class="tech-stack">
                 <span class="tech-badge">Angular</span>
                 <span class="tech-badge">TypeScript</span>
                 <span class="tech-badge">SASS</span>
+                <span class="tech-badge">Clean Code</span>
               </div>
               <button class="btn-back" (click)="flipCard(1, $event)">
                 ← Volver
@@ -59,9 +60,9 @@
            (mouseleave)="stopVideoDesktop(vid2)">
         <div class="pillar-inner" [class.flipped]="isFlipped2">
           
-          <div class="pillar-face pillar-front" (click)="toggleVideoMobile(vid2)">
+          <div class="pillar-face pillar-front">
             <div class="video-container">
-              <video #vid2 muted loop playsinline preload="auto" 
+              <video #vid2 #videoEl muted loop playsinline preload="auto" 
                      poster="/assets/images/conexion.jpg">
                  <source src="/assets/videos/conexionvideo.mp4" type="video/mp4">
               </video>
@@ -71,7 +72,7 @@
             
             <div class="content-wrap">
               <h3>02. E-Commerce</h3>
-              <p class="subtitle">Tiendas online que venden.</p>
+              <p class="subtitle">Tiendas de alto rendimiento con panel de control total y escalables.</p>
               <button class="btn-flip" (click)="flipCard(2, $event)">
                 Ver más <span class="arrow">→</span>
               </button>
@@ -80,14 +81,15 @@
 
           <div class="pillar-face pillar-back">
             <div class="content-wrap">
-              <h3>Ventas 24/7</h3>
+              <h3>E-Commerce Autogestionable</h3>
               <p class="description">
-                Tiendas seguras, integradas con MercadoPago y sistemas de envío.
+                Tomá el control total de tu negocio con paneles administrativos diseñados a medida. Escalabilidad real e integraciones fluidas con sistemas de pago y logística.
               </p>
               <div class="tech-stack">
                 <span class="tech-badge">WooCommerce</span>
                 <span class="tech-badge">MercadoPago</span>
                 <span class="tech-badge">Analytics</span>
+                <span class="tech-badge">Escalabilidad</span>
               </div>
               <button class="btn-back" (click)="flipCard(2, $event)">
                 ← Volver
@@ -103,9 +105,9 @@
            (mouseleave)="stopVideoDesktop(vid3)">
         <div class="pillar-inner" [class.flipped]="isFlipped3">
           
-          <div class="pillar-face pillar-front" (click)="toggleVideoMobile(vid3)">
+          <div class="pillar-face pillar-front">
             <div class="video-container">
-              <video #vid3 muted loop playsinline preload="auto" 
+              <video #vid3 #videoEl muted loop playsinline preload="auto" 
                      poster="/assets/images/branding.jpg">
                  <source src="/assets/videos/brandingvideo1.mp4" type="video/mp4">
               </video>
@@ -115,7 +117,7 @@
             
             <div class="content-wrap">
               <h3>03. Branding & UI/UX</h3>
-              <p class="subtitle">Identidad visual estratégica.</p>
+              <p class="subtitle">Identidad visual estratégica y experiencia unica.</p>
               <button class="btn-flip" (click)="flipCard(3, $event)">
                 Ver más <span class="arrow">→</span>
               </button>
@@ -124,14 +126,15 @@
 
           <div class="pillar-face pillar-back">
             <div class="content-wrap">
-              <h3>Diseño con Propósito</h3>
+              <h3>Experiencia de Usuario Única</h3>
               <p class="description">
-                Diseñamos identidades visuales modernas y experiencias de usuario (UX) intuitivas.
+                Diseñamos identidades visuales modernas y experiencias (UX) intuitivas para convertir usuarios en clientes.
               </p>
               <div class="tech-stack">
-                <span class="tech-badge">Figma</span>
+                <span class="tech-badge">UI/UX</span>
                 <span class="tech-badge">Illustrator</span>
-                <span class="tech-badge">Photoshop</span>
+                <span class="tech-badge">Figma</span>
+                <span class="tech-badge">Branding</span>
               </div>
               <button class="btn-back" (click)="flipCard(3, $event)">
                 ← Volver

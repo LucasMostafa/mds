@@ -15,13 +15,14 @@ export class WhatWeDo implements AfterViewInit {
   isFlipped3 = false;
 
   @ViewChildren('revealEl') revealElements!: QueryList<ElementRef>;
+  // 🔥 Capturamos TODOS los videos
+  @ViewChildren('videoEl') videoElements!: QueryList<ElementRef<HTMLVideoElement>>;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
-  // Agregamos Event como parámetro para detener la propagación del click
   flipCard(cardNumber: number, event?: Event) {
     if (event) {
-      event.stopPropagation(); // Evita que el click pase a la tarjeta y reproduzca el video en móvil
+      event.stopPropagation();
     }
     
     if (cardNumber === 1) this.isFlipped1 = !this.isFlipped1;
@@ -42,17 +43,6 @@ export class WhatWeDo implements AfterViewInit {
     }
   }
 
-  // --- LÓGICA DE VIDEO PARA MOBILE (Tap to toggle) ---
-  toggleVideoMobile(videoElement: HTMLVideoElement) {
-    if (window.innerWidth <= 768) {
-      if (videoElement.paused) {
-        this.playVideo(videoElement);
-      } else {
-        this.stopVideo(videoElement);
-      }
-    }
-  }
-
   // Funciones core de reproducción pura
   private playVideo(videoElement: HTMLVideoElement) {
     videoElement.muted = true;    
@@ -69,14 +59,15 @@ export class WhatWeDo implements AfterViewInit {
     videoElement.pause();
   }
 
-  // --- LÓGICA DE ANIMACIÓN AL SCROLLEAR ---
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
-      const observer = new IntersectionObserver((entries) => {
+      
+      // 1. Observer para las animaciones de entrada
+      const animationObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
+            animationObserver.unobserve(entry.target);
           }
         });
       }, {
@@ -85,7 +76,30 @@ export class WhatWeDo implements AfterViewInit {
       });
 
       this.revealElements.forEach(el => {
-        observer.observe(el.nativeElement);
+        animationObserver.observe(el.nativeElement);
+      });
+
+      // 🔥 2. NUEVO OBSERVER: Autoplay para Videos en Mobile
+      const videoObserver = new IntersectionObserver((entries) => {
+        // Solo ejecuta esta lógica si estamos en celular
+        if (window.innerWidth <= 768) {
+          entries.forEach(entry => {
+            const video = entry.target as HTMLVideoElement;
+            // Si el 60% del video está en pantalla, le damos Play. Si sale de pantalla, Pausa.
+            if (entry.isIntersecting) {
+              this.playVideo(video);
+            } else {
+              this.stopVideo(video);
+            }
+          });
+        }
+      }, {
+        threshold: 0.6 // Necesita verse al menos el 60% de la tarjeta para arrancar
+      });
+
+      // Observamos todos los videos
+      this.videoElements.forEach(video => {
+        videoObserver.observe(video.nativeElement);
       });
     }
   }
