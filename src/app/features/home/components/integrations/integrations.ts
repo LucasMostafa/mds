@@ -26,7 +26,7 @@ export class Integrations implements AfterViewInit, OnDestroy {
     { name: 'Correo Argentino', icon: '/assets/integrations/correoargentino.png' },
     
     // --- COMUNICACIÓN Y ANALÍTICA ---
-    { name: 'WhatsApp', icon: '/assets/integrations/whatsapp.png' },
+    { name: 'WhatsApp', icon: '/assets/integrations/whatsapp1.png' },
     { name: 'Google Analytics', icon: '/assets/integrations/analytics.png' },
     { name: 'Google Maps', icon: '/assets/integrations/maps.png' },
     { name: 'WordPress', icon: '/assets/integrations/wordpress.png' }
