@@ -20,10 +20,12 @@
   box-sizing: border-box;
   position: relative;
   width: 100%;
+  max-width: 100%; /* 🔥 Candado de ancho */
   padding: 60px 20px 100px 20px;
   background-color: #000;
   color: white;
-  overflow: hidden;
+  overflow-x: hidden; /* 🔥 Candado de desborde horizontal para matar el borde negro */
+  overflow-y: hidden;
 
   .gradient-bg {
     position: absolute;
@@ -91,12 +93,9 @@
         position: relative;
         will-change: transform; 
         
-        // La transición principal se maneja ahora por .animate-up
-        // Aquí solo definimos qué pasa al hacer hover una vez que ya apareció
         @media (hover: hover) {
           &:hover {
             transform: translateY(-5px); 
-            // 🔥 Sobreescribimos la transición lenta por una rápida para el hover
             transition: transform 0.3s ease, box-shadow 0.3s ease !important;
             
             .pillar-face {
@@ -136,6 +135,10 @@
           box-shadow: 0 0 0 transparent;
 
           overflow: hidden;
+          -webkit-mask-image: -webkit-radial-gradient(white, black);
+          mask-image: radial-gradient(white, black);
+          isolation: isolate;
+          
           display: flex;
           flex-direction: column;
           transition: border-color 0.3s ease, box-shadow 0.3s ease; 
@@ -151,6 +154,12 @@
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 0;
             overflow: hidden;
+            
+            // 🔥 SOLUCIÓN HERMÉTICA AL SANGRADO DE ESQUINAS 🔥
+            border-radius: 20px; 
+            transform: translateZ(0); 
+            -webkit-mask-image: -webkit-radial-gradient(white, black);
+            mask-image: radial-gradient(white, black);
 
             video {
               width: 100%;
@@ -158,6 +167,7 @@
               object-fit: cover; 
               transition: transform 0.5s ease; 
               will-change: transform;
+              border-radius: 20px; // Candado doble al video
             }
           }
           
@@ -167,6 +177,7 @@
             background: linear-gradient(to top, rgba(0,0,0,0.95) 15%, rgba(0,0,0,0.4) 60%, transparent 100%);
             z-index: 1;
             pointer-events: none; 
+            border-radius: 20px; // Candado triple al overlay
           }
 
           .content-wrap {
@@ -229,6 +240,7 @@
           text-align: center;
           box-sizing: border-box;
           z-index: 1; 
+          border-radius: 20px;
 
           .content-wrap {
             width: 100%;

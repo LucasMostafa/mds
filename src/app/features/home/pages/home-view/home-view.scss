@@ -1,3 +1,58 @@
+// Variables de marca MDS
+$bg-dark: #0a0a0a;
+$card-bg: rgba(255, 255, 255, 0.03);
+$accent-blue: #3b82f6;
+$accent-purple: #8b5cf6;
+$text-main: #ffffff;
+$text-muted: #a1a1aa;
+
+/* ========================================================
+   0. RESETEO GLOBAL DE CAJAS (El asesino de desbordes)
+   ======================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ========================================================
+   1. CONFIGURACIÓN BASE Y FIX DE SCROLL
+   ======================================================== */
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  
+  /* ESTA ES LA CLAVE: Define un "colchón" invisible arriba de todo el viewport. */
+  scroll-padding-top: 130px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%; /* 👉 NUNCA usar 100vw porque incluye la barra de scroll vertical */
+  background-color: #000000;
+  color: $text-main;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  
+  /* 🔥 LA MAGIA MODERNA: Corta el desborde lateral pero NO rompe el Navbar Sticky */
+  overflow-x: clip; 
+}
+
+/* Ajuste para móviles (barra más chica) */
+@media (max-width: 768px) {
+  html {
+    scroll-padding-top: 100px;
+  }
+}
+
+// ... Resto de tus estilos (glass-effect, etc) ...
+.glass-effect {
+  background: $card-bg;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+}
+
 @keyframes floatOrbs {
   0% { transform: translate(0, 0); }
   33% { transform: translate(100px, -50px); }
@@ -24,7 +79,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  overflow: hidden; 
+  overflow: hidden; // Asegura que las animaciones no estiren la sección
   isolation: isolate;
   background-color: #000000; 
 
@@ -32,6 +87,7 @@
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
     z-index: 0;
+    overflow: hidden; // 🛡️ Evita que las orbes generen scroll horizontal
     
     .orb {
       position: absolute;
@@ -73,8 +129,6 @@
     user-select: none; 
     touch-action: none; 
 
-    // Animaciones iniciales (Se apagan cuando interactuás)
-    // 🔥 USAMOS max() PARA QUE NUNCA QUEDEN A MENOS DE 40PX DEL BORDE
     &.tag-1 { 
       top: 18%; left: max(40px, 12vw); 
       animation: floatTags 10s ease-in-out infinite; 
@@ -122,7 +176,6 @@
       letter-spacing: -2px;
       text-shadow: 0 10px 30px rgba(0,0,0,0.8);
 
-      // 🔥 ESTILO PARA EL TEXTO AZUL
       .text-studio {
         color: #3b82f6; 
       }
@@ -165,12 +218,10 @@
 
 @media (max-width: 900px) {
   .hero-fullscreen {
-    // 🔥 CAMBIO APLICADO: Habilitamos las etiquetas en mobile y las adaptamos
     .floating-tag { 
-      font-size: 0.7rem; // Un poco más chicas para que no saturen
+      font-size: 0.7rem;
       padding: 6px 14px;
       
-      // Reacomodamos posiciones para que rodeen el texto central
       &.tag-1 { top: 12%; left: 5%; }
       &.tag-2 { top: 18%; right: 5%; left: auto; }
       &.tag-3 { bottom: 25%; left: 5%; }
@@ -182,45 +233,41 @@
 }
 
 // ========================================================
-// 🔥 PANEL DE CONTROL DE FRENO DE SCROLL POR COMPONENTE 🔥
+// PANEL DE CONTROL DE FRENO DE SCROLL POR COMPONENTE
 // ========================================================
 
-// 1. SERVICIOS
 app-what-we-do {
   display: block; 
-  scroll-margin-top: 0px; // <-- Modificá esto para PC
+  scroll-margin-top: 0px; 
   
   @media (max-width: 768px) {
-    scroll-margin-top: 0px; // <-- Modificá esto para Celular
+    scroll-margin-top: 0px;
   }
 }
 
-// 2. ESTUDIO
 app-studio {
   display: block; 
-  scroll-margin-top: -130px; // <-- Modificá esto para PC
+  scroll-margin-top: -130px; 
   
   @media (max-width: 768px) {
-    scroll-margin-top: -100px; // <-- Modificá esto para Celular
+    scroll-margin-top: -100px;
   }
 }
 
-// 3. PROYECTOS
 app-bento-grid {
   display: block; 
-  scroll-margin-top: -130px; // <-- Modificá esto para PC
+  scroll-margin-top: -130px; 
   
   @media (max-width: 768px) {
-    scroll-margin-top: -100px; // <-- Modificá esto para Celular
+    scroll-margin-top: -100px;
   }
 }
 
-// 4. CONTACTO
 app-contact {
   display: block; 
-  scroll-margin-top: -130px; // <-- Modificá esto para PC
+  scroll-margin-top: -130px; 
   
   @media (max-width: 768px) {
-    scroll-margin-top: -100px; // <-- Modificá esto para Celular
+    scroll-margin-top: -100px;
   }
 }

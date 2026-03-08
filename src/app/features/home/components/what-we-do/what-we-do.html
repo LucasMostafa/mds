@@ -10,13 +10,17 @@
 
     <div class="pillars">
       
-      <div #revealEl class="pillar-scene animate-up delay-1" (mouseenter)="playVideo(vid1)" (mouseleave)="stopVideo(vid1)">
+      <div #revealEl class="pillar-scene animate-up delay-1" 
+           (mouseenter)="playVideoDesktop(vid1)" 
+           (mouseleave)="stopVideoDesktop(vid1)">
         <div class="pillar-inner" [class.flipped]="isFlipped1">
           
-          <div class="pillar-face pillar-front">
+          <div class="pillar-face pillar-front" (click)="toggleVideoMobile(vid1)">
             <div class="video-container">
-              <video #vid1 muted loop playsinline preload="metadata" 
-                     poster="/assets/images/code1.jpg"> <source src="/assets/videos/codevideo.mp4" type="video/mp4"> </video>
+              <video #vid1 muted loop playsinline preload="auto" 
+                     poster="/assets/images/code1.jpg"> 
+                     <source src="/assets/videos/codevideo.mp4" type="video/mp4"> 
+              </video>
             </div>
             
             <div class="overlay"></div>
@@ -24,7 +28,7 @@
             <div class="content-wrap">
               <h3>01. Desarrollo Web & Apps</h3>
               <p class="subtitle">Sitios institucionales y PWAs.</p>
-              <button class="btn-flip" (click)="flipCard(1)">
+              <button class="btn-flip" (click)="flipCard(1, $event)">
                 Ver más <span class="arrow">→</span>
               </button>
             </div>
@@ -41,7 +45,7 @@
                 <span class="tech-badge">TypeScript</span>
                 <span class="tech-badge">SASS</span>
               </div>
-              <button class="btn-back" (click)="flipCard(1)">
+              <button class="btn-back" (click)="flipCard(1, $event)">
                 ← Volver
               </button>
             </div>
@@ -50,12 +54,14 @@
         </div>
       </div>
 
-      <div #revealEl class="pillar-scene animate-up delay-2" (mouseenter)="playVideo(vid2)" (mouseleave)="stopVideo(vid2)">
+      <div #revealEl class="pillar-scene animate-up delay-2" 
+           (mouseenter)="playVideoDesktop(vid2)" 
+           (mouseleave)="stopVideoDesktop(vid2)">
         <div class="pillar-inner" [class.flipped]="isFlipped2">
           
-          <div class="pillar-face pillar-front">
+          <div class="pillar-face pillar-front" (click)="toggleVideoMobile(vid2)">
             <div class="video-container">
-              <video #vid2 muted loop playsinline preload="metadata" 
+              <video #vid2 muted loop playsinline preload="auto" 
                      poster="/assets/images/conexion.jpg">
                  <source src="/assets/videos/conexionvideo.mp4" type="video/mp4">
               </video>
@@ -66,7 +72,7 @@
             <div class="content-wrap">
               <h3>02. E-Commerce</h3>
               <p class="subtitle">Tiendas online que venden.</p>
-              <button class="btn-flip" (click)="flipCard(2)">
+              <button class="btn-flip" (click)="flipCard(2, $event)">
                 Ver más <span class="arrow">→</span>
               </button>
             </div>
@@ -83,7 +89,7 @@
                 <span class="tech-badge">MercadoPago</span>
                 <span class="tech-badge">Analytics</span>
               </div>
-              <button class="btn-back" (click)="flipCard(2)">
+              <button class="btn-back" (click)="flipCard(2, $event)">
                 ← Volver
               </button>
             </div>
@@ -92,12 +98,14 @@
         </div>
       </div>
 
-      <div #revealEl class="pillar-scene animate-up delay-3" (mouseenter)="playVideo(vid3)" (mouseleave)="stopVideo(vid3)">
+      <div #revealEl class="pillar-scene animate-up delay-3" 
+           (mouseenter)="playVideoDesktop(vid3)" 
+           (mouseleave)="stopVideoDesktop(vid3)">
         <div class="pillar-inner" [class.flipped]="isFlipped3">
           
-          <div class="pillar-face pillar-front">
+          <div class="pillar-face pillar-front" (click)="toggleVideoMobile(vid3)">
             <div class="video-container">
-              <video #vid3 muted loop playsinline preload="metadata" 
+              <video #vid3 muted loop playsinline preload="auto" 
                      poster="/assets/images/branding.jpg">
                  <source src="/assets/videos/brandingvideo1.mp4" type="video/mp4">
               </video>
@@ -108,7 +116,7 @@
             <div class="content-wrap">
               <h3>03. Branding & UI/UX</h3>
               <p class="subtitle">Identidad visual estratégica.</p>
-              <button class="btn-flip" (click)="flipCard(3)">
+              <button class="btn-flip" (click)="flipCard(3, $event)">
                 Ver más <span class="arrow">→</span>
               </button>
             </div>
@@ -125,7 +133,7 @@
                 <span class="tech-badge">Illustrator</span>
                 <span class="tech-badge">Photoshop</span>
               </div>
-              <button class="btn-back" (click)="flipCard(3)">
+              <button class="btn-back" (click)="flipCard(3, $event)">
                 ← Volver
               </button>
             </div>

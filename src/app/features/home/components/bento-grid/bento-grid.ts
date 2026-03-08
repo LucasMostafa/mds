@@ -10,7 +10,6 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 })
 export class BentoGrid implements AfterViewInit {
 
-  // 🔥 Capturamos los elementos que van a animarse
   @ViewChildren('revealEl') revealElements!: QueryList<ElementRef>;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
@@ -26,7 +25,7 @@ export class BentoGrid implements AfterViewInit {
         });
       }, {
         threshold: 0.1, 
-        rootMargin: '0px 0px 25px 0px' // 🔥 Ajustado para que aparezca antes
+        rootMargin: '0px 0px 25px 0px' 
       });
 
       this.revealElements.forEach(el => {
@@ -35,8 +34,12 @@ export class BentoGrid implements AfterViewInit {
     }
   }
 
-  // Función para reproducir el video al entrar
   playVideo(videoElement: HTMLVideoElement) {
+    // 🔥 BLOQUEO PARA MOBILE: Solo reproduce en escritorio
+    if (isPlatformBrowser(this.platformId) && window.innerWidth <= 900) {
+      return; 
+    }
+
     videoElement.currentTime = 0;
     videoElement.muted = true; 
     
@@ -49,8 +52,12 @@ export class BentoGrid implements AfterViewInit {
     }
   }
 
-  // Función para detener el video al salir
   stopVideo(videoElement: HTMLVideoElement) {
+    // 🔥 BLOQUEO PARA MOBILE
+    if (isPlatformBrowser(this.platformId) && window.innerWidth <= 900) {
+      return; 
+    }
+
     videoElement.pause();
     videoElement.currentTime = 0; 
   }

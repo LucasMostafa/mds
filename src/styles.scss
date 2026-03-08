@@ -6,12 +6,25 @@ $accent-purple: #8b5cf6;
 $text-main: #ffffff;
 $text-muted: #a1a1aa;
 
-/* 1. Configuración Base */
-body {
+/* ========================================================
+   0. RESETEO GLOBAL DE CAJAS (Evita que el padding sume ancho)
+   ======================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* ========================================================
+   1. CONFIGURACIÓN BASE
+   ======================================================== */
+html, body {
+  width: 100%;
+  max-width: 100%;
   margin: 0;
+  padding: 0;
   background-color: #000000;
   color: $text-main;
   font-family: 'Inter', sans-serif;
+  // 🔥 SIN OVERFLOW ACÁ PARA NO ROMPER EL NAVBAR STICKY
 }
 
 /* 2. Scroll Suave y Offset Global */
@@ -38,4 +51,13 @@ html {
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 24px;
+}
+
+/* 🔥 PROTECCIÓN CONTRA DESBORDES DE CONTENIDO 🔥 */
+p, h1, h2, h3, h4, h5, h6, span, a {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+img, video {
+  max-width: 100%;
 }

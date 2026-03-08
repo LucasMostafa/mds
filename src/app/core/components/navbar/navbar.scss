@@ -13,11 +13,11 @@
   max-width: 1200px;
   height: 70px;
 
-  // 🔥 VIDRIO REAL
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  // 🔥 VIDRIO AHUMADO REAL (Más oscuro para igualar al menú)
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
   z-index: 1000;
 
@@ -138,10 +138,10 @@
     }
   }
 
-  // 🔥 MOBILE MENU CORREGIDO PROFESIONAL
+  // 🔥 MOBILE MENU CORREGIDO
   .mobile-menu {
-    position: fixed; // 🔥 CLAVE
-    top: 110px; // Ajustable según separación del navbar
+    position: fixed; 
+    top: 110px; 
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
@@ -157,21 +157,27 @@
     gap: 25px;
     padding: 30px 0;
 
-    // 🔥 MISMO VIDRIO EXACTO
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    // 🔥 VIDRIO OSCURO PREMIUM 🔥
+    // Usamos un fondo mucho más oscuro para tapar las imágenes brillantes de atrás
+    // y mantener la misma elegancia que el navbar.
+    background: rgba(10, 10, 10, 0.85); 
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08); 
 
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5); 
+    
+    transform: translateZ(0); 
 
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    transition: opacity 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), visibility 0.3s, transform 0.3s;
+    transform: translateX(-50%) translateY(-10px);
 
     &.open {
       opacity: 1;
       visibility: visible;
+      transform: translateX(-50%) translateY(0); 
     }
 
     a {
@@ -237,7 +243,13 @@
     }
 
     .mobile-menu {
+      background: rgba(255, 255, 255, 0.85);
       border-color: rgba(0, 0, 0, 0.1);
+      
+      a {
+        color: #0f172a;
+        &:hover { color: #3b82f6; }
+      }
     }
   }
 }
@@ -258,7 +270,7 @@
       .hamburger-btn {
         display: block;
         margin-left: auto;
-        margin-right: 50px;
+        margin-right: 20px; 
       }
     }
   }

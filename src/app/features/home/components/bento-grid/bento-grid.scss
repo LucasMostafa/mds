@@ -107,6 +107,9 @@
       overflow: hidden; 
       position: relative;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); 
+      
+      // Asegura que las curvas base siempre se respeten
+      transform: translateZ(0);
 
       // --- EFECTO HOVER COMÚN ---
       &:hover {
@@ -114,11 +117,10 @@
         border-color: rgba(59, 130, 246, 0.8);
         box-shadow: 0 0 30px rgba(59, 130, 246, 0.3); 
         
-        // Sobreescribimos la transición lenta de entrada para que el hover sea ágil
         transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
 
         .card-bg {
-           transform: scale(1.05);
+           transform: scale(1.05) translateZ(0);
         }
       }
     }
@@ -139,6 +141,12 @@
         opacity: 0.99; 
         z-index: 0;
         transition: transform 0.5s ease; 
+
+        // 🔥 FIX SANGRADO DE ESQUINAS 🔥
+        border-radius: 30px;
+        transform: translateZ(0);
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
+        mask-image: radial-gradient(white, black);
       }
 
       .content {
@@ -178,11 +186,18 @@
       justify-content: flex-end;
       background: #0f172a;
       
-      // 🔥 REEMPLAZAMOS LA IMAGEN FIJA POR EL CONTENEDOR DE MEDIA 🔥
       .media-container {
         position: absolute;
         top: 0; left: 0; width: 100%; height: 100%;
         z-index: 0;
+        
+        // 🔥 FIX HERMÉTICO PARA SANGRADO DE ESQUINAS 🔥
+        border-radius: 30px;
+        transform: translateZ(0);
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
+        mask-image: radial-gradient(white, black);
+        isolation: isolate;
+        overflow: hidden;
         
         video {
           position: absolute;
@@ -190,6 +205,7 @@
           object-fit: cover;
           transition: transform 0.5s ease;
           z-index: 1; 
+          border-radius: 30px; // Doble candado
         }
         
         .cover-image {
@@ -201,21 +217,22 @@
           z-index: 10;
           opacity: 1;
           transition: opacity 0.4s ease-in-out;
+          border-radius: 30px; // Doble candado
         }
 
         .overlay {
           position: absolute;
           top: 0; left: 0; width: 100%; height: 100%;
-          // Mismo velo degradado que las cards de proyectos
           background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
           z-index: 20; 
           pointer-events: none;
+          border-radius: 30px; // Doble candado
         }
       }
 
       .content {
         position: relative;
-        z-index: 30; // Aseguramos que quede arriba del velo
+        z-index: 30; 
         
         h3 { 
           font-size: 1.5rem; 
@@ -231,23 +248,24 @@
         }
       }
 
-      // 🔥 ANIMACIÓN HOVER PARA QUE SALGA EL VIDEO 🔥
-      &:hover {
-        .media-container video { transform: scale(1.05); }
-        .media-container .cover-image { opacity: 0; }
+      // 🔥 ANIMACIÓN HOVER SOLO EN ESCRITORIO 🔥
+      @media (min-width: 901px) {
+        &:hover {
+          .media-container video { transform: scale(1.05) translateZ(0); }
+          .media-container .cover-image { opacity: 0; }
+        }
       }
     }
 
     // --- PROYECTOS (Banners Anchos) ---
     .project-card {
-      // 🔥 ACÁ ESTÁ EL CAMBIO CLAVE: Ocupan las 4 columnas 🔥
       grid-column: span 4;
       
       position: relative;
       display: flex;
       flex-direction: column;
       justify-content: flex-end; 
-      padding: 35px; // Le subí un poquito el padding para que respire mejor como banner horizontal
+      padding: 35px; 
       cursor: pointer;
       background: #0f172a; 
 
@@ -256,12 +274,21 @@
         top: 0; left: 0; width: 100%; height: 100%;
         z-index: 0;
         
+        // 🔥 FIX HERMÉTICO PARA SANGRADO DE ESQUINAS 🔥
+        border-radius: 30px;
+        transform: translateZ(0);
+        -webkit-mask-image: -webkit-radial-gradient(white, black);
+        mask-image: radial-gradient(white, black);
+        isolation: isolate;
+        overflow: hidden;
+
         video {
           position: absolute;
           top: 0; left: 0; width: 100%; height: 100%;
           object-fit: cover;
           transition: transform 0.5s ease;
           z-index: 1; 
+          border-radius: 30px; // Doble candado
         }
         
         .cover-image {
@@ -273,15 +300,16 @@
           z-index: 10;
           opacity: 1;
           transition: opacity 0.4s ease-in-out;
+          border-radius: 30px; // Doble candado
         }
 
         .overlay {
           position: absolute;
           top: 0; left: 0; width: 100%; height: 100%;
-          // Degradado ajustado para banner panorámico
           background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
           z-index: 20; 
           pointer-events: none;
+          border-radius: 30px; // Doble candado
         }
       }
 
@@ -300,22 +328,25 @@
           margin-bottom: 12px;
         }
         h4 {
-          font-size: 1.8rem; // Título un poco más grande
+          font-size: 1.8rem; 
           margin: 0 0 5px 0;
           font-weight: 700;
           text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
         p {
-          font-size: 1.05rem; // Texto un poco más grande
+          font-size: 1.05rem; 
           color: #e2e8f0;
           margin: 0;
           text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
       }
 
-      &:hover {
-        .media-container video { transform: scale(1.05); }
-        .media-container .cover-image { opacity: 0; }
+      // 🔥 ANIMACIÓN HOVER SOLO EN ESCRITORIO 🔥
+      @media (min-width: 901px) {
+        &:hover {
+          .media-container video { transform: scale(1.05) translateZ(0); }
+          .media-container .cover-image { opacity: 0; }
+        }
       }
     }
 
@@ -325,7 +356,6 @@
       grid-auto-rows: 250px;
       padding: 0;
 
-      // 🔥 Todas las tarjetas ahora son de 1 columna en móvil 🔥
       .hero-card, .team-card, .project-card {
         grid-column: span 1;
         grid-row: span 1;
@@ -337,7 +367,7 @@
       }
       
       .project-card {
-        padding: 25px; // Volvemos al padding normal en celular
+        padding: 25px; 
         .info {
           h4 { font-size: 1.5rem; }
           p { font-size: 0.95rem; }

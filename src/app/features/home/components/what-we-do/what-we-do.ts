@@ -14,38 +14,59 @@ export class WhatWeDo implements AfterViewInit {
   isFlipped2 = false;
   isFlipped3 = false;
 
-  // 🔥 Capturamos todos los elementos que tienen la referencia #revealEl en el HTML
   @ViewChildren('revealEl') revealElements!: QueryList<ElementRef>;
 
-  // Inyectamos PLATFORM_ID para asegurarnos de que el IntersectionObserver solo corra en el navegador (evita errores con SSR)
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
-  flipCard(cardNumber: number) {
+  // Agregamos Event como parámetro para detener la propagación del click
+  flipCard(cardNumber: number, event?: Event) {
+    if (event) {
+      event.stopPropagation(); // Evita que el click pase a la tarjeta y reproduzca el video en móvil
+    }
+    
     if (cardNumber === 1) this.isFlipped1 = !this.isFlipped1;
     if (cardNumber === 2) this.isFlipped2 = !this.isFlipped2;
     if (cardNumber === 3) this.isFlipped3 = !this.isFlipped3;
   }
 
-  // --- REPRODUCIR VIDEO (Hover) ---
-  playVideo(videoElement: HTMLVideoElement) {
-    videoElement.currentTime = 0; // Reinicia el video
-    videoElement.muted = true;    // Asegura mute para autoplay
-    
+  // --- LÓGICA DE VIDEO PARA DESKTOP ---
+  playVideoDesktop(videoElement: HTMLVideoElement) {
+    if (window.innerWidth > 768) {
+      this.playVideo(videoElement);
+    }
+  }
+
+  stopVideoDesktop(videoElement: HTMLVideoElement) {
+    if (window.innerWidth > 768) {
+      this.stopVideo(videoElement);
+    }
+  }
+
+  // --- LÓGICA DE VIDEO PARA MOBILE (Tap to toggle) ---
+  toggleVideoMobile(videoElement: HTMLVideoElement) {
+    if (window.innerWidth <= 768) {
+      if (videoElement.paused) {
+        this.playVideo(videoElement);
+      } else {
+        this.stopVideo(videoElement);
+      }
+    }
+  }
+
+  // Funciones core de reproducción pura
+  private playVideo(videoElement: HTMLVideoElement) {
+    videoElement.muted = true;    
     const playPromise = videoElement.play();
     
     if (playPromise !== undefined) {
       playPromise.catch(error => {
-        // Autoplay bloqueado o interrupción rápida (normal en browsers)
         console.log('Video play prevented:', error);
       });
     }
   }
 
-  // --- PAUSAR VIDEO (Leave) ---
-  stopVideo(videoElement: HTMLVideoElement) {
+  private stopVideo(videoElement: HTMLVideoElement) {
     videoElement.pause();
-    // Opcional: Volver a 0 para que la próxima vez arranque de inicio
-    // videoElement.currentTime = 0; 
   }
 
   // --- LÓGICA DE ANIMACIÓN AL SCROLLEAR ---
@@ -54,19 +75,15 @@ export class WhatWeDo implements AfterViewInit {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
-            // Le agrega la clase .visible al elemento cuando entra en pantalla
             entry.target.classList.add('visible');
-            
-            // Dejamos de observarlo para que la animación ocurra solo la primera vez
             observer.unobserve(entry.target);
           }
         });
       }, {
-        threshold: 0.1, // Se activa cuando al menos el 10% del elemento es visible
-        rootMargin: '0px 0px 25px 0px' // Margen sutil para que anime justo antes de aparecer del todo
+        threshold: 0.1, 
+        rootMargin: '0px 0px 25px 0px' 
       });
 
-      // Le aplicamos el observador a cada elemento capturado
       this.revealElements.forEach(el => {
         observer.observe(el.nativeElement);
       });
