@@ -2,7 +2,7 @@
   position: sticky;
   position: -webkit-sticky;
   
-  // 🔥 FIX iOS 1: Protege el Navbar del Notch o la Isla Dinámica de iPhone
+  // FIX iOS 1: Protege el Navbar del Notch o la Isla Dinámica de iPhone
   top: calc(env(safe-area-inset-top, 0px) + 20px);
   
   margin-top: 50px;
@@ -16,7 +16,7 @@
   max-width: 1200px;
   height: 70px;
 
-  // 🔥 FIX iOS 2: Obliga a Safari a no cortar el efecto de vidrio al hacer scroll
+  // FIX iOS 2: Obliga a Safari a no cortar el efecto de vidrio al hacer scroll
   will-change: transform;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
@@ -65,13 +65,39 @@
       margin: 0;
 
       a {
+        position: relative; 
         text-decoration: none;
         color: rgba(255, 255, 255, 0.7);
         font-size: 0.9rem;
         transition: color 0.3s ease;
+        
+        // 🔥 EL EFECTO DE SUBRAYADO DESKTOP
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          
+          // 🔥 MODIFICÁ ESTE VALOR PARA SUBIR O BAJAR LA LÍNEA 🔥
+          // Si ponés -4px bajará un poquito, si ponés -8px bajará más. Si ponés 0px estará pegada al texto.
+          bottom: -4px; 
+          
+          width: 0; 
+          height: 2px; 
+          border-radius: 2px;
+          background-color: currentColor; 
+          transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
 
         &:hover {
           color: #fff;
+        }
+
+        // 🔥 ESTADO ACTIVO
+        &.active {
+          color: #fff;
+          &::after {
+            width: 100%;
+          }
         }
       }
     }
@@ -86,7 +112,7 @@
       cursor: pointer;
       transition: all 0.3s ease;
       white-space: nowrap;
-      margin-right: 50px;
+      margin-right: 0px;
 
       &.desktop-only {
         display: block;
@@ -197,6 +223,11 @@
       &:hover {
         color: #3b82f6;
       }
+
+      // 🔥 ESTADO ACTIVO MÓVIL (Solo color, sin subrayado)
+      &.active {
+        color: #3b82f6; 
+      }
     }
 
     .mobile-btn {
@@ -229,7 +260,13 @@
 
       .nav-links a {
         color: #64748b;
+        
         &:hover { color: #000; }
+        
+        // 🔥 ESTADO ACTIVO EN MODO CLARO
+        &.active {
+          color: #000;
+        }
       }
 
       .btn-contact {
@@ -252,8 +289,13 @@
       border-color: rgba(0, 0, 0, 0.1);
       
       a {
-        color: #0f172a;
+        color: #0f1114;
         &:hover { color: #3b82f6; }
+        
+        // 🔥 ESTADO ACTIVO MÓVIL EN MODO CLARO
+        &.active {
+          color: #3b82f6;
+        }
       }
     }
   }
@@ -262,7 +304,6 @@
 // MEDIA
 @media (max-width: 768px) {
   .navbar-glass {
-    // 🔥 FIX iOS 3: Mantenemos el safe-area para celulares
     top: calc(env(safe-area-inset-top, 0px) + 15px);
     margin-top: 15px;
     width: 95%;
@@ -276,7 +317,7 @@
       .hamburger-btn {
         display: block;
         margin-left: auto;
-        margin-right: 20px; 
+        margin-right: 10px; 
       }
     }
   }
