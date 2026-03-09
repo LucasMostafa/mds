@@ -20,11 +20,11 @@
   box-sizing: border-box;
   position: relative;
   width: 100%;
-  max-width: 100%; 
+  max-width: 100%; /* 🔥 Candado de ancho */
   padding: 60px 20px 100px 20px;
   background-color: #000;
   color: white;
-  overflow-x: hidden; 
+  overflow-x: hidden; /* 🔥 Candado de desborde horizontal para matar el borde negro */
   overflow-y: hidden;
 
   .gradient-bg {
@@ -167,7 +167,8 @@
               object-fit: cover; 
               transition: transform 0.5s ease; 
               will-change: transform;
-              border-radius: 20px; 
+              border-radius: 20px; // Candado doble al video
+              background-color: transparent; // 🔥 Aseguramos que el fondo se vea siempre
             }
           }
           
@@ -177,7 +178,7 @@
             background: linear-gradient(to top, rgba(0,0,0,0.95) 15%, rgba(0,0,0,0.4) 60%, transparent 100%);
             z-index: 1;
             pointer-events: none; 
-            border-radius: 20px; 
+            border-radius: 20px; // Candado triple al overlay
           }
 
           .content-wrap {
