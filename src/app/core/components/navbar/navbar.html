@@ -1,4 +1,4 @@
-\<nav class="navbar-glass" [class.nav-dark]="isDarkTheme">
+<nav class="navbar-glass" [class.nav-dark]="isDarkTheme">
   
   <div class="nav-container">
     
@@ -10,7 +10,7 @@
     <ul class="nav-links">
       <li><a (click)="scrollTo('servicios')" [class.active]="activeSection === 'servicios'" style="cursor: pointer;">Servicios</a></li>
       <li><a (click)="scrollTo('estudio')" [class.active]="activeSection === 'estudio'" style="cursor: pointer;">Estudio</a></li>
-      <li><a (click)="scrollTo('proyectos')" [class.active]="activeSection === 'proyectos'" style="cursor: pointer;">Proyectos</a></li>
+      <li><a (click)="scrollTo('proyectos')" [class.active]="activeSection === 'proyectos'" style="cursor: pointer;">Clientes</a></li>
     </ul>
 
     <button class="btn-contact desktop-only" (click)="scrollTo('contacto')">
@@ -27,7 +27,7 @@
   <div class="mobile-menu" [class.open]="isMenuOpen">
     <a (click)="scrollTo('servicios')" [class.active]="activeSection === 'servicios'">Servicios</a>
     <a (click)="scrollTo('estudio')" [class.active]="activeSection === 'estudio'">Estudio</a>
-    <a (click)="scrollTo('proyectos')" [class.active]="activeSection === 'proyectos'">Proyectos</a>
+    <a (click)="scrollTo('proyectos')" [class.active]="activeSection === 'proyectos'">Clientes</a>
     
     <button class="mobile-btn" (click)="scrollTo('contacto')">
       Contactanos
