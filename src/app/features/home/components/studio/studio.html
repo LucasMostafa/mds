@@ -37,9 +37,21 @@
     </div>
 
     <div #revealEl class="image-column">
-      <div class="image-frame">
-        <img src="/assets/images/notebook.png" alt="Oficinas MD Studio">
-        <div class="glow-effect"></div>
+      <div class="tech-cloud">
+        <div class="cloud-glow"></div>
+        
+        <div class="tech-node" *ngFor="let tech of techStack"
+             [style.top]="tech.top"
+             [style.left]="tech.left"
+             [style.--node-size]="tech.size"
+             [style.animation-delay]="tech.delay">
+             
+          <div class="glass-circle">
+            <img [src]="tech.icon" [alt]="tech.name" draggable="false" loading="lazy">
+          </div>
+          
+          <span class="tooltip">{{ tech.name }}</span>
+        </div>
       </div>
     </div>
 

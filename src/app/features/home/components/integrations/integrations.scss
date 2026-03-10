@@ -9,6 +9,19 @@
   flex-direction: column;
   align-items: center;
 
+  // --- 🔥 EFECTO REVEAL ON SCROLL 🔥 ---
+  opacity: 0;
+  // Desplazado 60px hacia abajo e incorporando el anti-flicker 3D
+  transform: translateY(60px) translate3d(0, 0, 0); 
+  backface-visibility: hidden;
+  transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  will-change: opacity, transform;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0) translate3d(0, 0, 0);
+  }
+
   .header-titles {
     text-align: center;
     margin-bottom: 10px;
@@ -41,8 +54,6 @@
     margin: 0 auto;
 
     // --- 🔥 EL NUEVO DIFUMINADO SUTIL PERFECTO (mask-image) ---
-    // Valores ajustados para un difuminado rápido solo en los bordes.
-    // La tarjeta es 100% visible desde el 5% hasta el 95% del ancho del contenedor.
     -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 92%, rgba(0,0,0,0) 100%);
     mask-image: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 8%, rgba(0,0,0,1) 92%, rgba(0,0,0,0) 100%);
 

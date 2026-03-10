@@ -22,21 +22,17 @@
   background-color: #111827; 
   color: white;
   overflow: hidden;
-  position: relative; // 🔥 CLAVE: Para que el video absolute se quede adentro
+  position: relative;
 
-  // ==========================================
-  // 🔥 MAGIA DEL VIDEO DE FONDO 🔥
-  // ==========================================
   .video-background {
     position: absolute;
     top: 0;
-    right: 0; // Lo pegamos a la derecha detrás de la imagen
-    width: 65%; // Cubre la mitad derecha y un poco más hacia el centro
+    right: 0; 
+    width: 65%; 
     height: 100%;
-    z-index: 0; // Lo mandamos al fondo
-    pointer-events: none; // Evita que interfiera con los clicks
+    z-index: 0; 
+    pointer-events: none; 
     
-    // El truco del fundido: Visible a la derecha, transparente a la izquierda
     -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
     mask-image: linear-gradient(to left, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 100%);
 
@@ -44,13 +40,13 @@
       width: 100%;
       height: 100%;
       object-fit: cover; 
-      opacity: 0.25; // 🔥 Opacidad sutil para que no pelee con tu foto principal
+      opacity: 0.25; 
     }
   }
 
   .content-wrapper {
-    position: relative; // 🔥 CLAVE
-    z-index: 2;         // 🔥 CLAVE: Mantiene el contenido por encima del video
+    position: relative; 
+    z-index: 2;         
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
@@ -106,59 +102,123 @@
       }
     }
 
-    // --- COLUMNA IMAGEN ---
+    // --- 🔥 COLUMNA TECNOLOGÍAS FLOTANTES 🔥 ---
     .image-column {
       position: relative;
-      padding: 10px;
+      width: 100%;
+      height: 550px; // Espacio para que floten los logos
       
-      // 1. ESTADO INICIAL (Desde la derecha)
+      // Animación de entrada de toda la columna
       opacity: 0;
-      transform: translateX(300px); 
+      transform: translateX(150px); 
       transition: opacity 1.5s ease-out, transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
       
-      // 2. ESTADO VISIBLE
       &.visible {
         opacity: 1;
         transform: translateX(0);
       }
 
-      .image-frame {
+      .tech-cloud {
         position: relative;
-        border-radius: 20px;
-        overflow: hidden;
-        
-        transform: rotate(3deg) scale(1);
-        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.5s ease;
-        
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3); 
-        border: 1px solid rgba(255,255,255,0.05);
-        cursor: pointer;
+        width: 100%;
+        height: 100%;
 
-        img {
-          width: 100%;
-          height: auto;
-          display: block;
-        }
-
-        .glow-effect {
+        .cloud-glow {
           position: absolute;
-          bottom: -20%;
-          right: -20%;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
           width: 60%;
           height: 60%;
-          background: radial-gradient(circle, rgba(59, 130, 246, 0.3), transparent 70%);
-          filter: blur(60px);
+          background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 60%);
+          filter: blur(50px);
           pointer-events: none;
         }
 
-        &:hover {
-          transform: rotate(0deg) scale(1.02);
-          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
-          border-color: rgba(255, 255, 255, 0.3);
+        .tech-node {
+          position: absolute;
+          // Aplicamos la variable CSS que viene de Angular
+          width: var(--node-size);
+          height: var(--node-size);
+          
+          // Efecto de flotación infinita
+          animation: floatNode 5s ease-in-out infinite;
+          will-change: transform;
+          z-index: 5;
+
+          // Al hacer hover, frena la animación y pasa al frente
+          &:hover {
+            animation-play-state: paused;
+            z-index: 20;
+
+            .glass-circle {
+              transform: scale(1.15);
+              border-color: rgba(59, 130, 246, 0.6);
+              box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+              background: rgba(255, 255, 255, 0.08);
+            }
+
+            .tooltip {
+              opacity: 1;
+              transform: translateX(-50%) translateY(0);
+              visibility: visible;
+            }
+          }
+
+          .glass-circle {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+
+            img {
+              width: 55%;
+              height: 55%;
+              object-fit: contain;
+            }
+          }
+
+          // Cartelito Glassmorphism
+          .tooltip {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+            pointer-events: none; // Evita que el mouse parpadee al tocarlo
+          }
         }
       }
     }
   }
+}
+
+// Keyframe para flotar
+@keyframes floatNode {
+  0% { transform: translateY(0px) translate3d(0,0,0); }
+  50% { transform: translateY(-12px) translate3d(0,0,0); }
+  100% { transform: translateY(0px) translate3d(0,0,0); }
 }
 
 // --- MOBILE ---
@@ -166,47 +226,40 @@
   .studio-container {
     padding: 100px 20px 50px; 
 
-    // 🔥 AJUSTE DEL VIDEO EN MOBILE
     .video-background {
-      width: 100%; // En celular que ocupe todo el ancho
-      // Cambiamos el degradado para que se funda hacia arriba (el video queda abajo)
+      width: 100%; 
       -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%);
       mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%);
       
-      video {
-        opacity: 0.15; // Un poco más transparente en móvil
-      }
+      video { opacity: 0.15; }
     }
 
     .content-wrapper {
       grid-template-columns: 1fr;
-      gap: 5px; 
+      gap: 15px; 
 
       .text-column {
         display: contents;
         .badge { order: 1; }
-        h2 { 
-          order: 2;
-          margin-top: 2px; 
-          font-size: 2.2rem; 
-        }
+        h2 { order: 2; margin-top: 2px; font-size: 2.2rem; }
         .story { order: 4; }
-        .founders { order: 5; }
+        .founders { order: 5; margin-top: 20px;}
       }
 
       .image-column {
         order: 3;
-        margin: 10px 0 20px 0; 
-        
-        // En mobile entra desde más cerca
+        margin: 20px 0; 
+        height: 400px; // Un poco más bajo en celular
         transform: translateX(80px);
         
-        &.visible {
-          transform: translateX(0);
-        }
+        &.visible { transform: translateX(0); }
 
-        .image-frame {
-           transform: rotate(0deg); 
+        .tech-cloud {
+          .tech-node {
+            // Magia: en celular los logos se achican solos al 80% de su tamaño
+            width: calc(var(--node-size) * 0.8);
+            height: calc(var(--node-size) * 0.8);
+          }
         }
       }
     }
