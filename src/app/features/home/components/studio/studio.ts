@@ -1,4 +1,4 @@
-import { Component, ElementRef, QueryList, ViewChildren, ViewChild, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, ElementRef, QueryList, ViewChildren, ViewChild, AfterViewInit, Inject, PLATFORM_ID, HostListener } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -13,9 +13,8 @@ export class Studio implements AfterViewInit {
   @ViewChildren('revealEl') revealElements!: QueryList<ElementRef>;
   @ViewChild('bgVideo') bgVideo!: ElementRef<HTMLVideoElement>;
 
-  // 🔥 CONSTELACIÓN DE TECNOLOGÍAS 🔥
-  // Ajusta los nombres de los archivos en 'icon' exactamente como los subas a tu carpeta assets
-  techStack = [
+  // 🔥 ESCRITORIO (Intacto)
+  private baseTechStackDesktop = [
     { name: 'Angular', icon: '/assets/logos/angular.png', top: '5%', left: '25%', delay: '0s', size: '85px' },
     { name: 'Google APIs', icon: '/assets/logos/google-apis.png', top: '15%', left: '75%', delay: '1.2s', size: '65px' },
     { name: 'TypeScript', icon: '/assets/logos/ts.png', top: '30%', left: '10%', delay: '0.5s', size: '70px' },
@@ -34,30 +33,64 @@ export class Studio implements AfterViewInit {
     { name: 'WordPress', icon: '/assets/integrations/wordpress.png', top: '28%', left: '65%', delay: '3.1s', size: '70px' }
   ];
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  // 🔥 MÓVILES (Matriz Comprimida)
+  // Tamaños sutilmente reducidos (35-45px) y posiciones exactas para entrar perfectos en 380px de alto.
+  private baseTechStackMobile = [
+    { name: 'Cloudflare', icon: '/assets/logos/cloudflare.png', top: '0%', left: '50%', delay: '1.7s', size: '45px' },
+    { name: 'Angular', icon: '/assets/logos/angular.png', top: '13%', left: '20%', delay: '0s', size: '40px' },
+    { name: 'Google APIs', icon: '/assets/logos/google-apis.png', top: '13%', left: '80%', delay: '1.2s', size: '40px' },
+    { name: 'TypeScript', icon: '/assets/logos/ts.png', top: '26%', left: '38%', delay: '0.5s', size: '40px' },
+    { name: 'HTML5', icon: '/assets/logos/html.png', top: '26%', left: '62%', delay: '0.3s', size: '35px' },
+    { name: 'JavaScript', icon: '/assets/logos/js.png', top: '39%', left: '15%', delay: '0.4s', size: '40px' },
+    { name: 'React', icon: '/assets/logos/react.png', top: '39%', left: '85%', delay: '2.1s', size: '45px' },
+    { name: 'WordPress', icon: '/assets/integrations/wordpress.png', top: '52%', left: '35%', delay: '3.1s', size: '40px' },
+    { name: 'Figma', icon: '/assets/logos/figma.png', top: '52%', left: '65%', delay: '2.8s', size: '40px' },
+    { name: 'Git', icon: '/assets/logos/git.png', top: '65%', left: '20%', delay: '1.1s', size: '35px' },
+    { name: 'SCSS', icon: '/assets/logos/scss.png', top: '65%', left: '80%', delay: '0.7s', size: '35px' },
+    { name: 'CSS3', icon: '/assets/logos/css.png', top: '78%', left: '42%', delay: '1.5s', size: '35px' },
+    { name: 'SQL', icon: '/assets/logos/sql.png', top: '78%', left: '58%', delay: '0.8s', size: '35px' },
+    { name: 'Node.js', icon: '/assets/logos/nodejs.png', top: '90%', left: '15%', delay: '1.8s', size: '45px' },
+    { name: 'C#', icon: '/assets/logos/csharp.png', top: '90%', left: '50%', delay: '2.2s', size: '45px' },
+    { name: 'MySQL', icon: '/assets/logos/mysql.png', top: '90%', left: '85%', delay: '2.5s', size: '40px' }
+  ];
+
+  techStack: any[] = [];
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.calculatePositions();
+  }
+
+  @HostListener('window:resize')
+  onResize() {
+    this.calculatePositions();
+  }
+
+  private calculatePositions() {
+    if (isPlatformBrowser(this.platformId)) {
+      const isMobile = window.innerWidth <= 900;
+      this.techStack = isMobile ? this.baseTechStackMobile : this.baseTechStackDesktop;
+    } else {
+      this.techStack = [...this.baseTechStackDesktop];
+    }
+  }
 
   ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       
-      // --- 1. LÓGICA DE REPRODUCCIÓN DEL VIDEO ---
       if (this.bgVideo) {
         const videoElement = this.bgVideo.nativeElement;
-        
         videoElement.muted = true;
         
         const playPromise = videoElement.play();
         
         if (playPromise !== undefined) {
           playPromise.catch(error => {
-            console.warn('El autoplay fue prevenido por el navegador, intentando de nuevo...', error);
-            setTimeout(() => {
-              videoElement.play();
-            }, 500);
+            console.warn('El autoplay prevenido:', error);
+            setTimeout(() => { videoElement.play(); }, 500);
           });
         }
       }
 
-      // --- 2. LÓGICA DE ANIMACIÓN AL SCROLLEAR ---
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {

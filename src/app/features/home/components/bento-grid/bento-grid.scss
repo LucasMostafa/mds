@@ -1,28 +1,43 @@
-// 🔥 CLASES DE ANIMACIÓN (Aparición desde abajo)
+// 🔥 CLASES DE ANIMACIÓN CORREGIDAS A KEYFRAMES
 .animate-up {
-  opacity: 0;
-  transform: translateY(60px);
-  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-
+  opacity: 0; 
+  
   &.visible {
-    opacity: 1;
-    transform: translateY(0);
+    animation: revealSlideUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
   }
 }
 
-// Delays en cascada
-.delay-1 { transition-delay: 0.1s; }
-.delay-2 { transition-delay: 0.2s; }
-.delay-3 { transition-delay: 0.3s; }
-.delay-4 { transition-delay: 0.4s; }
-.delay-5 { transition-delay: 0.5s; }
+@keyframes revealSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) translate3d(0, 0, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) translate3d(0, 0, 0);
+  }
+}
+
+// Delays exclusivos para la animación de entrada
+.delay-1.visible { animation-delay: 0.1s; }
+.delay-2.visible { animation-delay: 0.2s; }
+.delay-3.visible { animation-delay: 0.3s; }
+.delay-4.visible { animation-delay: 0.4s; }
+.delay-5.visible { animation-delay: 0.5s; }
 
 // --- RESTO DE LOS ESTILOS ---
 .projects-section {
   position: relative;
-  padding: 120px 20px;
+  
+  // 🔥 FIX 1: Obligamos a la sección a "subirse" 2px arriba del componente anterior
+  margin-top: -2px; 
+  padding: 122px 20px 120px 20px; // Sumamos 2px al padding-top para compensar y no alterar el diseño
+  
   color: white;
   overflow: hidden;
+
+  // 🔥 FIX 2: Sombra negra interna que tapará herméticamente cualquier pixel fugitivo de la imagen
+  box-shadow: inset 0 10px 0 0 rgba(0,0,0,1), inset 0 -10px 0 0 rgba(0,0,0,1);
 
   // --- 1. FONDO PARALLAX GENERAL ---
   background-image: url('https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=2070&auto=format&fit=crop');
@@ -30,12 +45,20 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: #000; // Respaldo por si falla la carga
 
   // --- 2. EL VELO OSCURO GENERAL ---
   &::before {
     content: "";
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    
+    // Lo estiramos de forma exagerada para que nunca coincida con el borde cortado
+    top: -20px; 
+    bottom: -20px; 
+    left: -20px; 
+    right: -20px; 
+    
+    // Tu degradado original exacto
     background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 1) 0%,      
@@ -108,22 +131,16 @@
       position: relative;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); 
       
-      // 🔥 FIX 1: Obligamos a procesar en GPU y ocultamos la parte de atrás para evitar parpadeos
-      transform: translate3d(0, 0, 0);
       backface-visibility: hidden;
-
-      // 🔥 FIX 2: La transición base DEBE estar acá para que el regreso sea suave
+      
       transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
 
-      // --- EFECTO HOVER COMÚN ---
       &:hover {
-        // 🔥 FIX 3: Mantenemos el translate3d junto con el movimiento
-        transform: translateY(-5px) translate3d(0, 0, 0);
+        transform: translateY(-5px) translate3d(0, 0, 0) !important;
         border-color: rgba(59, 130, 246, 0.8);
         box-shadow: 0 0 30px rgba(59, 130, 246, 0.3); 
 
         .card-bg {
-           // 🔥 FIX 4: Mantenemos el translate3d en el hijo también
            transform: scale(1.05) translate3d(0, 0, 0);
         }
       }
@@ -145,7 +162,6 @@
         opacity: 0.99; 
         z-index: 0;
         
-        // 🔥 FIX 5: Transición y backface en la imagen de fondo
         transition: transform 0.5s ease; 
         transform: translate3d(0, 0, 0);
         backface-visibility: hidden;

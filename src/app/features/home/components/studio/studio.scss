@@ -1,4 +1,4 @@
-// 🔥 CLASES DE ANIMACIÓN (De abajo hacia arriba)
+// 🔥 CLASES DE ANIMACIÓN
 .animate-up {
   opacity: 0;
   transform: translateY(60px);
@@ -55,7 +55,6 @@
     align-items: center;
     box-sizing: border-box; 
 
-    // --- COLUMNA TEXTO ---
     .text-column {
       .badge {
         color: #818cf8; 
@@ -102,13 +101,10 @@
       }
     }
 
-    // --- 🔥 COLUMNA TECNOLOGÍAS FLOTANTES 🔥 ---
     .image-column {
       position: relative;
       width: 100%;
-      height: 550px; // Espacio para que floten los logos
-      
-      // Animación de entrada de toda la columna
+      height: 550px; 
       opacity: 0;
       transform: translateX(150px); 
       transition: opacity 1.5s ease-out, transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
@@ -137,16 +133,18 @@
 
         .tech-node {
           position: absolute;
-          // Aplicamos la variable CSS que viene de Angular
-          width: var(--node-size);
-          height: var(--node-size);
+          width: var(--base-size);
+          height: var(--base-size);
           
-          // Efecto de flotación infinita
+          @media (max-width: 1200px) and (min-width: 901px) {
+            width: calc(var(--base-size) * 0.75);
+            height: calc(var(--base-size) * 0.75);
+          }
+          
           animation: floatNode 5s ease-in-out infinite;
           will-change: transform;
           z-index: 5;
 
-          // Al hacer hover, frena la animación y pasa al frente
           &:hover {
             animation-play-state: paused;
             z-index: 20;
@@ -157,11 +155,11 @@
               box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
               background: rgba(255, 255, 255, 0.08);
             }
-
+            
             .tooltip {
               opacity: 1;
-              transform: translateX(-50%) translateY(0);
               visibility: visible;
+              transform: translateX(-50%) translateY(0);
             }
           }
 
@@ -186,10 +184,10 @@
             }
           }
 
-          // Cartelito Glassmorphism
+          // Cartelito centrado nativo
           .tooltip {
             position: absolute;
-            bottom: -40px;
+            bottom: -35px;
             left: 50%;
             transform: translateX(-50%) translateY(10px);
             background: rgba(15, 23, 42, 0.85);
@@ -201,12 +199,12 @@
             font-size: 0.8rem;
             font-weight: 600;
             letter-spacing: 0.5px;
-            white-space: nowrap;
+            white-space: nowrap; 
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-            pointer-events: none; // Evita que el mouse parpadee al tocarlo
+            pointer-events: none; 
           }
         }
       }
@@ -214,7 +212,6 @@
   }
 }
 
-// Keyframe para flotar
 @keyframes floatNode {
   0% { transform: translateY(0px) translate3d(0,0,0); }
   50% { transform: translateY(-12px) translate3d(0,0,0); }
@@ -224,41 +221,65 @@
 // --- MOBILE ---
 @media (max-width: 900px) {
   .studio-container {
+    // 🔥 RESTAURADO: Tu padding original para que el nav no pise el título
     padding: 100px 20px 50px; 
 
     .video-background {
       width: 100%; 
       -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%);
       mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%);
-      
       video { opacity: 0.15; }
     }
 
     .content-wrapper {
       grid-template-columns: 1fr;
-      gap: 15px; 
+      gap: 0; 
 
       .text-column {
         display: contents;
+        
         .badge { order: 1; }
         h2 { order: 2; margin-top: 2px; font-size: 2.2rem; }
-        .story { order: 4; }
-        .founders { order: 5; margin-top: 20px;}
+        
+        // 1. TEXTO ARRIBA (sin pisar nada)
+        .story { 
+          order: 3; 
+          margin-bottom: 20px; 
+          position: relative;
+          z-index: 10;
+        }
+        
+        // 3. FUNDADORES ABAJO
+        .founders { 
+          order: 5; 
+          margin-top: 10px; 
+          padding-top: 30px;
+          position: relative;
+          z-index: 10;
+        }
       }
 
+      // 2. LOGOS EN EL MEDIO (Scroll comprimido)
       .image-column {
-        order: 3;
-        margin: 20px 0; 
-        height: 400px; // Un poco más bajo en celular
+        order: 4; 
+        
+        // Márgenes seguros, no toca el texto de arriba ni de abajo
+        margin: 20px auto 30px auto; 
+        max-width: 400px; 
+        padding: 0;
+        
+        // 🔥 SCROLL CORTO: Reducimos a 380px de altura
+        height: 380px; 
         transform: translateX(80px);
+        z-index: 2; 
         
         &.visible { transform: translateX(0); }
 
         .tech-cloud {
           .tech-node {
-            // Magia: en celular los logos se achican solos al 80% de su tamaño
-            width: calc(var(--node-size) * 0.8);
-            height: calc(var(--node-size) * 0.8);
+            .tooltip {
+              font-size: 0.75rem; 
+            }
           }
         }
       }
