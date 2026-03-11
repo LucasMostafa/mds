@@ -1,0 +1,141 @@
+.wa-container {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 999;
+  
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(30px) scale(0.8);
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
+  }
+
+  .wa-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 65px;
+    height: 65px;
+    background-color: #25D366; 
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    position: relative; // Necesario para el pseudo-elemento del borde
+    
+    // Sombra negra base sutil para dar profundidad
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+
+    // 🔥 LOGO MÁS GRANDE (como pediste)
+    svg {
+      width: 55%; // Aumentado para rellenar más el círculo verde
+      height: 55%;
+      // Rotación mantenida
+      transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 2; // Asegura que esté por encima del borde si colisionan
+    }
+
+    // 🔥 NUEVO: Pseudo-elemento para el CONTORNO EXTERIOR estilo "Studio"
+    &::after {
+      content: '';
+      position: absolute;
+      // 🔥 Lo hacemos un poquito más grande que el botón para que quede POR FUERA
+      top: -5px; 
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      border-radius: 50%;
+      // Contorno fino y blanco sutil por defecto (estilo Studio)
+      border: 1px solid rgba(255, 255, 255, 0.2); 
+      transition: all 0.3s ease;
+      z-index: 1; // Por detrás del SVG
+      pointer-events: none; // Evita que interfiera con el click
+    }
+
+    &:hover {
+      transform: scale(1.08) translateY(-5px);
+      
+      // Sombra exterior sutil
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.15), 0 6px 15px rgba(0, 0, 0, 0.4);
+      background-color: #20ba56; 
+
+      // 🔥 Animación del contorno EXTERIOR en Hover (Estilo Studio)
+      &::after {
+        // Neón sutil verde en el borde exterior
+        border-color: rgba(37, 211, 102, 0.6); 
+        box-shadow: 0 0 15px rgba(37, 211, 102, 0.3), inset 0 0 5px rgba(37, 211, 102, 0.2);
+      }
+
+      // Gira y agranda sutilmente el logo interior
+      svg {
+        transform: rotate(-15deg) scale(1.05);
+      }
+
+      .tooltip {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(-50%) translateX(0); 
+      }
+    }
+
+    // ETIQUETA ACHICADA (Mantenida)
+    .tooltip {
+      position: absolute;
+      right: calc(100% + 18px); 
+      top: 50%;
+      transform: translateY(-50%) translateX(10px); 
+      
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      // Padding reducido
+      padding: 6px 14px; 
+      border-radius: 20px;
+      // Fuente reducida
+      font-size: 0.8rem; 
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+      
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+      pointer-events: none; 
+    }
+  }
+}
+
+// --- MOBILE ---
+@media (max-width: 900px) {
+  .wa-container {
+    bottom: 25px; 
+    right: 25px;
+
+    .wa-button {
+      width: 55px; 
+      height: 55px;
+
+      // Desactivamos el tooltip en móvil
+      .tooltip {
+        display: none; 
+      }
+      
+      // Ajustamos el borde exterior en móvil
+      &::after {
+        top: -4px;
+        left: -4px;
+        right: -4px;
+        bottom: -4px;
+      }
+    }
+  }
+}
