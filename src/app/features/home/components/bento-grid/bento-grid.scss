@@ -29,14 +29,14 @@
 .projects-section {
   position: relative;
   
-  // 🔥 FIX 1: Obligamos a la sección a "subirse" 2px arriba del componente anterior
+  // FIX 1: Obligamos a la sección a "subirse" 2px arriba del componente anterior
   margin-top: -2px; 
-  padding: 122px 20px 120px 20px; // Sumamos 2px al padding-top para compensar y no alterar el diseño
+  padding: 122px 20px 120px 20px;
   
   color: white;
   overflow: hidden;
 
-  // 🔥 FIX 2: Sombra negra interna que tapará herméticamente cualquier pixel fugitivo de la imagen
+  // FIX 2: Sombra negra interna
   box-shadow: inset 0 10px 0 0 rgba(0,0,0,1), inset 0 -10px 0 0 rgba(0,0,0,1);
 
   // --- 1. FONDO PARALLAX GENERAL ---
@@ -45,20 +45,14 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  background-color: #000; // Respaldo por si falla la carga
+  background-color: #000;
 
   // --- 2. EL VELO OSCURO GENERAL ---
   &::before {
     content: "";
     position: absolute;
+    top: -20px; bottom: -20px; left: -20px; right: -20px; 
     
-    // Lo estiramos de forma exagerada para que nunca coincida con el borde cortado
-    top: -20px; 
-    bottom: -20px; 
-    left: -20px; 
-    right: -20px; 
-    
-    // Tu degradado original exacto
     background: linear-gradient(
       to bottom,
       rgba(0, 0, 0, 1) 0%,      
@@ -132,7 +126,6 @@
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); 
       
       backface-visibility: hidden;
-      
       transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
 
       &:hover {
@@ -293,7 +286,7 @@
       }
     }
 
-    // --- PROYECTOS (Banners Anchos) ---
+    // --- PROYECTOS ---
     .project-card {
       grid-column: span 4;
       
@@ -386,24 +379,42 @@
       }
     }
 
-    // --- MOBILE ---
+    // --- 🔥 CORRECCIONES MOBILE 🔥 ---
     @media (max-width: 900px) {
       grid-template-columns: 1fr; 
-      grid-auto-rows: 250px;
+      
+      // Permitimos que la altura sea automática, liberando la restricción que cortaba el texto
+      grid-auto-rows: auto; 
       padding: 0;
 
       .hero-card, .team-card, .project-card {
         grid-column: span 1;
-        grid-row: span 1;
+        grid-row: auto; 
       }
       
       .hero-card {
-        padding: 30px;
-        h1 { font-size: 2.5rem; }
+        padding: 35px 25px; // Ajuste sutil de márgenes internos
+        min-height: 360px; // Le damos altura mínima suficiente para que el texto respire
+        
+        .content {
+          h1 { 
+            font-size: 2.2rem; // Achicado un pelín para que no quiebre la línea
+          }
+          p { 
+            font-size: 1rem; 
+            max-width: 100%; // Que ocupe todo el ancho disponible
+            margin-top: 10px;
+          }
+        }
       }
       
+      .team-card {
+        min-height: 280px;
+      }
+
       .project-card {
         padding: 25px; 
+        min-height: 280px;
         .info {
           h4 { font-size: 1.5rem; }
           p { font-size: 0.95rem; }
