@@ -33,7 +33,6 @@
                 "glob": "**/*",
                 "input": "public"
               },
-              "src/favicon.png",
               "src/assets"
             ],
             "styles": [

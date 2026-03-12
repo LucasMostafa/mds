@@ -148,7 +148,7 @@
     </div>
 
     <div #revealEl class="support-banner-wrapper animate-up delay-3">
-      <div class="support-banner">
+      <div #supportBanner class="support-banner" [class.active-mobile]="isBannerActive">
         <div class="accent-glow"></div>
         
         <div class="banner-content">
@@ -165,5 +165,6 @@
         </div>
       </div>
     </div>
-    </div>
+    
+  </div>
 </section>

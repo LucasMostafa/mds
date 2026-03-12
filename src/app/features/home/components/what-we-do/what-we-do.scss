@@ -20,11 +20,11 @@
   box-sizing: border-box;
   position: relative;
   width: 100%;
-  max-width: 100%; /* 🔥 Candado de ancho */
+  max-width: 100%; 
   padding: 60px 20px 60px 20px;
   background-color: #000;
   color: white;
-  overflow-x: hidden; /* 🔥 Candado de desborde horizontal para matar el borde negro */
+  overflow-x: hidden; 
   overflow-y: hidden;
 
   .gradient-bg {
@@ -100,7 +100,6 @@
             
             .pillar-face {
               border-color: rgba(59, 130, 246, 0.8); 
-              // 🔥 GLOW MÁS INTENSO EN HOVER 🔥
               box-shadow: 0 0 30px rgba(59, 130, 246, 0.5), 0 4px 30px rgba(0, 0, 0, 0.5); 
             }
           }
@@ -134,8 +133,6 @@
           border-radius: 20px;
           border: 1px solid rgba(255, 255, 255, 0.08); 
           
-          // 🔥 GLOW CONSTANTE Y PROFUNDIDAD 🔥
-          // La primera sombra da profundidad (negra), la segunda da la luz sutil
           box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(59, 130, 246, 0.15);
 
           overflow: hidden;
@@ -159,7 +156,6 @@
             z-index: 0;
             overflow: hidden;
             
-            // 🔥 SOLUCIÓN HERMÉTICA AL SANGRADO DE ESQUINAS 🔥
             border-radius: 20px; 
             transform: translateZ(0); 
             -webkit-mask-image: -webkit-radial-gradient(white, black);
@@ -171,8 +167,8 @@
               object-fit: cover; 
               transition: transform 0.5s ease; 
               will-change: transform;
-              border-radius: 20px; // Candado doble al video
-              background-color: transparent; // 🔥 Aseguramos que el fondo se vea siempre
+              border-radius: 20px; 
+              background-color: transparent; 
             }
           }
           
@@ -182,7 +178,7 @@
             background: linear-gradient(to top, rgba(0,0,0,0.95) 15%, rgba(0,0,0,0.4) 60%, transparent 100%);
             z-index: 1;
             pointer-events: none; 
-            border-radius: 20px; // Candado triple al overlay
+            border-radius: 20px; 
           }
 
           .content-wrap {
@@ -314,9 +310,11 @@
           height: 2px;
           background: linear-gradient(90deg, transparent 0%, #3b82f6 50%, transparent 100%);
           opacity: 0.5;
+          transition: opacity 0.3s ease, box-shadow 0.3s ease;
         }
 
-        &:hover {
+        // 🔥 Unificamos hover y la nueva clase activa para mobile
+        &:hover, &.active-mobile {
           transform: translateY(-3px);
           border-color: rgba(59, 130, 246, 0.4);
           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);

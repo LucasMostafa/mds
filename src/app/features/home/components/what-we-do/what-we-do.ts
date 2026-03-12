@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ElementRef, QueryList, ViewChildren, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, QueryList, ViewChildren, ViewChild, Inject, PLATFORM_ID } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -14,9 +14,14 @@ export class WhatWeDo implements AfterViewInit {
   isFlipped2 = false;
   isFlipped3 = false;
 
+  // 🔥 Estado del Banner en Mobile
+  isBannerActive = false;
+
   @ViewChildren('revealEl') revealElements!: QueryList<ElementRef>;
-  // 🔥 Capturamos TODOS los videos
   @ViewChildren('videoEl') videoElements!: QueryList<ElementRef<HTMLVideoElement>>;
+  
+  // 🔥 Capturamos el Banner
+  @ViewChild('supportBanner') supportBanner!: ElementRef;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
@@ -30,7 +35,6 @@ export class WhatWeDo implements AfterViewInit {
     if (cardNumber === 3) this.isFlipped3 = !this.isFlipped3;
   }
 
-  // --- LÓGICA DE VIDEO PARA DESKTOP ---
   playVideoDesktop(videoElement: HTMLVideoElement) {
     if (window.innerWidth > 768) {
       this.playVideo(videoElement);
@@ -43,7 +47,6 @@ export class WhatWeDo implements AfterViewInit {
     }
   }
 
-  // Funciones core de reproducción pura
   private playVideo(videoElement: HTMLVideoElement) {
     videoElement.muted = true;    
     const playPromise = videoElement.play();
@@ -79,13 +82,11 @@ export class WhatWeDo implements AfterViewInit {
         animationObserver.observe(el.nativeElement);
       });
 
-      // 🔥 2. NUEVO OBSERVER: Autoplay para Videos en Mobile
+      // 2. Observer: Autoplay para Videos en Mobile
       const videoObserver = new IntersectionObserver((entries) => {
-        // Solo ejecuta esta lógica si estamos en celular
         if (window.innerWidth <= 768) {
           entries.forEach(entry => {
             const video = entry.target as HTMLVideoElement;
-            // Si el 60% del video está en pantalla, le damos Play. Si sale de pantalla, Pausa.
             if (entry.isIntersecting) {
               this.playVideo(video);
             } else {
@@ -94,13 +95,28 @@ export class WhatWeDo implements AfterViewInit {
           });
         }
       }, {
-        threshold: 0.6 // Necesita verse al menos el 60% de la tarjeta para arrancar
+        threshold: 0.6 
       });
 
-      // Observamos todos los videos
       this.videoElements.forEach(video => {
         videoObserver.observe(video.nativeElement);
       });
+
+      // 🔥 3. NUEVO OBSERVER: Interacción del Banner en Mobile
+      if (this.supportBanner) {
+        const bannerObserver = new IntersectionObserver((entries) => {
+          if (window.innerWidth <= 768) {
+            entries.forEach(entry => {
+              // Si el banner entra un 60% en la pantalla, lo iluminamos
+              this.isBannerActive = entry.isIntersecting;
+            });
+          }
+        }, {
+          threshold: 0.6 // Mismo umbral que los videos para que se sienta parejo
+        });
+
+        bannerObserver.observe(this.supportBanner.nativeElement);
+      }
     }
   }
 }
