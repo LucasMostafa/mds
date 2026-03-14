@@ -12,6 +12,9 @@ export class BentoGrid implements AfterViewInit {
 
   @ViewChildren('revealEl') revealElements!: QueryList<ElementRef>;
 
+  // 🔥 Estado para el efecto Acordeón ('ampas', 'gnc', 'kdonna' o null)
+  expandedCard: string | null = null;
+
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
 
   ngAfterViewInit() {
@@ -35,7 +38,6 @@ export class BentoGrid implements AfterViewInit {
   }
 
   playVideo(videoElement: HTMLVideoElement) {
-    // 🔥 BLOQUEO PARA MOBILE: Solo reproduce en escritorio
     if (isPlatformBrowser(this.platformId) && window.innerWidth <= 900) {
       return; 
     }
@@ -53,12 +55,25 @@ export class BentoGrid implements AfterViewInit {
   }
 
   stopVideo(videoElement: HTMLVideoElement) {
-    // 🔥 BLOQUEO PARA MOBILE
     if (isPlatformBrowser(this.platformId) && window.innerWidth <= 900) {
       return; 
     }
 
     videoElement.pause();
     videoElement.currentTime = 0; 
+  }
+
+  // 🔥 Lógica del botón interactivo
+  toggleExpand(cardId: string, event: Event) {
+    // Evita que el clic abra la URL del proyecto en otra pestaña
+    event.preventDefault();
+    event.stopPropagation();
+
+    // Si ya está abierta, la cerramos (null). Si no, la abrimos (cerrando cualquier otra).
+    if (this.expandedCard === cardId) {
+      this.expandedCard = null;
+    } else {
+      this.expandedCard = cardId;
+    }
   }
 }

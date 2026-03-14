@@ -126,7 +126,8 @@
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); 
       
       backface-visibility: hidden;
-      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+      // Añadimos una transición más larga para que el cambio de grid-row sea suave
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, all 0.5s ease;
 
       &:hover {
         transform: translateY(-5px) translate3d(0, 0, 0) !important;
@@ -286,9 +287,10 @@
       }
     }
 
-    // --- PROYECTOS ---
+    // --- PROYECTOS (Tarjetas Expansibles) ---
     .project-card {
       grid-column: span 4;
+      grid-row: span 1; // Altura por defecto (1 bloque)
       
       position: relative;
       display: flex;
@@ -297,6 +299,15 @@
       padding: 35px; 
       cursor: pointer;
       background: #0f172a; 
+
+      // 🔥 ESTADO EXPANDIDO 🔥
+      &.expanded {
+        grid-row: span 2; // Al recibir esta clase, ocupa el doble de altura
+        
+        .expand-btn {
+          background: rgba(255, 255, 255, 0.2); // Se nota que está activado
+        }
+      }
 
       .media-container {
         position: absolute;
@@ -346,6 +357,7 @@
       .info {
         position: relative;
         z-index: 30;
+        width: 80%; // Dejamos espacio a la derecha para que el texto no pise el botón
         
         .tag {
           font-size: 0.75rem;
@@ -371,6 +383,31 @@
         }
       }
 
+      // 🔥 BOTÓN DE EXPANSIÓN 🔥
+      .expand-btn {
+        position: absolute;
+        bottom: 35px;
+        right: 35px;
+        z-index: 35; // Por encima de la capa info
+        
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 8px 20px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 600;
+        backdrop-filter: blur(5px);
+        transition: all 0.3s ease;
+        
+        &:hover {
+          background: white;
+          color: black;
+          transform: translateY(-2px);
+        }
+      }
+
       @media (min-width: 901px) {
         &:hover {
           .media-container video { transform: scale(1.05) translate3d(0,0,0); }
@@ -383,26 +420,31 @@
     @media (max-width: 900px) {
       grid-template-columns: 1fr; 
       
-      // Permitimos que la altura sea automática, liberando la restricción que cortaba el texto
+      // Liberamos las alturas fijas
       grid-auto-rows: auto; 
       padding: 0;
 
       .hero-card, .team-card, .project-card {
         grid-column: span 1;
-        grid-row: auto; 
+        grid-row: auto !important; // Matamos los span 2 en mobile
+      }
+      
+      // El botón de expansión no tiene sentido en mobile
+      .desktop-only {
+        display: none !important;
       }
       
       .hero-card {
-        padding: 35px 25px; // Ajuste sutil de márgenes internos
-        min-height: 360px; // Le damos altura mínima suficiente para que el texto respire
+        padding: 35px 25px; 
+        min-height: 360px; 
         
         .content {
           h1 { 
-            font-size: 2.2rem; // Achicado un pelín para que no quiebre la línea
+            font-size: 2.2rem; 
           }
           p { 
             font-size: 1rem; 
-            max-width: 100%; // Que ocupe todo el ancho disponible
+            max-width: 100%; 
             margin-top: 10px;
           }
         }
@@ -416,6 +458,7 @@
         padding: 25px; 
         min-height: 280px;
         .info {
+          width: 100%; // Restauramos ancho completo al ocultar el botón
           h4 { font-size: 1.5rem; }
           p { font-size: 0.95rem; }
         }

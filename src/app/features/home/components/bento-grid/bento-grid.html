@@ -38,6 +38,7 @@
 
     <a #revealEl href="https://www.ampasmdp.com.ar/" target="_blank" rel="noopener noreferrer"
        class="bento-item project-card ampas animate-up delay-3" 
+       [class.expanded]="expandedCard === 'ampas'"
        (mouseenter)="playVideo(vidAmpas)" 
        (mouseleave)="stopVideo(vidAmpas)">
       
@@ -54,10 +55,15 @@
         <h4>AMPAS MDP</h4>
         <p>WEB empresarial autoadministrable.</p>
       </div>
+
+      <button class="expand-btn desktop-only" (click)="toggleExpand('ampas', $event)">
+        {{ expandedCard === 'ampas' ? 'Contraer' : 'Expandir' }}
+      </button>
     </a>
 
     <a #revealEl href="https://gncconstitucion.ar/home" target="_blank" rel="noopener noreferrer"
        class="bento-item project-card gnc animate-up delay-4"
+       [class.expanded]="expandedCard === 'gnc'"
        (mouseenter)="playVideo(vidGnc)" 
        (mouseleave)="stopVideo(vidGnc)">
       
@@ -73,10 +79,15 @@
         <h4>GNC Constitución</h4>
         <p>Landing Page Corporativa.</p>
       </div>
+
+      <button class="expand-btn desktop-only" (click)="toggleExpand('gnc', $event)">
+        {{ expandedCard === 'gnc' ? 'Contraer' : 'Expandir' }}
+      </button>
     </a>
 
     <a #revealEl href="https://kdonna.pages.dev/" target="_blank" rel="noopener noreferrer"
        class="bento-item project-card kdonna animate-up delay-5"
+       [class.expanded]="expandedCard === 'kdonna'"
        (mouseenter)="playVideo(vidKdonna)" 
        (mouseleave)="stopVideo(vidKdonna)">
       
@@ -92,6 +103,10 @@
         <h4>Kdonna</h4>
         <p>E-Commerce de Moda.</p>
       </div>
+
+      <button class="expand-btn desktop-only" (click)="toggleExpand('kdonna', $event)">
+        {{ expandedCard === 'kdonna' ? 'Contraer' : 'Expandir' }}
+      </button>
     </a>
 
   </div>
