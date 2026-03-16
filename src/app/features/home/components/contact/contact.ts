@@ -48,22 +48,51 @@ export class Contact implements AfterViewInit {
     // 1. Cambiamos el estado a "sending" (esto dispara la barra de progreso en CSS)
     this.buttonState = 'sending';
 
-    // 2. Simulamos el tiempo que tarda en mandarse el mail al servidor (2 segundos)
-    setTimeout(() => {
-      
-      // Acá iría el HTTP POST a tu backend
-      console.log('Datos listos para enviar al backend:', this.contactData);
-      
-      // 3. Cambiamos a estado "sent" (¡Mensaje enviado!)
-      this.buttonState = 'sent';
-      
-      // 4. Esperamos 2.5 segundos para que el usuario lea que se envió bien, y luego cerramos todo.
-      setTimeout(() => {
-        form.resetForm();
-        this.closeEmailForm();
-      }, 2500);
+    // 🔥 Configuración de EmailJS
+    // Ya te dejé tu Service ID, faltan reemplazar los otros dos
+    const serviceID = 'service_5dbb5pq';
+    const templateID = 'template_bbuhla7'; 
+    const publicKey = 'qt8JnhuoZSDQbTRlb';
 
-    }, 2000); // 2000 ms = 2 segundos de "carga"
+    const templateParams = {
+      name: this.contactData.name,
+      email: this.contactData.email,
+      message: this.contactData.message
+    };
+
+    // Petición POST directa a la API de EmailJS
+    fetch('https://api.emailjs.com/api/v1.0/email/send', {
+      method: 'POST',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        service_id: serviceID,
+        template_id: templateID,
+        user_id: publicKey,
+        template_params: templateParams
+      })
+    })
+    .then((response) => {
+      if (response.ok) {
+        // 3. Cambiamos a estado "sent" (¡Mensaje enviado!)
+        this.buttonState = 'sent';
+        
+        // 4. Esperamos 2.5 segundos para que el usuario lea que se envió bien, y luego cerramos todo.
+        setTimeout(() => {
+          form.resetForm();
+          this.closeEmailForm();
+        }, 2500);
+      } else {
+        throw new Error('Error en la respuesta de EmailJS');
+      }
+    })
+    .catch((error) => {
+      console.error('Oops... ', error);
+      alert('Hubo un error al enviar el mensaje. Por favor, intentá por WhatsApp.');
+      this.buttonState = 'idle';
+    });
   }
 
   @ViewChildren('revealEl') revealElements!: QueryList<ElementRef>;
