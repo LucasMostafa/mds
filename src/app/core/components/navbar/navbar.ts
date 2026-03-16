@@ -69,7 +69,7 @@ export class Navbar implements AfterViewInit {
 
       // --- 2. 🔥 NUEVO OBSERVER PARA EL SUBRAYADO ACTIVO 🔥 ---
       // Lista de todos los IDs de tus componentes
-      const sectionIds = ['hero', 'servicios', 'estudio', 'proyectos', 'contacto'];
+      const sectionIds = ['hero', 'servicios', 'proceso', 'estudio', 'proyectos', 'contacto'];
       
       const scrollObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {

@@ -7,11 +7,12 @@ import { Studio } from '../../components/studio/studio';
 import { Contact } from '../../components/contact/contact';
 import { Integrations } from '../../components/integrations/integrations';
 import { WhatsappButton } from '../../components/whatsapp-button/whatsapp-button';
+import { Process } from '../../components/process/process';
 
 @Component({
   selector: 'app-home-view',
   standalone: true,
-  imports: [CommonModule, BentoGrid, Navbar, WhatWeDo, Studio, Contact, Integrations, WhatsappButton],
+  imports: [CommonModule, BentoGrid, Navbar, WhatWeDo, Studio, Contact, Integrations, WhatsappButton, Process],
   templateUrl: './home-view.html',
   styleUrl: './home-view.scss',
 })
