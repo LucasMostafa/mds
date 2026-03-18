@@ -280,3 +280,8 @@ app-contact {
     scroll-margin-top: -100px;
   }
 }
+.seamless-dark-wrapper {
+  width: 100%;
+  // 🔥 EL DEGRADADO MAESTRO: Negro puro -> Azul Noche -> Negro puro
+  background: linear-gradient(to bottom, #000000 0%, #0f172a 40%, #0f172a 60%, #000000 100%);
+}

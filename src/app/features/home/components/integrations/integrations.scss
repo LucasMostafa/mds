@@ -1,3 +1,10 @@
+// 🔥 FIX PARA LA LÍNEA NEGRA: Aseguramos que Integraciones esté siempre por encima de Proceso
+:host {
+  display: block;
+  position: relative;
+  z-index: 10;
+}
+
 .integrations-container {
   padding: 20px 0px 20px 0px;
   
@@ -8,6 +15,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  // 🔥 EL TRUCO DEFINITIVO: Proyectamos el color final 5px hacia abajo. 
+  // Al ser box-shadow, se dibuja fuera de la caja y el 'overflow: hidden' NO lo recorta. Tapa cualquier hueco.
+  box-shadow: 0 5px 0px 0px #0f172a;
 
   // --- 🔥 EFECTO REVEAL ON SCROLL 🔥 ---
   opacity: 0;
