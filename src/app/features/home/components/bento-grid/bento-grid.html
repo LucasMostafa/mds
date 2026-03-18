@@ -51,13 +51,37 @@
       </div>
 
       <div class="info">
-        <span class="tag">Proyecto Destacado</span>
+        <!--<span class="tag">Proyecto Destacado</span>-->
         <h4>AMPAS MDP</h4>
         <p>WEB empresarial autoadministrable.</p>
       </div>
 
       <button class="expand-btn desktop-only" (click)="toggleExpand('ampas', $event)">
         {{ expandedCard === 'ampas' ? 'Contraer' : 'Expandir' }}
+      </button>
+    </a>
+
+    <a #revealEl  target="_blank" rel="noopener noreferrer"
+       class="bento-item project-card apas-rosario animate-up delay-6"
+       [class.expanded]="expandedCard === 'apasrosario'"
+       (mouseenter)="playVideo(vidApasRosario)" 
+       (mouseleave)="stopVideo(vidApasRosario)">
+      
+      <div class="media-container">
+        <video #vidApasRosario muted loop playsinline preload="metadata">
+           <source src="/assets/videos/apasrosariovideo.mp4" type="video/mp4">
+        </video>
+        <div class="cover-image" style="background-image: url('/assets/images/apasrosario.png');"></div>
+        <div class="overlay"></div>
+      </div>
+
+      <div class="info">
+        <h4>Apas Rosario</h4>
+        <p>Sitio web institucional.</p>
+      </div>
+
+      <button class="expand-btn desktop-only" (click)="toggleExpand('apasrosario', $event)">
+        {{ expandedCard === 'apasrosario' ? 'Contraer' : 'Expandir' }}
       </button>
     </a>
 
@@ -109,29 +133,7 @@
       </button>
     </a>
 
-    <a #revealEl  target="_blank" rel="noopener noreferrer"
-       class="bento-item project-card apas-rosario animate-up delay-6"
-       [class.expanded]="expandedCard === 'apasrosario'"
-       (mouseenter)="playVideo(vidApasRosario)" 
-       (mouseleave)="stopVideo(vidApasRosario)">
-      
-      <div class="media-container">
-        <video #vidApasRosario muted loop playsinline preload="metadata">
-           <source src="/assets/videos/apasrosariovideo.mp4" type="video/mp4">
-        </video>
-        <div class="cover-image" style="background-image: url('/assets/images/apasrosarioimg.jpg');"></div>
-        <div class="overlay"></div>
-      </div>
-
-      <div class="info">
-        <h4>Apas Rosario</h4>
-        <p>Sitio web institucional.</p>
-      </div>
-
-      <button class="expand-btn desktop-only" (click)="toggleExpand('apasrosario', $event)">
-        {{ expandedCard === 'apasrosario' ? 'Contraer' : 'Expandir' }}
-      </button>
-    </a>
+    
 
   </div>
 </section>
