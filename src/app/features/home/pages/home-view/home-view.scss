@@ -200,9 +200,10 @@ body {
       pointer-events: auto; 
 
       // 🔥 EL FIX PARA ANDROID:
-      font-weight: 300; // Forzamos que intente usar el peso más ligero
-      -webkit-font-smoothing: antialiased; // Le saca lo "gordo" en Android
-      -moz-osx-font-smoothing: grayscale;
+      font-weight: 300 !important; // Forzamos que intente usar el peso más ligero
+      -webkit-font-smoothing: antialiased !important; // Le saca lo "gordo" en Android
+      -moz-osx-font-smoothing: grayscale !important;
+      letter-spacing: -0.5px !important;
 
       .text { 
         letter-spacing: 1px; 
