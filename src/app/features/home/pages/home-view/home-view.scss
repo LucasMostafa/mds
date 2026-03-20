@@ -182,16 +182,38 @@ body {
     }
     
     .typewriter-container {
-      font-family: 'monospace'; font-size: 1.2rem; color: #dbeafe;
-      margin-top: 1.5rem; background: rgba(255, 255, 255, 0.03); 
-      border: 1px solid rgba(255, 255, 255, 0.1); padding: 10px 25px;
-      border-radius: 50px; backdrop-filter: blur(5px);
-      display: inline-flex; align-items: center; justify-content: center;
-      min-width: 320px; min-height: 48px; box-sizing: border-box;
+      font-family: 'monospace'; 
+      font-size: 1.2rem; 
+      color: #dbeafe;
+      margin-top: 1.5rem; 
+      background: rgba(255, 255, 255, 0.03); 
+      border: 1px solid rgba(255, 255, 255, 0.1); 
+      padding: 10px 25px;
+      border-radius: 50px; 
+      backdrop-filter: blur(5px);
+      display: inline-flex; 
+      align-items: center; 
+      justify-content: center;
+      min-width: 320px; 
+      min-height: 48px; 
+      box-sizing: border-box;
       pointer-events: auto; 
 
-      .text { letter-spacing: 1px; }
-      .cursor { color: #3b82f6; font-weight: 800; font-size: 1.3rem; margin-left: 2px; animation: blinkCursor 1s step-end infinite; }
+      // 🔥 EL FIX PARA ANDROID:
+      font-weight: 300; // Forzamos que intente usar el peso más ligero
+      -webkit-font-smoothing: antialiased; // Le saca lo "gordo" en Android
+      -moz-osx-font-smoothing: grayscale;
+
+      .text { 
+        letter-spacing: 1px; 
+      }
+      .cursor { 
+        color: #3b82f6; 
+        font-weight: 800; 
+        font-size: 1.3rem; 
+        margin-left: 2px; 
+        animation: blinkCursor 1s step-end infinite; 
+      }
     }
   }
 
