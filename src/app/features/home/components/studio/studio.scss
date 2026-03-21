@@ -276,6 +276,10 @@
         &.visible { transform: translateX(0); }
 
         .tech-cloud {
+          // 🔥 EL FIX PARA CENTRAR: Desplazamos todo el bloque de logos hacia la izquierda
+          transform: translateX(-15%); 
+          margin-left: 25px;
+
           .tech-node {
             .tooltip {
               font-size: 0.75rem; 
