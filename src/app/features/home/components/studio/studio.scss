@@ -136,14 +136,15 @@
           width: var(--base-size);
           height: var(--base-size);
           
+          // 🔥 FIX: Propiedades base movidas ARRIBA para evitar warnings de SASS
+          animation: floatNode 5s ease-in-out infinite;
+          will-change: transform;
+          z-index: 5;
+          
           @media (max-width: 1200px) and (min-width: 901px) {
             width: calc(var(--base-size) * 0.75);
             height: calc(var(--base-size) * 0.75);
           }
-          
-          animation: floatNode 5s ease-in-out infinite;
-          will-change: transform;
-          z-index: 5;
 
           &:hover {
             animation-play-state: paused;
@@ -228,7 +229,10 @@
       width: 100%; 
       -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%);
       mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 100%);
-      video { opacity: 0.15; }
+      video { 
+        opacity: 0.15; 
+        object-position: 65% 50%;
+      }
     }
 
     .content-wrapper {
@@ -277,7 +281,7 @@
 
         .tech-cloud {
           // 🔥 EL FIX PARA CENTRAR: Desplazamos todo el bloque de logos hacia la izquierda
-          transform: translateX(-15%); 
+          transform: translateX(-12%); 
           margin-left: 25px;
 
           .tech-node {
