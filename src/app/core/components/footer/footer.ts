@@ -40,7 +40,7 @@ export class Footer {
   copyEmail(event: Event) {
     event.preventDefault(); // Evita saltos de página
     
-    const email = 'mdstudio.dev@gmail.com';
+    const email = 'contact@mdstudio.com.ar';
 
     // Usamos la API del portapapeles del navegador
     navigator.clipboard.writeText(email).then(() => {
