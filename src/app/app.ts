@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 //import { Navbar } from './core/components/navbar/navbar';
 import { Footer } from './core/components/footer/footer';
@@ -12,4 +12,19 @@ import { Footer } from './core/components/footer/footer';
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
-export class App { }
+export class App implements OnInit {
+  
+  showLoader = true;
+
+  ngOnInit() {
+    this.startIntroSequence();
+  }
+
+  startIntroSequence() {
+    const introDuration = 2500; // 2.5 segundos de intro
+
+    setTimeout(() => {
+      this.showLoader = false;
+    }, introDuration);
+  }
+}

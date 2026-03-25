@@ -1,0 +1,45 @@
+.page-header {
+  padding: 140px 20px 60px; /* Padding alto arriba para que el Nav no tape el título */
+  background-color: #0a0f16;
+  color: #ffffff;
+  text-align: center;
+  
+  h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: #ffffff;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #38bdf8; /* Un toque del celeste tecnológico */
+  }
+}
+
+.page-content {
+  padding: 80px 20px;
+  text-align: center;
+  color: #e4e4e7;
+  background-color: #0f172a; 
+  min-height: 50vh;
+
+  .btn-back {
+    margin-top: 30px;
+    background-color: #ffffff;
+    color: #0a0f16;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      background-color: #f4f4f5;
+    }
+  }
+}

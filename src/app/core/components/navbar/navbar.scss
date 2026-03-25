@@ -76,11 +76,7 @@
           content: '';
           position: absolute;
           left: 0;
-          
-          // 🔥 MODIFICÁ ESTE VALOR PARA SUBIR O BAJAR LA LÍNEA 🔥
-          // Si ponés -4px bajará un poquito, si ponés -8px bajará más. Si ponés 0px estará pegada al texto.
           bottom: -4px; 
-          
           width: 0; 
           height: 2px; 
           border-radius: 2px;
@@ -301,8 +297,8 @@
   }
 }
 
-// MEDIA
-@media (max-width: 768px) {
+// MEDIA BREAKPOINT ACTUALIZADO A 1024px
+@media (max-width: 1024px) {
   .navbar-glass {
     top: calc(env(safe-area-inset-top, 0px) + 15px);
     margin-top: 15px;

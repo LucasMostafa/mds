@@ -1,0 +1,86 @@
+<section class="solutions-section" [ngClass]="[selectedThemeClass, selectedTypographyClass]" id="soluciones">
+  <div class="background-grid"></div>
+  <div class="background-glow"></div>
+  
+  <div class="solutions-wrapper">
+    
+    <div class="left-content">
+      <span class="badge">Modular Digital Studio</span>
+      
+      <h2>Rompé el molde. <br> <span class="highlight">Creá</span> tu web <br> sin límites.</h2>
+      
+      <p>
+        Presentamos la plataforma visual definitiva donde editás tu web como si fueras el diseñador. Sin plantillas rígidas, sin depender de nadie.
+      </p>
+
+      <button class="btn-cta" [ngClass]="selectedButtonShapeClass" (click)="goToSolutions()">
+        Plataforma Visual
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+
+    <div class="right-content">
+      
+      <div class="wide-player-wrapper">
+        <video autoplay loop [muted]="true" playsinline class="demo-video" oncanplay="this.play()" onloadedmetadata="this.muted = true">
+          <source src="assets/videos/solutions-demo.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="floating-panel theme-panel" [class.panel-is-open]="themeDropdownOpen">
+        <button class="panel-header" (click)="toggleThemeDropdown()">
+          <span>Tema</span>
+          <svg class="chevron-icon" [class.rotated]="themeDropdownOpen" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="panel-content dropdown-list">
+          <div class="theme-option" [class.selected]="selectedTheme === 'dark'" (click)="selectTheme('dark')">
+            <div class="theme-circle circle-dark"></div><span>Dark</span>
+          </div>
+          <div class="theme-option" [class.selected]="selectedTheme === 'beige'" (click)="selectTheme('beige')">
+            <div class="theme-circle circle-beige"></div><span>Beige</span>
+          </div>
+          <div class="theme-option" [class.selected]="selectedTheme === 'neon-green'" (click)="selectTheme('neon-green')">
+            <div class="theme-circle circle-neon"></div><span>Neon Green</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="floating-panel shape-panel" [class.panel-is-open]="shapeDropdownOpen">
+        <button class="panel-header" (click)="toggleShapeDropdown()">
+          <span>Forma Botón</span>
+          <svg class="chevron-icon" [class.rotated]="shapeDropdownOpen" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+        <div class="panel-content segmented-horizontal">
+          <div class="shape-option" [class.selected]="selectedButtonShape === 'rounded'" (click)="selectButtonShape('rounded')">
+            <div class="shape-visual shape-rounded"></div>
+          </div>
+          <div class="shape-option" [class.selected]="selectedButtonShape === 'square'" (click)="selectButtonShape('square')">
+            <div class="shape-visual shape-square"></div>
+          </div>
+          <div class="shape-option" [class.selected]="selectedButtonShape === 'wavy'" (click)="selectButtonShape('wavy')">
+            <div class="shape-visual shape-wavy"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="floating-panel typography-panel" [class.panel-is-open]="typographyDropdownOpen">
+        <button class="panel-header" (click)="toggleTypographyDropdown()">
+          <span>Tipografía</span>
+          <svg class="chevron-icon" [class.rotated]="typographyDropdownOpen" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+        </button>
+        <div class="panel-content dropdown-list typography-right-content" [ngClass]="selectedTypographyClass">
+          <div class="typo-option sample-sans" [class.selected]="selectedTypography === 'sans'" (click)="selectTypography('sans')">
+            <div class="typo-sample">Aa</div><span>Geometric Sans</span>
+          </div>
+          <div class="typo-option sample-serif" [class.selected]="selectedTypography === 'serif'" (click)="selectTypography('serif')">
+            <div class="typo-sample">Aa</div><span>Classic Serif</span>
+          </div>
+          <div class="typo-option sample-mono" [class.selected]="selectedTypography === 'mono'" (click)="selectTypography('mono')">
+            <div class="typo-sample">Aa</div><span>Monospace</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

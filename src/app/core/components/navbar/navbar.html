@@ -10,7 +10,8 @@
     <ul class="nav-links">
       <li><a (click)="scrollTo('servicios')" [class.active]="activeSection === 'servicios'" style="cursor: pointer;">Servicios</a></li>
       <li><a (click)="scrollTo('proceso')" [class.active]="activeSection === 'proceso'" style="cursor: pointer;">Como Trabajamos</a></li>
-      <li><a (click)="scrollTo('estudio')" [class.active]="activeSection === 'estudio'" style="cursor: pointer;">Estudio</a></li>
+      <li><a (click)="scrollTo('soluciones')" [class.active]="activeSection === 'soluciones'" style="cursor: pointer;">Modular</a></li>
+      <li><a (click)="scrollTo('estudio')" [class.active]="activeSection === 'estudio'" style="cursor: pointer;">Nosotros</a></li>
       <li><a (click)="scrollTo('proyectos')" [class.active]="activeSection === 'proyectos'" style="cursor: pointer;">Clientes</a></li>
     </ul>
 
@@ -28,7 +29,8 @@
   <div class="mobile-menu" [class.open]="isMenuOpen">
     <a (click)="scrollTo('servicios')" [class.active]="activeSection === 'servicios'">Servicios</a>
      <a (click)="scrollTo('proceso')" [class.active]="activeSection === 'proceso'">Como Trabajamos</a>
-    <a (click)="scrollTo('estudio')" [class.active]="activeSection === 'estudio'">Estudio</a>
+     <a (click)="scrollTo('soluciones')" [class.active]="activeSection === 'soluciones'">Modular</a>
+    <a (click)="scrollTo('estudio')" [class.active]="activeSection === 'estudio'">Nosotros</a>
     <a (click)="scrollTo('proyectos')" [class.active]="activeSection === 'proyectos'">Clientes</a>
     
     <button class="mobile-btn" (click)="scrollTo('contacto')">
