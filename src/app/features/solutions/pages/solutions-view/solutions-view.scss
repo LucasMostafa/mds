@@ -1,45 +1,423 @@
-.page-header {
-  padding: 140px 20px 60px; /* Padding alto arriba para que el Nav no tape el título */
-  background-color: #0a0f16;
-  color: #ffffff;
-  text-align: center;
-  
-  h1 {
-    font-size: 3rem;
-    margin-bottom: 15px;
-    font-weight: 800;
-    letter-spacing: -1px;
-    color: #ffffff;
+/* --- VARIABLES CORPORATIVAS (Mantenemos los colores claros de Nico) --- */
+$bg-light: #ffffff;
+$bg-off-white: #f9fafb;
+$bg-dark: #111111; // Casi negro
+$text-dark: #1f2937;
+$text-light: #f9fafb;
+$primary: #3b82f6;
+
+/* --- TIPOGRAFÍAS --- */
+/* Letra Serif Elegante para Títulos y el Logo Badge (Playfair Display Italic para Modular) */
+$font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
+
+/* --- CONTENEDOR PRINCIPAL --- */
+.corporate-solutions-wrapper {
+  background-color: $bg-light;
+  color: $text-dark;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+  /* Fuente sans-serif limpia para textos */
+}
+
+/* --- NAVBAR CORPORATIVO --- */
+.corp-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 5%;
+  background: transparent;
+
+  .nav-logo {
+    font-weight: 800; 
+    font-size: 1.5rem; 
+    letter-spacing: -0.5px;
+    
+    /* 🔥 Aseguramos que se alineen por la base 🔥 */
+    display: flex; 
+    align-items: baseline; 
+
+    .mds-text { color: $text-dark; }
+    .studio-text { color: $primary; }
+    
+    .logo-badge { 
+      /* 🔥 FUERZA BRUTA PARA EL DISEÑO DE "PELÍCULA" 🔥 */
+      font-family: 'Playfair Display', 'EB Garamond', Georgia, serif; 
+      font-style: italic;
+      font-weight: 500;
+      color: $primary;
+      font-size: 1.4rem; /* Un poco más grande para que destaque */
+      margin-left: 14px;
+      
+      /* Matamos el diseño de etiqueta viejo */
+      background: transparent; 
+      padding: 0; 
+      border-radius: 0;
+      
+      /* Ajuste fino de altura */
+      transform: translateY(1px); 
+      text-shadow: 0 1px 2px rgba(59, 130, 246, 0.1);
+    }
   }
 
-  p {
-    font-size: 1.2rem;
-    color: #38bdf8; /* Un toque del celeste tecnológico */
+  .btn-back-outline {
+    background: transparent;
+    color: $text-dark;
+    border: 1px solid #e5e7eb;
+    border-radius: 50px;
+    padding: 10px 24px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: $bg-off-white;
+      border-color: #d1d5db;
+    }
   }
 }
 
-.page-content {
-  padding: 80px 20px;
-  text-align: center;
-  color: #e4e4e7;
-  background-color: #0f172a; 
-  min-height: 50vh;
+/* --- ESTILOS TIPOGRÁFICOS DE NICO PARA EL CUERPO --- */
+.serif-title {
+  font-family: $font-serif-elegant;
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
 
-  .btn-back {
-    margin-top: 30px;
-    background-color: #ffffff;
-    color: #0a0f16;
+  i {
+    font-style: italic;
+    color: #6b7280;
+  }
+}
+
+.serif-title-medium {
+  font-family: $font-serif-elegant;
+  font-size: 3rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.serif-title-small {
+  font-family: $font-serif-elegant;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+/* --- HERO --- */
+.corp-hero {
+  text-align: center;
+  padding: 60px 20px 80px;
+  max-width: 900px;
+  margin: 0 auto;
+
+  .badge-premium {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #6b7280;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 5px;
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    color: #4b5563;
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+}
+
+/* --- SHOWCASE (Video flotante) --- */
+.corp-showcase {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+  z-index: 10;
+}
+
+.showcase-container {
+  background: $bg-light;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); // Sombra elegante y corporativa
+
+  .browser-header {
+    background: $bg-off-white;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .browser-dots {
+      position: absolute;
+      left: 20px;
+      display: flex;
+      gap: 8px;
+
+      .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #d1d5db;
+      }
+    }
+
+    .browser-url {
+      font-size: 0.85rem;
+      color: #9ca3af;
+    }
+  }
+
+  .video-wrapper {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+
+    .platform-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+}
+
+/* --- LA DIAGONAL OSCURA (Mismo diseño que antes) --- */
+.corp-dark-diagonal {
+  background-color: $bg-dark;
+  color: $text-light;
+  padding: 15vw 20px 100px;
+  margin-top: -8vw;
+
+  /* EL CORTE DIAGONAL QUE TE GUSTA */
+  clip-path: polygon(0 8vw, 100% 0, 100% 100%, 0 100%);
+
+  position: relative;
+  z-index: 1;
+
+  .section-header-dark {
+    text-align: center;
+    margin-bottom: 60px;
+
+    p {
+      color: #9ca3af;
+      font-size: 1.1rem;
+    }
+  }
+
+  .payment-banner {
+    max-width: 900px;
+    margin: 0 auto 80px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+
+    .text-wrap p {
+      color: #9ca3af;
+      margin-top: 10px;
+      font-size: 1.1rem;
+
+      strong {
+        color: #fff;
+      }
+    }
+
+    .btn-solid-white {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        background: #e5e7eb;
+      }
+    }
+  }
+
+  .plans-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+
+    .plan-card {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 40px 30px;
+
+      h3 {
+        font-size: 1.4rem;
+        margin-bottom: 15px;
+        letter-spacing: -0.5px;
+      }
+
+      p {
+        color: #9ca3af;
+        line-height: 1.6;
+      }
+
+      &.highlight {
+        background: #fff;
+        color: $bg-dark;
+        position: relative;
+
+        p {
+          color: #4b5563;
+        }
+
+        .popular-badge {
+          position: absolute;
+          top: -12px;
+          right: 20px;
+          background: $primary;
+          color: #fff;
+          font-size: 0.75rem;
+          font-weight: 700;
+          padding: 4px 12px;
+          border-radius: 20px;
+          text-transform: uppercase;
+        }
+      }
+    }
+  }
+}
+
+/* --- CARACTERÍSTICAS BLANCAS --- */
+.corp-light-features {
+  background: $bg-light;
+  padding: 100px 20px;
+
+  .section-header-light {
+    text-align: center;
+    margin-bottom: 60px;
+
+    p {
+      color: #6b7280;
+      font-size: 1.1rem;
+    }
+  }
+
+  .bento-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+
+    .bento-card {
+      background: $bg-off-white;
+      border: 1px solid #e5e7eb;
+      border-radius: 16px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      min-height: 250px;
+
+      h3 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: $text-dark;
+      }
+
+      p {
+        color: #4b5563;
+        line-height: 1.6;
+      }
+    }
+
+    .bento-large {
+      grid-column: span 2;
+      min-height: 300px;
+    }
+  }
+}
+
+/* --- MINI FOOTER EXCLUSIVO (Mismo diseño corporativo) --- */
+.corp-mini-footer {
+  background: $bg-dark;
+  color: #fff;
+  padding: 60px 5% 30px;
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 40px;
+    margin-bottom: 30px;
+  }
+
+  .logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  .btn-text-only {
+    background: transparent;
+    color: #9ca3af;
     border: none;
-    padding: 12px 24px;
     font-size: 1rem;
-    font-weight: 600;
-    border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.3s ease, background-color 0.3s ease;
 
     &:hover {
-      transform: translateY(-2px);
-      background-color: #f4f4f5;
+      color: #fff;
+      text-decoration: underline;
     }
+  }
+
+  .footer-bottom {
+    text-align: center;
+    color: #6b7280;
+    font-size: 0.9rem;
+  }
+}
+
+/* --- RESPONSIVE GENERAL --- */
+@media (max-width: 992px) {
+  .corp-dark-diagonal .plans-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .corp-dark-diagonal .payment-banner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .corp-light-features .bento-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .corp-light-features .bento-large {
+    grid-column: span 1;
+  }
+
+  /* Ajuste de diagonal en móvil */
+  .corp-dark-diagonal {
+    clip-path: polygon(0 4vw, 100% 0, 100% 100%, 0 100%);
+    margin-top: -4vw;
+    padding-top: 15vw;
   }
 }

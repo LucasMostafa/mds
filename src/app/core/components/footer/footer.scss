@@ -8,7 +8,7 @@
 
   // --- LÍNEA DE NEÓN (Violeta -> Azul) ---
   .footer-gradient-line {
-    width: 90%;           
+    width: 90%;          
     max-width: 1200px;    
     height: 3px;          
     margin: 0 auto 40px;  
@@ -122,6 +122,9 @@
         flex-direction: column;
         gap: 15px;
         margin-bottom: 30px;
+        
+        // 🔥 ESTA ES LA CLAVE PARA QUE NO SE ESTIRE 🔥
+        align-items: flex-start; 
 
         .social-btn {
           text-decoration: none;
@@ -187,7 +190,7 @@
         .logo { justify-content: center; }
       }
 
-      // En móvil centramos los botones sociales también
+      // En móvil centramos los botones sociales
       .footer-social .social-links {
         align-items: center; 
       }

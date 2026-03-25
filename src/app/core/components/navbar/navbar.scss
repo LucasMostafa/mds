@@ -71,7 +71,7 @@
         font-size: 0.9rem;
         transition: color 0.3s ease;
         
-        // 🔥 EL EFECTO DE SUBRAYADO DESKTOP
+        // 🔥 RESTAURADO: EL EFECTO DE SUBRAYADO DESKTOP PARA TODOS
         &::after {
           content: '';
           position: absolute;
@@ -88,12 +88,57 @@
           color: #fff;
         }
 
-        // 🔥 ESTADO ACTIVO
+        // 🔥 RESTAURADO: ESTADO ACTIVO PARA TODOS
         &.active {
           color: #fff;
           &::after {
             width: 100%;
           }
+        }
+      }
+
+      /* --- ESTILO PARA EL TEXTO "NEW!" FLOTANTE Y SUAVIZADO --- */
+      .badge-new-text {
+        position: absolute;
+        bottom: -18px; 
+        right: -20px;  
+        color: #3b82f6; 
+        font-size: 0.85rem;
+        font-weight: 800;
+        font-style: italic; 
+        letter-spacing: 0.5px;
+        
+        /* Fijamos la inclinación desde el principio (-12deg) y lo achicamos para el popIn */
+        transform: rotate(-12deg) scale(0); 
+        pointer-events: none; 
+        opacity: 0;
+        
+        /* 🌟 Resplandor base más sutil y elegante */
+        text-shadow: 0 4px 10px rgba(59, 130, 246, 0.4); 
+        z-index: 10;
+        
+        /* Animaciones encadenadas */
+        animation: 
+          popInText 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards,
+          floatNavBadge 3s ease-in-out 0.5s infinite;
+      }
+
+      /* Animación 1: Aparición inicial manteniendo los -12 grados */
+      @keyframes popInText {
+        0% { transform: scale(0) rotate(-12deg); opacity: 0; }
+        100% { transform: scale(1) rotate(-12deg); opacity: 1; }
+      }
+
+      /* Animación 2: Flotación súper suave y pulso armónico */
+      @keyframes floatNavBadge {
+        0%, 100% { 
+          transform: translateY(0) rotate(-12deg) scale(1); 
+          text-shadow: 0 4px 10px rgba(59, 130, 246, 0.4); 
+        }
+        50% { 
+          /* Apenas sube 1.5px y crece imperceptiblemente, sumando 1 grado extra */
+          transform: translateY(-1.5px) rotate(-13deg) scale(1.02); 
+          text-shadow: 0 5px 14px rgba(59, 130, 246, 0.6); 
         }
       }
     }

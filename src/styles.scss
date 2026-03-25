@@ -66,3 +66,21 @@ img, video {
 * {
   -webkit-tap-highlight-color: transparent;
 }
+
+/* =========================================
+   COMPORTAMIENTO DINÁMICO DEL FOOTER GLOBAL
+   ========================================= */
+
+/* Si la página tiene el componente solutions-view renderizado... */
+body:has(app-solutions-view) {
+  
+  /* ...buscá el footer global y ocultale la parte de Explorar */
+  app-footer .footer-nav {
+    display: none !important;
+  }
+  
+  /* Opcional: Si querés centrar lo que queda del footer para que no quede un hueco raro 
+  app-footer .footer-container {
+    justify-content: space-around; 
+  }*/
+}
