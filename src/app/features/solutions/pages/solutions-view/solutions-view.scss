@@ -1,13 +1,12 @@
-/* --- VARIABLES CORPORATIVAS (Mantenemos los colores claros de Nico) --- */
+/* --- VARIABLES CORPORATIVAS --- */
 $bg-light: #ffffff;
 $bg-off-white: #f9fafb;
-$bg-dark: #111111; // Casi negro
+$bg-dark: #111111;
 $text-dark: #1f2937;
 $text-light: #f9fafb;
 $primary: #3b82f6;
 
-/* --- TIPOGRAFÍAS --- */
-/* Letra Serif Elegante para Títulos y el Logo Badge (Playfair Display Italic para Modular) */
+/* Letra Serif Elegante para Títulos y Modular (Playfair Display) */
 $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
 
 /* --- CONTENEDOR PRINCIPAL --- */
@@ -16,7 +15,58 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   color: $text-dark;
   min-height: 100vh;
   font-family: 'Inter', system-ui, sans-serif;
-  /* Fuente sans-serif limpia para textos */
+
+  /* 🔥 FIX iOS: Containment para evitar overscrolls horizontales 🔥 */
+  position: relative;
+  overflow: hidden;
+  overscroll-behavior-x: none;
+}
+
+/* --- FONDO ANIMADO SUTIL (PUNTOS PEQUEÑOS + RESPIRACIÓN) --- */
+.elegant-dots-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+
+  -webkit-mask-image: radial-gradient(ellipse at top center, black 10%, transparent 75%);
+  mask-image: radial-gradient(ellipse at top center, black 10%, transparent 75%);
+
+  background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+  background-size: 30px 30px;
+
+  animation:
+    driftSingleLayer 15s linear infinite,
+    breatheDepth 8s ease-in-out infinite alternate;
+}
+
+@keyframes driftSingleLayer {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: -30px -30px;
+  }
+}
+
+@keyframes breatheDepth {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+.corp-nav,
+.corp-hero {
+  position: relative;
+  z-index: 10;
 }
 
 /* --- NAVBAR CORPORATIVO --- */
@@ -28,33 +78,36 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   background: transparent;
 
   .nav-logo {
-    font-weight: 800; 
-    font-size: 1.5rem; 
+    font-weight: 800;
+    font-size: 2.0rem;
     letter-spacing: -0.5px;
-    
-    /* 🔥 Aseguramos que se alineen por la base 🔥 */
-    display: flex; 
+    display: flex;
     align-items: baseline; 
+
+    /* 🔥 Contenedor nuevo que mantiene pegado a MD y Studio 🔥 */
+    .brand-wrapper {
+      display: flex;
+    }
 
     .mds-text { color: $text-dark; }
     .studio-text { color: $primary; }
-    
-    .logo-badge { 
-      /* 🔥 FUERZA BRUTA PARA EL DISEÑO DE "PELÍCULA" 🔥 */
-      font-family: 'Playfair Display', 'EB Garamond', Georgia, serif; 
-      font-style: italic;
-      font-weight: 500;
-      color: $primary;
-      font-size: 1.4rem; /* Un poco más grande para que destaque */
+
+    .logo-signature {
+      font-family: 'Tangerine' !important;
+      font-style: normal !important;
+      font-weight: 700 !important;
+      font-size: 1.65rem !important;
       margin-left: 14px;
-      
-      /* Matamos el diseño de etiqueta viejo */
-      background: transparent; 
-      padding: 0; 
+      background: transparent;
+      padding: 0;
       border-radius: 0;
-      
-      /* Ajuste fino de altura */
-      transform: translateY(1px); 
+
+      background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+
+      transform: translateY(0px);
       text-shadow: 0 1px 2px rgba(59, 130, 246, 0.1);
     }
   }
@@ -64,11 +117,17 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
     color: $text-dark;
     border: 1px solid #e5e7eb;
     border-radius: 50px;
-    padding: 10px 24px;
+    padding: 8px 18px; 
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 0.85rem; 
     cursor: pointer;
     transition: all 0.3s ease;
+    
+    /* 🔥 Flex para alinear flecha y texto 🔥 */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap; 
 
     &:hover {
       background: $bg-off-white;
@@ -77,7 +136,7 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   }
 }
 
-/* --- ESTILOS TIPOGRÁFICOS DE NICO PARA EL CUERPO --- */
+/* --- ESTILOS TIPOGRÁFICOS --- */
 .serif-title {
   font-family: $font-serif-elegant;
   font-size: clamp(3.5rem, 6vw, 5.5rem);
@@ -85,20 +144,17 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   font-weight: 600;
   letter-spacing: -1px;
   margin-bottom: 20px;
-
   i {
     font-style: italic;
     color: #6b7280;
   }
 }
-
 .serif-title-medium {
   font-family: $font-serif-elegant;
   font-size: 3rem;
   font-weight: 600;
   margin-bottom: 15px;
 }
-
 .serif-title-small {
   font-family: $font-serif-elegant;
   font-size: 2rem;
@@ -133,7 +189,7 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   }
 }
 
-/* --- SHOWCASE (Video flotante) --- */
+/* --- SHOWCASE --- */
 .corp-showcase {
   max-width: 1100px;
   margin: 0 auto;
@@ -147,7 +203,7 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); // Sombra elegante y corporativa
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
 
   .browser-header {
     background: $bg-off-white;
@@ -157,13 +213,11 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
     align-items: center;
     justify-content: center;
     position: relative;
-
     .browser-dots {
       position: absolute;
       left: 20px;
       display: flex;
       gap: 8px;
-
       .dot {
         width: 10px;
         height: 10px;
@@ -171,18 +225,15 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
         background: #d1d5db;
       }
     }
-
     .browser-url {
       font-size: 0.85rem;
       color: #9ca3af;
     }
   }
-
   .video-wrapper {
     width: 100%;
     aspect-ratio: 16/9;
     background: #000;
-
     .platform-video {
       width: 100%;
       height: 100%;
@@ -192,23 +243,20 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   }
 }
 
-/* --- LA DIAGONAL OSCURA (Mismo diseño que antes) --- */
+/* --- LA DIAGONAL OSCURA --- */
 .corp-dark-diagonal {
   background-color: $bg-dark;
   color: $text-light;
   padding: 15vw 20px 100px;
-  margin-top: -8vw;
+  margin-top: -10vw;
 
-  /* EL CORTE DIAGONAL QUE TE GUSTA */
-  clip-path: polygon(0 8vw, 100% 0, 100% 100%, 0 100%);
-
+  clip-path: polygon(0 10vw, 100% 0, 100% 100%, 0 100%);
   position: relative;
   z-index: 1;
 
   .section-header-dark {
     text-align: center;
     margin-bottom: 60px;
-
     p {
       color: #9ca3af;
       font-size: 1.1rem;
@@ -231,12 +279,10 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
       color: #9ca3af;
       margin-top: 10px;
       font-size: 1.1rem;
-
       strong {
         color: #fff;
       }
     }
-
     .btn-solid-white {
       background: #fff;
       color: #000;
@@ -246,7 +292,6 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
       font-weight: 600;
       cursor: pointer;
       transition: 0.3s;
-
       &:hover {
         background: #e5e7eb;
       }
@@ -265,13 +310,11 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 12px;
       padding: 40px 30px;
-
       h3 {
         font-size: 1.4rem;
         margin-bottom: 15px;
         letter-spacing: -0.5px;
       }
-
       p {
         color: #9ca3af;
         line-height: 1.6;
@@ -281,11 +324,9 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
         background: #fff;
         color: $bg-dark;
         position: relative;
-
         p {
           color: #4b5563;
         }
-
         .popular-badge {
           position: absolute;
           top: -12px;
@@ -311,7 +352,6 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   .section-header-light {
     text-align: center;
     margin-bottom: 60px;
-
     p {
       color: #6b7280;
       font-size: 1.1rem;
@@ -324,11 +364,12 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+    width: 100%; // Contención
 
     .bento-card {
-      background: $bg-off-white;
+      background: #ffffff; /* 🔥 Fondo sólido para tapar el fondo animado 🔥 */
       border: 1px solid #e5e7eb;
-      border-radius: 16px;
+      border-radius: 16px; // Corregido el valor excesivo
       padding: 40px;
       display: flex;
       flex-direction: column;
@@ -340,13 +381,11 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
         margin-bottom: 10px;
         color: $text-dark;
       }
-
       p {
         color: #4b5563;
         line-height: 1.6;
       }
     }
-
     .bento-large {
       grid-column: span 2;
       min-height: 300px;
@@ -354,70 +393,87 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   }
 }
 
-/* --- MINI FOOTER EXCLUSIVO (Mismo diseño corporativo) --- */
-.corp-mini-footer {
-  background: $bg-dark;
-  color: #fff;
-  padding: 60px 5% 30px;
-
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 40px;
-    margin-bottom: 30px;
-  }
-
-  .logo {
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: -0.5px;
-  }
-
-  .btn-text-only {
-    background: transparent;
-    color: #9ca3af;
-    border: none;
-    font-size: 1rem;
-    cursor: pointer;
-
-    &:hover {
-      color: #fff;
-      text-decoration: underline;
-    }
-  }
-
-  .footer-bottom {
-    text-align: center;
-    color: #6b7280;
-    font-size: 0.9rem;
-  }
-}
-
-/* --- RESPONSIVE GENERAL --- */
+/* --- RESPONSIVE --- */
 @media (max-width: 992px) {
   .corp-dark-diagonal .plans-grid {
     grid-template-columns: 1fr;
   }
-
   .corp-dark-diagonal .payment-banner {
     flex-direction: column;
     text-align: center;
   }
-
   .corp-light-features .bento-grid {
     grid-template-columns: 1fr;
   }
-
   .corp-light-features .bento-large {
     grid-column: span 1;
   }
 
-  /* Ajuste de diagonal en móvil */
   .corp-dark-diagonal {
     clip-path: polygon(0 4vw, 100% 0, 100% 100%, 0 100%);
     margin-top: -4vw;
     padding-top: 15vw;
+  }
+}
+
+@media (max-width: 768px) {
+  /* 🔥 NAVBAR MOBILE 🔥 */
+  .corp-nav {
+    flex-direction: column; 
+    align-items: center; /* Centramos el logo en la pantalla */
+    position: relative; /* Para poder fijar el botón de volver */
+    padding-top: 25px; /* Le damos aire arriba */
+
+    .nav-logo {
+      flex-direction: column; 
+      align-items: flex-end; /* Modular se va hacia la derecha */
+      gap: 0px; /* Quitamos espacios extra */
+    }
+    
+    .nav-logo .logo-signature { 
+      margin-left: 0 !important; 
+      font-size: 1.8rem !important; 
+      transform: translateY(-5px) !important; /* Lo acercamos hacia arriba para que quede bien pegado a MDStudio */
+    }
+    
+    /* 🔥 BOTÓN VOLVER CIRCULAR ARRIBA A LA IZQUIERDA 🔥 */
+    .btn-back-outline { 
+      position: absolute;
+      top: 25px;
+      left: 20px;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border-radius: 50%; /* Lo hacemos un círculo perfecto */
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.8); /* Fondito sutil para que se vea */
+      backdrop-filter: blur(5px);
+      
+      .text {
+        display: none; /* Ocultamos la palabra "Volver al inicio" */
+      }
+      .arrow {
+        font-size: 1.2rem;
+      }
+    } 
+  }
+
+  /* 🔥 FIX BENTO GRID MOBILE 🔥 */
+  .corp-light-features {
+    padding: 60px 20px;
+    .bento-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 100%; // Forzar contención
+    }
+    .bento-large {
+      grid-column: span 1;
+      min-height: auto;
+    }
+    .bento-card {
+      padding: 30px;
+      min-height: auto;
+    }
   }
 }
