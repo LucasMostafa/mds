@@ -101,6 +101,7 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
       background: transparent;
       padding: 0;
       border-radius: 0;
+      padding-right: 10px;
 
       background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%);
       -webkit-background-clip: text;
@@ -232,12 +233,18 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   }
   .video-wrapper {
     width: 100%;
-    aspect-ratio: 16/9;
+    /* 🔥 LA CLAVE: El aspecto respeta los píxeles exactos de tu video (1898x892) 🔥 */
+    aspect-ratio: 1898 / 892;
     background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
     .platform-video {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      /* 🔥 object-fit: contain asegura que no se recorte un solo milímetro 🔥 */
+      object-fit: contain; 
       display: block;
     }
   }
