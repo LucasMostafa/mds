@@ -7,20 +7,27 @@ import { WhatsappButton } from '../../../home/components/whatsapp-button/whatsap
 @Component({
   selector: 'app-solutions-view',
   standalone: true,
-  imports: [CommonModule, WhatsappButton], // Lo declaramos en los imports
+  imports: [CommonModule, WhatsappButton], 
   templateUrl: './solutions-view.html',
   styleUrls: ['./solutions-view.scss']
 })
 export class SolutionsView implements OnInit {
 
-  // Esta función se ejecuta automáticamente cuando el componente carga
+  // Variable que controla la pantalla de carga nueva
+  showModuleLoader = true; 
+
   ngOnInit() {
-    // Clava el scroll en la coordenada 0,0 de forma instantánea
+    // 1. Clava el scroll en la coordenada 0,0 de forma instantánea
     window.scrollTo({
       top: 0,
       left: 0,
-      behavior: 'instant' /* Esto mata cualquier efecto de "scroll suave" del CSS */
+      behavior: 'instant' 
     });
+
+    // 2. Simulamos la carga de la plataforma "Modular" (2.8 segundos)
+    setTimeout(() => {
+      this.showModuleLoader = false;
+    }, 2800);
   }
 
   // Función para volver al Home y forzar la pantalla de carga inicial
@@ -28,7 +35,7 @@ export class SolutionsView implements OnInit {
     window.location.href = '/'; 
   }
 
-  // 🔥 NUEVA FUNCIÓN PARA VOLVER ARRIBA 🔥
+  // Función para volver arriba suavemente
   scrollToTop() {
     window.scrollTo({
       top: 0,

@@ -1,4 +1,4 @@
-/* --- VARIABLES CORPORATIVAS --- */
+/* --- VARIABLES CORPORATIVAS (Mantenelas arriba) --- */
 $bg-light: #ffffff;
 $bg-off-white: #f9fafb;
 $bg-dark: #111111;
@@ -9,40 +9,7 @@ $primary: #3b82f6;
 /* Letra Serif Elegante para Títulos y Modular (Playfair Display) */
 $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
 
-/* --- CONTENEDOR PRINCIPAL --- */
-.corporate-solutions-wrapper {
-  background-color: $bg-light;
-  color: $text-dark;
-  min-height: 100vh;
-  font-family: 'Inter', system-ui, sans-serif;
-
-  /* 🔥 FIX iOS: Containment para evitar overscrolls horizontales 🔥 */
-  position: relative;
-  overflow: hidden;
-  overscroll-behavior-x: none;
-}
-
-/* --- FONDO ANIMADO SUTIL (PUNTOS PEQUEÑOS + RESPIRACIÓN) --- */
-.elegant-dots-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-
-  -webkit-mask-image: radial-gradient(ellipse at top center, black 10%, transparent 75%);
-  mask-image: radial-gradient(ellipse at top center, black 10%, transparent 75%);
-
-  background-image: radial-gradient(#d1d5db 1px, transparent 1px);
-  background-size: 30px 30px;
-
-  animation:
-    driftSingleLayer 15s linear infinite,
-    breatheDepth 8s ease-in-out infinite alternate;
-}
-
+/* 🔥 NUEVO: KEYFRAMES GLOBALES SUBIDOS ACÁ PARA CONTINUIDAD 🔥 */
 @keyframes driftSingleLayer {
   0% {
     background-position: 0 0;
@@ -63,73 +30,216 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   }
 }
 
+@keyframes titleSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px); // Empieza abajo
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0); // Sube a su lugar
+  }
+}
+
+@keyframes modularEntry {
+  0% {
+    opacity: 0;
+    transform: translate(-100px, -100px) scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+/* ==========================================================
+   --- LOADER MODULAR PREMIUM (Actualizado) ---
+   ========================================================== */
+.modular-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background-color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  /* 🔥 EFECTO TELÓN: Sólido, sube de abajo hacia arriba 🔥 */
+  transition:
+    transform 1.2s cubic-bezier(0.77, 0, 0.175, 1),
+    visibility 0s 1.2s;
+
+  &.slide-out {
+    transform: translateY(-100%); /* Sube limpiamente */
+    visibility: hidden;
+    pointer-events: none;
+    /* Chau opacity: 0; ¡No más transparencias fantasmas! */
+  }
+
+  /* Efecto Vignette sutil (Se mantiene muy sutil) */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.03);
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* 🔥 NUEVO: Puntos del loader actualizados para "respirar" como la web cargada 🔥 */
+  .elegant-dots-bg-loader {
+    position: absolute;
+    inset: 0;
+    // Agregamos máscara para suavizar bordes igual que la web cargada
+    -webkit-mask-image: radial-gradient(ellipse at top center, black 10%, transparent 75%);
+    mask-image: radial-gradient(ellipse at top center, black 10%, transparent 75%);
+    background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+    background-size: 30px 30px; // Tamaño sincronizado
+
+    // 🔥 Ahora usan las mismas animaciones que el fondo de la web real
+    animation:
+      driftSingleLayer 15s linear infinite,
+      breatheDepth 8s ease-in-out infinite alternate;
+    z-index: 1;
+  }
+
+  .loader-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+
+    .brand-main {
+      font-size: clamp(3.5rem, 8vw, 5rem);
+      font-weight: 900;
+      letter-spacing: -2px;
+      color: #111;
+      font-family: 'Inter', sans-serif;
+
+      .studio {
+        color: #3b82f6;
+      }
+
+      // Animación de entrada: Sube desde abajo
+      animation: titleSlideUp 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    .modular-signature {
+      display: block;
+      font-family: 'Tangerine', cursive;
+      font-size: clamp(3rem, 6vw, 4.5rem);
+      font-weight: 500;
+      background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-top: -20px;
+      margin-left: 350px; // 👍 Desktop: Mantenemos tu tweak liked
+
+      animation: modularEntry 2.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+  }
+
+  /* 🔥 NUEVO: MEDIA QUERY ESPECÍFICO PARA EL LOADER EN MOBILE 🔥 */
+  /* Corrige el desborde (image_7.png) centrando Modular under MDStudio */
+  @media (max-width: 768px) {
+    .loader-content {
+      .modular-signature {
+        margin-left: 0 !important; // 👍 Centrar en mobile
+        margin-top: 0; //👍 Centrar under mdstudio
+        transform: translateY(-5px); // 👍 Tweak visual tight visually
+        text-align: center;
+      }
+    }
+  }
+}
+
+/* De acá para abajo, dejá todo como estaba (contenedor principal, Dots de la web cargada, nav, etc.) */
+.corporate-solutions-wrapper {
+  background-color: $bg-light;
+  color: $text-dark;
+  min-height: 100vh;
+  font-family: 'Inter', system-ui, sans-serif;
+  position: relative;
+  overflow: hidden;
+  overscroll-behavior-x: none;
+}
+
+.elegant-dots-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  -webkit-mask-image: radial-gradient(ellipse at top center, black 10%, transparent 75%);
+  mask-image: radial-gradient(ellipse at top center, black 10%, transparent 75%);
+  background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+  background-size: 30px 30px;
+  animation:
+    driftSingleLayer 15s linear infinite,
+    breatheDepth 8s ease-in-out infinite alternate;
+}
+
 .corp-nav,
 .corp-hero {
   position: relative;
   z-index: 10;
 }
 
-/* --- NAVBAR CORPORATIVO --- */
 .corp-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 30px 5%;
   background: transparent;
-
   .nav-logo {
     font-weight: 800;
-    font-size: 2.0rem;
+    font-size: 2rem;
     letter-spacing: -0.5px;
     display: flex;
-    align-items: baseline; 
-
-    /* 🔥 Contenedor nuevo que mantiene pegado a MD y Studio 🔥 */
+    align-items: baseline;
     .brand-wrapper {
       display: flex;
     }
-
-    .mds-text { color: $text-dark; }
-    .studio-text { color: $primary; }
-
+    .mds-text {
+      color: $text-dark;
+    }
+    .studio-text {
+      color: $primary;
+    }
     .logo-signature {
       font-family: 'Tangerine' !important;
       font-style: normal !important;
-      font-weight: 700 !important;
-      font-size: 1.65rem !important;
-      margin-left: 14px;
+      font-weight: 600 !important;
+      font-size: 1.85rem !important;
+      margin-left:-50px;
       background: transparent;
       padding: 0;
       border-radius: 0;
       padding-right: 10px;
-
       background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-
       transform: translateY(0px);
       text-shadow: 0 1px 2px rgba(59, 130, 246, 0.1);
     }
   }
-
   .btn-back-outline {
     background: transparent;
     color: $text-dark;
     border: 1px solid #e5e7eb;
     border-radius: 50px;
-    padding: 8px 18px; 
+    padding: 8px 18px;
     font-weight: 600;
-    font-size: 0.85rem; 
+    font-size: 0.85rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    
-    /* 🔥 Flex para alinear flecha y texto 🔥 */
     display: flex;
     align-items: center;
     gap: 8px;
-    white-space: nowrap; 
-
+    white-space: nowrap;
     &:hover {
       background: $bg-off-white;
       border-color: #d1d5db;
@@ -137,7 +247,6 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   }
 }
 
-/* --- ESTILOS TIPOGRÁFICOS --- */
 .serif-title {
   font-family: $font-serif-elegant;
   font-size: clamp(3.5rem, 6vw, 5.5rem);
@@ -161,14 +270,11 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   font-size: 2rem;
   font-weight: 600;
 }
-
-/* --- HERO --- */
 .corp-hero {
   text-align: center;
-  padding: 60px 20px 80px;
+  padding: 20px 20px 80px;
   max-width: 900px;
   margin: 0 auto;
-
   .badge-premium {
     display: inline-block;
     font-size: 0.8rem;
@@ -180,7 +286,6 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
     border-bottom: 1px solid #e5e7eb;
     padding-bottom: 5px;
   }
-
   .hero-subtitle {
     font-size: 1.2rem;
     color: #4b5563;
@@ -189,8 +294,6 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
     margin: 0 auto;
   }
 }
-
-/* --- SHOWCASE --- */
 .corp-showcase {
   max-width: 1100px;
   margin: 0 auto;
@@ -198,14 +301,12 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   position: relative;
   z-index: 10;
 }
-
 .showcase-container {
   background: $bg-light;
   border: 1px solid #e5e7eb;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
-
   .browser-header {
     background: $bg-off-white;
     border-bottom: 1px solid #e5e7eb;
@@ -233,34 +334,27 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   }
   .video-wrapper {
     width: 100%;
-    /* 🔥 LA CLAVE: El aspecto respeta los píxeles exactos de tu video (1898x892) 🔥 */
     aspect-ratio: 1898 / 892;
     background: #000;
     display: flex;
     justify-content: center;
     align-items: center;
-    
     .platform-video {
       width: 100%;
       height: 100%;
-      /* 🔥 object-fit: contain asegura que no se recorte un solo milímetro 🔥 */
-      object-fit: contain; 
+      object-fit: contain;
       display: block;
     }
   }
 }
-
-/* --- LA DIAGONAL OSCURA --- */
 .corp-dark-diagonal {
   background-color: $bg-dark;
   color: $text-light;
   padding: 15vw 20px 100px;
   margin-top: -10vw;
-
   clip-path: polygon(0 10vw, 100% 0, 100% 100%, 0 100%);
   position: relative;
   z-index: 1;
-
   .section-header-dark {
     text-align: center;
     margin-bottom: 60px;
@@ -269,7 +363,6 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
       font-size: 1.1rem;
     }
   }
-
   .payment-banner {
     max-width: 900px;
     margin: 0 auto 80px;
@@ -281,7 +374,6 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
     align-items: center;
     justify-content: space-between;
     gap: 30px;
-
     .text-wrap p {
       color: #9ca3af;
       margin-top: 10px;
@@ -304,14 +396,12 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
       }
     }
   }
-
   .plans-grid {
     max-width: 1100px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
-
     .plan-card {
       background: transparent;
       border: 1px solid rgba(255, 255, 255, 0.15);
@@ -326,7 +416,6 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
         color: #9ca3af;
         line-height: 1.6;
       }
-
       &.highlight {
         background: #fff;
         color: $bg-dark;
@@ -350,12 +439,9 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
     }
   }
 }
-
-/* --- CARACTERÍSTICAS BLANCAS --- */
 .corp-light-features {
   background: $bg-light;
   padding: 100px 20px;
-
   .section-header-light {
     text-align: center;
     margin-bottom: 60px;
@@ -364,25 +450,22 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
       font-size: 1.1rem;
     }
   }
-
   .bento-grid {
     max-width: 1100px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-    width: 100%; // Contención
-
+    width: 100%;
     .bento-card {
-      background: #ffffff; /* 🔥 Fondo sólido para tapar el fondo animado 🔥 */
+      background: #ffffff;
       border: 1px solid #e5e7eb;
-      border-radius: 16px; // Corregido el valor excesivo
+      border-radius: 16px;
       padding: 40px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       min-height: 250px;
-
       h3 {
         font-size: 1.5rem;
         margin-bottom: 10px;
@@ -399,8 +482,63 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
     }
   }
 }
+/* ==========================================================
+   --- BOTÓN FLOTANTE "VOLVER ARRIBA" ---
+   ========================================================== */
+.btn-scroll-top-floating {
+  position: fixed;
+  bottom: 30px; 
+  left: 30px; 
+  width: 50px;
+  height: 50px;
+  background-color: $bg-dark;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 100;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-/* --- RESPONSIVE --- */
+  svg {
+    width: 24px;
+    height: 24px;
+    transition: transform 0.3s ease;
+  }
+
+  /* 🔥 LA CLAVE: Solo aplica hover si el usuario usa un mouse (Desktop) 🔥 */
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      background-color: $primary;
+      border-color: $primary;
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4);
+
+      svg { transform: translateY(-3px); }
+    }
+  }
+
+  /* 🔥 EFECTO TÁCTIL: Para que en mobile se hunda un poquito al tocar y se suelte 🔥 */
+  &:active {
+    transform: scale(0.92);
+    background-color: #1e293b;
+  }
+
+  @media (max-width: 768px) {
+    bottom: 20px;
+    left: 20px;
+    width: 45px;
+    height: 45px;
+    svg { width: 20px; height: 20px; }
+  }
+}
+
+/* ==========================================================
+   --- RESPONSIVE MOBILE TWEAKS PRINCIPALES (image_6.png y image_7.png) ---
+   ========================================================== */
 @media (max-width: 992px) {
   .corp-dark-diagonal .plans-grid {
     grid-template-columns: 1fr;
@@ -415,7 +553,6 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   .corp-light-features .bento-large {
     grid-column: span 1;
   }
-
   .corp-dark-diagonal {
     clip-path: polygon(0 4vw, 100% 0, 100% 100%, 0 100%);
     margin-top: -4vw;
@@ -424,55 +561,56 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
 }
 
 @media (max-width: 768px) {
-  /* 🔥 NAVBAR MOBILE 🔥 */
+  /* 🔥 ACTUALIZADO: NAVBAR MOBILE TWEAK (Equilibra image_6.png) 🔥 */
   .corp-nav {
-    flex-direction: column; 
-    align-items: center; /* Centramos el logo en la pantalla */
-    position: relative; /* Para poder fijar el botón de volver */
-    padding-top: 25px; /* Le damos aire arriba */
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding-top: 25px;
 
+    // Logo Tweak: Apilamos centrado pero movemos Modular un poco a la derecha
     .nav-logo {
-      flex-direction: column; 
-      align-items: flex-end; /* Modular se va hacia la derecha */
-      gap: 0px; /* Quitamos espacios extra */
+      flex-direction: column;
+      align-items: center; // 👍 Stacking centered initially
+      gap: 0px;
     }
-    
-    .nav-logo .logo-signature { 
-      margin-left: 0 !important; 
-      font-size: 1.8rem !important; 
-      transform: translateY(-5px) !important; /* Lo acercamos hacia arriba para que quede bien pegado a MDStudio */
+
+    // 👍 Tweak: Equilibrar visualmente Modular (que parece muy a la izquierda en captura 6)
+    .nav-logo .logo-signature {
+      margin-left: 0 !important; //👍 Reset desktop margin
+      padding-left: 100px;
+      font-size: 1.8rem !important;
+      // 🔥 NUDGE VISUAL: Movemos un poco a la derecha (translateX) para compensar visualmente el inicio de la fuente cursiva
+      transform: translate(25px, -5px) !important; // 👍 Nudge visually, visually tight visually
     }
-    
-    /* 🔥 BOTÓN VOLVER CIRCULAR ARRIBA A LA IZQUIERDA 🔥 */
-    .btn-back-outline { 
+
+    .btn-back-outline {
       position: absolute;
       top: 25px;
       left: 20px;
       width: 40px;
       height: 40px;
       padding: 0;
-      border-radius: 50%; /* Lo hacemos un círculo perfecto */
+      border-radius: 50%;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.8); /* Fondito sutil para que se vea */
+      background: rgba(255, 255, 255, 0.8);
       backdrop-filter: blur(5px);
-      
       .text {
-        display: none; /* Ocultamos la palabra "Volver al inicio" */
+        display: none;
       }
       .arrow {
         font-size: 1.2rem;
       }
-    } 
+    }
   }
 
-  /* 🔥 FIX BENTO GRID MOBILE 🔥 */
   .corp-light-features {
     padding: 60px 20px;
     .bento-grid {
       display: flex;
       flex-direction: column;
       gap: 15px;
-      max-width: 100%; // Forzar contención
+      max-width: 100%;
     }
     .bento-large {
       grid-column: span 1;
