@@ -15,22 +15,22 @@ export class Integrations implements AfterViewInit, OnDestroy {
   
   integrationsList = [
     // --- PASARELAS DE PAGO ---
-    { name: 'Mercado Pago', icon: '/assets/integrations/mercadopago.png' },
-    { name: 'Stripe', icon: '/assets/integrations/stripe.png' },
-    { name: 'PayPal', icon: '/assets/integrations/paypal.png' },
-    { name: 'MODO', icon: '/assets/integrations/modo.png' },
-    { name: 'Ualá Bis', icon: '/assets/integrations/ualabis.png' },
+    { name: 'Mercado Pago', icon: '/assets/integrations/mercadopago.webp' },
+    { name: 'Stripe', icon: '/assets/integrations/stripe.webp' },
+    { name: 'PayPal', icon: '/assets/integrations/paypal.webp' },
+    { name: 'MODO', icon: '/assets/integrations/modo.webp' },
+    { name: 'Ualá Bis', icon: '/assets/integrations/ualabis.webp' },
     
     // --- LOGÍSTICA Y ENVÍOS ---
-    { name: 'Andreani', icon: '/assets/integrations/andreani.png' },
-    { name: 'OCA', icon: '/assets/integrations/oca.png' },
-    { name: 'Correo Argentino', icon: '/assets/integrations/correoargentino.png' },
+    { name: 'Andreani', icon: '/assets/integrations/andreani.webp' },
+    { name: 'OCA', icon: '/assets/integrations/oca.webp' },
+    { name: 'Correo Argentino', icon: '/assets/integrations/correoargentino.webp' },
     
     // --- COMUNICACIÓN Y ANALÍTICA ---
-    { name: 'WhatsApp', icon: '/assets/integrations/whatsapp1.png' },
-    { name: 'Google Analytics', icon: '/assets/integrations/analytics.png' },
-    { name: 'Google Maps', icon: '/assets/integrations/maps.png' },
-    { name: 'WordPress', icon: '/assets/integrations/wordpress.png' }
+    { name: 'WhatsApp', icon: '/assets/integrations/whatsapp1.webp' },
+    { name: 'Google Analytics', icon: '/assets/integrations/analytics.webp' },
+    { name: 'Google Maps', icon: '/assets/integrations/maps.webp' },
+    { name: 'WordPress', icon: '/assets/integrations/wordpress.webp' }
   ];
 
   private animationId: number = 0;
