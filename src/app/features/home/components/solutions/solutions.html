@@ -9,13 +9,8 @@
         MODULAR DIGITAL STUDIO
         <span class="badge-new-section">New!</span>
       </span>
-      
       <h2>Rompé el molde. <br> <span class="highlight">Creá</span> tu web <br> sin límites.</h2>
-      
-      <p>
-        Presentamos la plataforma visual definitiva donde editás tu web como si fueras el diseñador. Sin plantillas rígidas, sin depender de nadie.
-      </p>
-
+      <p>Presentamos la plataforma visual definitiva donde editás tu web como si fueras el diseñador. Sin plantillas rígidas, sin depender de nadie.</p>
       <button class="btn-cta" [ngClass]="selectedButtonShapeClass" (click)="goToSolutions()">
         Plataforma Visual
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -25,7 +20,7 @@
     <div class="right-content">
       
       <div class="wide-player-wrapper">
-        <video autoplay loop [muted]="true" playsinline class="demo-video" oncanplay="this.play()" onloadedmetadata="this.muted = true">
+        <video autoplay loop [muted]="true" playsinline aria-hidden="true" class="demo-video" oncanplay="this.play()" onloadedmetadata="this.muted = true">
           <source src="assets/videos/solutions-demo.mp4" type="video/mp4">
         </video>
       </div>

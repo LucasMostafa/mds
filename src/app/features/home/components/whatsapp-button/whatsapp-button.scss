@@ -59,30 +59,39 @@
       pointer-events: none; // Evita que interfiera con el click
     }
 
-    &:hover {
-      transform: scale(1.08) translateY(-5px);
-      
-      // Sombra exterior sutil
-      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.15), 0 6px 15px rgba(0, 0, 0, 0.4);
-      background-color: #20ba56; 
+    /* 🔥 LA MAGIA: Esto bloquea el hover pegadizo en celulares 🔥 */
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        transform: scale(1.08) translateY(-5px);
+        
+        // Sombra exterior sutil
+        box-shadow: 0 10px 25px rgba(37, 211, 102, 0.15), 0 6px 15px rgba(0, 0, 0, 0.4);
+        background-color: #20ba56; 
 
-      // 🔥 Animación del contorno EXTERIOR en Hover (Estilo Studio)
-      &::after {
-        // Neón sutil verde en el borde exterior
-        border-color: rgba(37, 211, 102, 0.6); 
-        box-shadow: 0 0 15px rgba(37, 211, 102, 0.3), inset 0 0 5px rgba(37, 211, 102, 0.2);
-      }
+        // 🔥 Animación del contorno EXTERIOR en Hover (Estilo Studio)
+        &::after {
+          // Neón sutil verde en el borde exterior
+          border-color: rgba(37, 211, 102, 0.6); 
+          box-shadow: 0 0 15px rgba(37, 211, 102, 0.3), inset 0 0 5px rgba(37, 211, 102, 0.2);
+        }
 
-      // Gira y agranda sutilmente el logo interior
-      svg {
-        transform: rotate(-15deg) scale(1.05);
-      }
+        // Gira y agranda sutilmente el logo interior
+        svg {
+          transform: rotate(-15deg) scale(1.05);
+        }
 
-      .tooltip {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(-50%) translateX(0); 
+        .tooltip {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(-50%) translateX(0); 
+        }
       }
+    }
+
+    /* 🔥 EFECTO TÁCTIL: Para que en mobile se hunda un poquito al tocar y se suelte 🔥 */
+    &:active {
+      transform: scale(0.95);
+      background-color: #20ba56;
     }
 
     // ETIQUETA ACHICADA (Mantenida)

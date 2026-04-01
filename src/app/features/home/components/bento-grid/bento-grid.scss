@@ -24,20 +24,18 @@
 .delay-3.visible { animation-delay: 0.3s; }
 .delay-4.visible { animation-delay: 0.4s; }
 .delay-5.visible { animation-delay: 0.5s; }
-.delay-6.visible { animation-delay: 0.6s; } // 🔥 Agregado para el 4to proyecto
+.delay-6.visible { animation-delay: 0.6s; } 
 
 // --- RESTO DE LOS ESTILOS ---
 .projects-section {
   position: relative;
   
-  // FIX 1: Obligamos a la sección a "subirse" 2px arriba del componente anterior
   margin-top: -2px; 
   padding: 122px 20px 120px 20px;
   
   color: white;
   overflow: hidden;
 
-  // FIX 2: Sombra negra interna
   box-shadow: inset 0 10px 0 0 rgba(0,0,0,1), inset 0 -10px 0 0 rgba(0,0,0,1);
 
   // --- 1. FONDO PARALLAX GENERAL ---
@@ -122,18 +120,22 @@
       
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 30px;
-      overflow: hidden; 
+      
+      overflow: hidden; // Mantenido para que el borde azul se vea perfecto
       position: relative;
       box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3); 
       
       backface-visibility: hidden;
-      // Añadimos una transición más larga para que el cambio de grid-row sea suave
       transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, all 0.5s ease;
 
       &:hover {
-        transform: translateY(-5px) translate3d(0, 0, 0) !important;
+        /* 🔥 LA CURA DEL TEMBLOR: Usamos solo scale(1.02). Al crecer desde el centro, 
+           la tarjeta avanza hacia el mouse y es imposible que se escape. 🔥 */
+        transform: scale(1.02) translate3d(0, 0, 0) !important;
         border-color: rgba(59, 130, 246, 0.8);
-        box-shadow: 0 0 30px rgba(59, 130, 246, 0.3); 
+        
+        // Intensificamos sutilmente la sombra para lograr el efecto de "levantamiento"
+        box-shadow: 0 15px 35px rgba(59, 130, 246, 0.25); 
 
         .card-bg {
            transform: scale(1.05) translate3d(0, 0, 0);
@@ -183,7 +185,7 @@
         position: relative;
         z-index: 2; 
         
-        h1 { 
+        h3 { 
           font-size: clamp(2rem, 4vw, 3.5rem); 
           margin: 0 0 10px 0; 
           line-height: 1;
@@ -230,6 +232,8 @@
         isolation: isolate;
         overflow: hidden;
         
+        pointer-events: none;
+
         video {
           position: absolute;
           top: 0; left: 0; width: 100%; height: 100%;
@@ -238,6 +242,7 @@
           transform: translate3d(0,0,0);
           z-index: 1; 
           border-radius: 30px; 
+          pointer-events: none; 
         }
         
         .cover-image {
@@ -250,6 +255,7 @@
           opacity: 1;
           transition: opacity 0.4s ease-in-out;
           border-radius: 30px; 
+          pointer-events: none; 
         }
 
         .overlay {
@@ -257,7 +263,7 @@
           top: 0; left: 0; width: 100%; height: 100%;
           background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.6) 45%, transparent 80%);
           z-index: 20; 
-          pointer-events: none;
+          pointer-events: none; 
           border-radius: 30px; 
         }
       }
@@ -291,7 +297,7 @@
     // --- PROYECTOS (Tarjetas Expansibles) ---
     .project-card {
       grid-column: span 4;
-      grid-row: span 1; // Altura por defecto (1 bloque)
+      grid-row: span 1; 
       
       position: relative;
       display: flex;
@@ -301,12 +307,11 @@
       cursor: pointer;
       background: #0f172a; 
 
-      // 🔥 ESTADO EXPANDIDO 🔥
       &.expanded {
-        grid-row: span 2; // Al recibir esta clase, ocupa el doble de altura
+        grid-row: span 2; 
         
         .expand-btn {
-          background: rgba(255, 255, 255, 0.2); // Se nota que está activado
+          background: rgba(255, 255, 255, 0.2); 
         }
       }
 
@@ -323,30 +328,33 @@
         isolation: isolate;
         overflow: hidden;
 
+        pointer-events: none;
+
         video {
           position: absolute;
           top: 0; left: 0; width: 100%; height: 100%;
           object-fit: cover;
           
-          // 🔥 ACÁ ESTÁ EL ÚNICO CAMBIO: El video anclado al TOP
           object-position: top; 
           
           transition: transform 0.5s ease;
           transform: translate3d(0,0,0);
           z-index: 1; 
           border-radius: 30px; 
+          pointer-events: none; 
         }
         
         .cover-image {
           position: absolute;
           top: 0; left: 0; width: 100%; height: 100%;
           background-size: cover;
-          background-position: center; // Mantiene su centro intacto
+          background-position: center; 
           background-color: #000;
           z-index: 10;
           opacity: 1;
           transition: opacity 0.4s ease-in-out;
           border-radius: 30px; 
+          pointer-events: none; 
         }
 
         .overlay {
@@ -354,7 +362,7 @@
           top: 0; left: 0; width: 100%; height: 100%;
           background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
           z-index: 20; 
-          pointer-events: none;
+          pointer-events: none; 
           border-radius: 30px; 
         }
       }
@@ -362,7 +370,7 @@
       .info {
         position: relative;
         z-index: 30;
-        width: 80%; // Dejamos espacio a la derecha para que el texto no pise el botón
+        width: 80%; 
         
         .tag {
           font-size: 0.75rem;
@@ -374,7 +382,7 @@
           display: inline-block;
           margin-bottom: 12px;
         }
-        h4 {
+        h3 {
           font-size: 1.8rem; 
           margin: 0 0 5px 0;
           font-weight: 700;
@@ -393,7 +401,7 @@
         position: absolute;
         bottom: 35px;
         right: 35px;
-        z-index: 35; // Por encima de la capa info
+        z-index: 35; 
         
         background: rgba(255, 255, 255, 0.1);
         border: 1px solid rgba(255, 255, 255, 0.2);
@@ -425,16 +433,14 @@
     @media (max-width: 900px) {
       grid-template-columns: 1fr; 
       
-      // Liberamos las alturas fijas
       grid-auto-rows: auto; 
       padding: 0;
 
       .hero-card, .team-card, .project-card {
         grid-column: span 1;
-        grid-row: auto !important; // Matamos los span 2 en mobile
+        grid-row: auto !important; 
       }
       
-      // El botón de expansión no tiene sentido en mobile
       .desktop-only {
         display: none !important;
       }
@@ -444,7 +450,7 @@
         min-height: 360px; 
         
         .content {
-          h1 { 
+          h3 { 
             font-size: 2.2rem; 
           }
           p { 
@@ -463,8 +469,8 @@
         padding: 25px; 
         min-height: 280px;
         .info {
-          width: 100%; // Restauramos ancho completo al ocultar el botón
-          h4 { font-size: 1.5rem; }
+          width: 100%; 
+          h3 { font-size: 1.5rem; }
           p { font-size: 0.95rem; }
         }
       }

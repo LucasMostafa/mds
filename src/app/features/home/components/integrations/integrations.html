@@ -2,26 +2,21 @@
   
   <div class="header-titles">
     <span class="badge">INTEGRACIONES</span>
-    <h3>Conectamos tu negocio.</h3>
+    <h2>Conectamos tu negocio.</h2>
   </div>
 
   <div class="slider-wrapper">
-
     <div class="slide-track" #slideTrack>
-      
       <ng-container *ngFor="let loop of [1, 2]">
         <div class="slide" *ngFor="let item of integrationsList">
           <div class="glass-card">
-            
             <div class="img-circle">
               <img [src]="item.icon" [alt]="item.name" draggable="false">
             </div>
-            
             <span class="name">{{ item.name }}</span>
           </div>
         </div>
       </ng-container>
-
     </div>
   </div>
 

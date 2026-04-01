@@ -12,7 +12,7 @@
       <div class="card-bg" style="background-image: url('/assets/images/proyectos.webp');"></div>
       
       <div class="content">
-        <h1>SOLUCIONES QUE <br>ESCALAN</h1>
+        <h3>SOLUCIONES QUE <br>ESCALAN</h3>
         <p>Construimos herramientas digitales robustas, rápidas y 100% a medida para cubrir los requerimientos de tu proyecto.</p>
         <div class="decorative-line"></div>
       </div>
@@ -23,7 +23,7 @@
          (mouseleave)="stopVideo(vidTeam)">
       
       <div class="media-container">
-        <video #vidTeam muted loop playsinline preload="metadata">
+        <video #vidTeam muted loop playsinline preload="metadata" aria-hidden="true">
            <source src="/assets/videos/programadorcodeando.mp4" type="video/mp4">
         </video>
         <div class="cover-image" style="background-image: url('/assets/images/programador.webp');"></div>
@@ -43,7 +43,7 @@
        (mouseleave)="stopVideo(vidAmpas)">
       
       <div class="media-container">
-        <video #vidAmpas muted loop playsinline preload="metadata">
+        <video #vidAmpas muted loop playsinline preload="metadata" aria-hidden="true">
            <source src="/assets/videos/ampasvideo.mp4" type="video/mp4">
         </video>
         <div class="cover-image" style="background-image: url('/assets/images/ampasimg.webp');"></div>
@@ -51,8 +51,7 @@
       </div>
 
       <div class="info">
-        <!--<span class="tag">Proyecto Destacado</span>-->
-        <h4>AMPAS MDP</h4>
+        <h3>AMPAS MDP</h3>
         <p>WEB empresarial autoadministrable.</p>
       </div>
 
@@ -68,7 +67,7 @@
        (mouseleave)="stopVideo(vidApasRosario)">
       
       <div class="media-container">
-        <video #vidApasRosario muted loop playsinline preload="metadata">
+        <video #vidApasRosario muted loop playsinline preload="metadata" aria-hidden="true">
            <source src="/assets/videos/apasrosariovideo.mp4" type="video/mp4">
         </video>
         <div class="cover-image" style="background-image: url('/assets/images/apasrosario.webp');"></div>
@@ -76,7 +75,7 @@
       </div>
 
       <div class="info">
-        <h4>Apas Rosario</h4>
+        <h3>Apas Rosario</h3>
         <p>Sitio web institucional.</p>
       </div>
 
@@ -92,7 +91,7 @@
        (mouseleave)="stopVideo(vidGnc)">
       
       <div class="media-container">
-        <video #vidGnc muted loop playsinline preload="metadata">
+        <video #vidGnc muted loop playsinline preload="metadata" aria-hidden="true">
            <source src="/assets/videos/gncconstitucionvideo.mp4" type="video/mp4">
         </video>
         <div class="cover-image" style="background-image: url('/assets/images/gncconstitucionimg.webp');"></div>
@@ -100,7 +99,7 @@
       </div>
 
       <div class="info">
-        <h4>GNC Constitución</h4>
+        <h3>GNC Constitución</h3>
         <p>Landing Page Corporativa.</p>
       </div>
 
@@ -116,7 +115,7 @@
        (mouseleave)="stopVideo(vidKdonna)">
       
       <div class="media-container">
-        <video #vidKdonna muted loop playsinline preload="metadata">
+        <video #vidKdonna muted loop playsinline preload="metadata" aria-hidden="true">
            <source src="/assets/videos/kdonnavideo.mp4" type="video/mp4">
         </video>
         <div class="cover-image" style="background-image: url('/assets/images/kdonna.webp');"></div>
@@ -124,7 +123,7 @@
       </div>
 
       <div class="info">
-        <h4>Kdonna</h4>
+        <h3>Kdonna</h3>
         <p>E-Commerce de Moda.</p>
       </div>
 
@@ -132,8 +131,6 @@
         {{ expandedCard === 'kdonna' ? 'Contraer' : 'Expandir' }}
       </button>
     </a>
-
-    
 
   </div>
 </section>
