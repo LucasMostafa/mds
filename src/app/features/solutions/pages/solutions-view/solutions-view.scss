@@ -224,6 +224,13 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
       background-clip: text;
       transform: translateY(0px);
       text-shadow: 0 1px 2px rgba(59, 130, 246, 0.1);
+      
+      display: block;
+
+      /* 🔥 NUEVO: Reemplazo del <br> solo para Desktop 🔥 */
+      @media (min-width: 769px) {
+        transform: translateY(28px); /* Baja la firma para que quede bajo MDStudio */
+      }
     }
   }
   .btn-back-outline {
@@ -582,6 +589,7 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
       font-size: 1.8rem !important;
       // 🔥 NUDGE VISUAL: Movemos un poco a la derecha (translateX) para compensar visualmente el inicio de la fuente cursiva
       transform: translate(25px, -5px) !important; // 👍 Nudge visually, visually tight visually
+      margin-top: 5px; /* Esto simula el espacio vacío que antes te daba el <br> */
     }
 
     .btn-back-outline {
