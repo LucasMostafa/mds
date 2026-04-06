@@ -31,11 +31,11 @@
           <svg class="chevron-icon" [class.rotated]="themeDropdownOpen" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
         </button>
         <div class="panel-content dropdown-list">
-          <div class="theme-option" [class.selected]="selectedTheme === 'dark'" (click)="selectTheme('dark')">
-            <div class="theme-circle circle-dark"></div><span>Dark</span>
-          </div>
           <div class="theme-option" [class.selected]="selectedTheme === 'beige'" (click)="selectTheme('beige')">
             <div class="theme-circle circle-beige"></div><span>Beige</span>
+          </div>
+          <div class="theme-option" [class.selected]="selectedTheme === 'dark'" (click)="selectTheme('dark')">
+            <div class="theme-circle circle-dark"></div><span>Dark</span>
           </div>
           <div class="theme-option" [class.selected]="selectedTheme === 'neon-green'" (click)="selectTheme('neon-green')">
             <div class="theme-circle circle-neon"></div><span>Neon Green</span>

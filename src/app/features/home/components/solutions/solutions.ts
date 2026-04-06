@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
 export class Solutions {
 
   // Variables de estado
-  selectedTheme = 'dark';
+  selectedTheme = 'beige';
   selectedButtonShape = 'rounded';
   selectedTypography = 'sans';
 

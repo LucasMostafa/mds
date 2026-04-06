@@ -349,7 +349,7 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
     .platform-video {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover; 
       display: block;
     }
   }
@@ -446,6 +446,8 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
     }
   }
 }
+
+/* 🔥 SECCIÓN DE AUTOGESTIÓN CON BENTO BOX DEGRADADO 🔥 */
 .corp-light-features {
   background: $bg-light;
   padding: 100px 20px;
@@ -457,6 +459,7 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
       font-size: 1.1rem;
     }
   }
+  
   .bento-grid {
     max-width: 1100px;
     margin: 0 auto;
@@ -464,31 +467,88 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     width: 100%;
+
     .bento-card {
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
+      position: relative; 
+      background-color: #1a1a1a; 
+      border: 1px solid rgba(0,0,0,0.1); 
       border-radius: 16px;
       padding: 40px;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       min-height: 250px;
-      h3 {
-        font-size: 1.5rem;
-        margin-bottom: 10px;
-        color: $text-dark;
+      
+      overflow: hidden; 
+      transform: translateZ(0); 
+      background-clip: padding-box; 
+      
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      .card-content {
+        position: relative;
+        z-index: 2;
+        max-width: 85%; /* Evita que el texto llegue hasta el borde derecho donde está la foto */
+        
+        h3 {
+          font-size: 1.5rem;
+          margin-bottom: 10px;
+          color: #ffffff; 
+          text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+        }
+        p {
+          color: #e2e8f0; 
+          line-height: 1.6;
+          text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+        }
       }
-      p {
-        color: #4b5563;
-        line-height: 1.6;
+
+      /* 🔥 LA CLAVE 1: El hover SOLO funciona si el usuario usa un mouse (Desktop) 🔥 */
+      @media (hover: hover) and (pointer: fine) {
+        &:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
       }
     }
+
     .bento-large {
       grid-column: span 2;
       min-height: 300px;
     }
+
+    /* 🔥 LA CLAVE 2: Degradado de izquierda a derecha (to right) 🔥 */
+    /* El lado izquierdo es 95% oscuro, el medio es 70%, y la derecha es transparente para ver la foto */
+    
+    .card-1 {
+      background-image: linear-gradient(to right, rgba(15,15,15,0.95) 0%, rgba(15,15,15,0.7) 45%, rgba(15,15,15,0) 100%), url('/assets/images/edicion.webp'); 
+      background-size: cover;
+      background-position: right center; /* Alinea la foto a la derecha */
+    }
+
+    .card-2 {
+      background-image: linear-gradient(to right, rgba(15,15,15,0.95) 0%, rgba(15,15,15,0.7) 45%, rgba(15,15,15,0) 100%), url('/assets/images/identidad.webp');
+      background-size: cover;
+      background-position: right center;
+    }
+
+    .card-3 {
+      background-image: linear-gradient(to right, rgba(15,15,15,0.95) 0%, rgba(15,15,15,0.7) 45%, rgba(15,15,15,0) 100%), url('/assets/images/soporte.webp');
+      background-size: cover;
+      background-position: right center;
+    }
+
+    /* Ajuste para mobile: En celu, como la tarjeta es angosta, oscurecemos un poquito más para asegurar la lectura */
+    @media (max-width: 768px) {
+      .card-1, .card-2, .card-3 {
+        background-image: linear-gradient(to right, rgba(15,15,15,0.95) 0%, rgba(15,15,15,0.85) 60%, rgba(15,15,15,0.2) 100%), url('/assets/images/edicion.webp');
+      }
+      .card-2 { background-image: linear-gradient(to right, rgba(15,15,15,0.95) 0%, rgba(15,15,15,0.85) 60%, rgba(15,15,15,0.2) 100%), url('/assets/images/identidad.webp'); }
+      .card-3 { background-image: linear-gradient(to right, rgba(15,15,15,0.95) 0%, rgba(15,15,15,0.85) 60%, rgba(15,15,15,0.2) 100%), url('/assets/images/soporte.webp'); }
+    }
   }
 }
+
 /* ==========================================================
    --- BOTÓN FLOTANTE "VOLVER ARRIBA" ---
    ========================================================== */

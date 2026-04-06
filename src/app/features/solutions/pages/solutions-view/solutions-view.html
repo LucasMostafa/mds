@@ -34,7 +34,7 @@
         <i>Contas con nuestro soporte.</i>
       </h1>
       <p class="hero-subtitle">
-        Olvidate de empezar desde cero y tener que improvisar en plataformas complicadas. Te entregamos tu web 100% funcional y diseñada a medida, con un panel visual súper fácil para que la edites en tu día a día. ¿Lo mejor? Siempre tenés a nuestro equipo de desarrollo respaldándote.
+        Olvidate de empezar desde cero y tener que improvisar en plataformas complicadas. Te entregamos tu web 100% funcional y diseñada a medida, con un panel visual súper fácil para que la edites en tu día a y día. ¿Lo mejor? Siempre tenés a nuestro equipo de desarrollo respaldándote.
       </p>
     </div>
   </header>
@@ -48,7 +48,7 @@
         <div class="browser-url">modular.mdstudio.com.ar</div>
       </div>
       <div class="video-wrapper">
-        <video autoplay loop [muted]="true" playsinline aria-hidden="true" poster="assets/images/modularmdstudio.webp" class="platform-video">
+        <video #demoVideo loop [muted]="true" playsinline aria-hidden="true" preload="none" poster="assets/images/modularmdstudio.webp" class="platform-video">
           <source src="assets/videos/modularmdstudio.mp4" type="video/mp4">
         </video>
       </div>
@@ -94,19 +94,21 @@
     </div>
 
     <div class="bento-grid">
-      <div class="bento-card bento-large">
+      <div class="bento-card bento-large card-1">
         <div class="card-content">
           <h3>Edición Visual Intuitiva</h3>
           <p>Cambiá textos, actualizá precios o subí imágenes en tiempo real. Modificá tu web viendo exactamente cómo va a quedar en la pantalla, sin depender de un tercero para tus actualizaciones del día a día.</p>
         </div>
       </div>
-      <div class="bento-card">
+      
+      <div class="bento-card card-2">
         <div class="card-content">
           <h3>Identidad</h3>
           <p>Modular te permite proyectar una imagen profesional y única, diseñada específicamente para las necesidades de tu negocio y con la libertad de expandirla sin restricciones.</p>
         </div>
       </div>
-      <div class="bento-card">
+      
+      <div class="bento-card card-3">
         <div class="card-content">
           <h3>Soporte Técnico</h3>
           <p>Contás con comunicación directa por WhatsApp o email con nuestro equipo para resolver cualquier inquietud al instante.</p>
