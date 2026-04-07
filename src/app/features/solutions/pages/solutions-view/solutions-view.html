@@ -20,7 +20,7 @@
       <span class="logo-signature">Modular</span>
     </div>
     
-    <button class="btn-back-outline" (click)="goBackHome()">
+    <button class="btn-back-outline" (click)="goBackHome()" aria-label="Volver al inicio">
       <span class="arrow">←</span>
       <span class="text">Volver al inicio</span>
     </button>
@@ -45,7 +45,7 @@
         <div class="browser-dots">
           <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
         </div>
-        <div class="browser-url">modular.mdstudio.com.ar</div>
+        <div class="browser-url">mdstudio.com.ar/modular</div>
       </div>
       <div class="video-wrapper">
         <video #demoVideo loop [muted]="true" playsinline aria-hidden="true" preload="none" poster="assets/images/modularmdstudio.webp" class="platform-video">
@@ -62,7 +62,11 @@
         <h3 class="serif-title-small">Tu negocio online.</h3>
         <p>Aprovechá nuestro plan de financiación: <strong>3 cuotas SIN tarjeta de crédito</strong>.</p>
       </div>
-      <button class="btn-solid-white" (click)="goBackHome()">Consultar ahora</button>
+      
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=contact@mdstudio.com.ar" target="_blank" class="btn-solid-white btn-desktop" style="text-decoration: none; text-align: center;">Consultar ahora</a>
+
+      <a href="mailto:contact@mdstudio.com.ar" class="btn-solid-white btn-mobile" style="text-decoration: none; text-align: center;">Consultar ahora</a>
+
     </div>
 
     <div class="section-header-dark">

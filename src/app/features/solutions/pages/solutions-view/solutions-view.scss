@@ -263,7 +263,7 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
   margin-bottom: 20px;
   i {
     font-style: italic;
-    color: #6b7280;
+    color: #4b5563; /* 🔥 CORRECCIÓN ACCESIBILIDAD 🔥 */
   }
 }
 .serif-title-medium {
@@ -288,7 +288,7 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 2px;
-    color: #6b7280;
+    color: #4b5563; /* 🔥 CORRECCIÓN ACCESIBILIDAD 🔥 */
     margin-bottom: 30px;
     border-bottom: 1px solid #e5e7eb;
     padding-bottom: 5px;
@@ -381,6 +381,7 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
     align-items: center;
     justify-content: space-between;
     gap: 30px;
+    
     .text-wrap p {
       color: #9ca3af;
       margin-top: 10px;
@@ -389,6 +390,15 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
         color: #fff;
       }
     }
+
+    /* 🔥 LÓGICA PARA LOS BOTONES DESKTOP/MOBILE 🔥 */
+    .btn-desktop {
+      display: inline-block; 
+    }
+    .btn-mobile {
+      display: none; 
+    }
+
     .btn-solid-white {
       background: #fff;
       color: #000;
@@ -455,7 +465,7 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
     text-align: center;
     margin-bottom: 60px;
     p {
-      color: #6b7280;
+      color: #4b5563; /* 🔥 CORRECCIÓN ACCESIBILIDAD 🔥 */
       font-size: 1.1rem;
     }
   }
@@ -628,6 +638,17 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
 }
 
 @media (max-width: 768px) {
+  
+  /* 🔥 ACTUALIZADO: CAMBIO DE BOTONES DE CORREO EN MOBILE 🔥 */
+  .corp-dark-diagonal .payment-banner {
+    .btn-desktop {
+      display: none !important;
+    }
+    .btn-mobile {
+      display: inline-block !important;
+    }
+  }
+
   /* 🔥 ACTUALIZADO: NAVBAR MOBILE TWEAK (Equilibra image_6.png) 🔥 */
   .corp-nav {
     flex-direction: column;
