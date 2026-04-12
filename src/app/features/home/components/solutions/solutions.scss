@@ -7,6 +7,15 @@
   /* Agregamos font-family a las transiciones para que el cambio sea suave */
   transition: background-color 0.5s ease, color 0.5s ease, font-family 0.3s ease;
 
+  /* 🔥 NUEVO: CLASE QUE ACTIVA LA ANIMACIÓN 🔥 */
+  &.is-visible {
+    .left-content,
+    .right-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   /* =========================================
      MAGIA ENCAPSULADA: TIPOGRAFÍAS LOCALES
      Solo afecta a esta sección y sus hijos
@@ -66,6 +75,11 @@
 /* --- COLUMNA IZQUIERDA --- */
 .left-content {
   flex: 1;
+  
+  /* 🔥 ESTADO INICIAL PARA ANIMACIÓN DE SCROLL 🔥 */
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 
   .badge {
     display: inline-block;
@@ -146,7 +160,7 @@
     animation: floatBadge 3s ease-in-out infinite; 
   }
 
-  /* Keyframes de la animación (ponelo al final del archivo o fuera de left-content si tu preprocesador lo pide, aunque Angular 17 anida bien) */
+  /* Keyframes de la animación */
   @keyframes floatBadge {
     0%, 100% { transform: translateY(0) rotate(-20deg) scale(1); }
     50% { transform: translateY(-4px) rotate(-24deg) scale(1.05); }
@@ -160,6 +174,12 @@
   justify-content: center;
   align-items: center;
   position: relative;
+
+  /* 🔥 ESTADO INICIAL PARA ANIMACIÓN DE SCROLL 🔥 */
+  opacity: 0;
+  transform: translateY(50px);
+  /* Le damos un delay de 0.2s para que entre un poquito después que el texto */
+  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
 }
 
 .wide-player-wrapper {
