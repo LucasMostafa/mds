@@ -256,16 +256,23 @@ $font-serif-elegant: 'Playfair Display', 'EB Garamond', Georgia, serif;
 
 .serif-title {
   font-family: $font-serif-elegant;
-  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  /* 🔥 CORRECCIÓN MOBILE: Bajamos el mínimo de 3.5rem a 2.2rem y ajustamos el centro a 8vw 🔥 */
+  font-size: clamp(2.2rem, 8vw, 5.5rem);
   line-height: 1.1;
   font-weight: 600;
   letter-spacing: -1px;
   margin-bottom: 20px;
+  
+  /* Evita que las palabras muy largas se rompan de forma fea por si las dudas */
+  word-break: keep-all; 
+  overflow-wrap: break-word;
+
   i {
     font-style: italic;
     color: #4b5563; /* 🔥 CORRECCIÓN ACCESIBILIDAD 🔥 */
   }
 }
+
 .serif-title-medium {
   font-family: $font-serif-elegant;
   font-size: 3rem;
