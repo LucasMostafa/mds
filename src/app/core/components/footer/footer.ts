@@ -20,7 +20,8 @@ export class Footer {
     const element = document.getElementById(sectionId);
     
     if (element) {
-      const offset = 0; 
+      // 🔥 EXCEPCIÓN: Si es 'servicios', aplica el offset del navbar. Si no, es 0.
+      const offset = sectionId === 'servicios' ? 110 : 0; 
       
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
